@@ -23,7 +23,6 @@ class CityController extends Controller
     public function store(CityRequest $request)
     {
         $user = City::create($request->all());
-        $user->create_user_id = auth()->user()->id;
 
         return redirect()->route('cities.index')
             ->with(['success' => __('city.City created successfully')]);
@@ -38,7 +37,6 @@ class CityController extends Controller
     {
         $user = City::findOrFail($id);
         $user->update($request->all());
-        $user->update_user_id = auth()->user()->id;
 
         return redirect()->route('cities.index')
             ->with(['success' => __('city.City successfully edited')]);

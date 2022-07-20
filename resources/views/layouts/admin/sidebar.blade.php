@@ -146,6 +146,23 @@
             {{--      /////////////////////////////      --}}
 
 
+
+            {{-- Start lectures --}}
+            <li>
+                <a class="has-arrow" href="javascript:void(0);" aria-expanded="false">
+                    <i class="bi bi-people"></i>
+                    <span class="nav-text">{{__('lecture.lectures')}} </span>
+                </a>
+                <ul aria-expanded="false">
+                    <li><a href="{{route('lectures.index')}}">{{__('lecture.all lectures')}}</a></li>
+                    <li><a href="{{route('lectures.create')}}">{{__('lecture.add new lectures')}}</a></li>
+                </ul>
+            </li>
+            {{-- End lectures --}}
+
+            {{--      /////////////////////////////      --}}
+
+
         </ul>
 
         <div class="copyright">

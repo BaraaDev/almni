@@ -43,6 +43,7 @@ return [
     'About Me'                               => 'About Me',
     'add image'                              => 'Add image',
     'add video'                              => 'Add Video',
+    'add PDF'                                => 'Add PDf',
     'location'                               => 'Location',
     'Notice'                                 => 'Notice :-',
     'roles'                                  => 'Roles',

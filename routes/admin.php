@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\CityController;
 use App\Http\Controllers\Admin\CourseController;
 use App\Http\Controllers\Admin\GroupController;
 use App\Http\Controllers\Admin\HomeController;
+use App\Http\Controllers\Admin\LectureController;
 use App\Http\Controllers\Admin\LevelController;
 use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\Admin\SubjectController;
@@ -32,5 +33,6 @@ Route::group([
         Route::resource('/groups', GroupController::class);
         Route::resource('/categories', CategoryController::class);
         Route::resource('/courses', CourseController::class);
+        Route::resource('/lectures', LectureController::class);
     });
 });

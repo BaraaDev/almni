@@ -32,7 +32,7 @@ class CourseController extends Controller
                 ->addMediaFromRequest('image')
                 ->UsingName($random = Random::generate('30'))
                 ->UsingFileName($random)
-                ->toMediaCollection('course');
+                ->toMediaCollection('coursePC');
         }
 
         if($request->file('video')) {
@@ -73,7 +73,6 @@ class CourseController extends Controller
                 ->UsingFileName($random)
                 ->toMediaCollection('course');
         }
-        $course->save();
 
 
         if($request->file('video')) {

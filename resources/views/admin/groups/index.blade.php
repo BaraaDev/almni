@@ -15,7 +15,8 @@
             <div class="col-xl-4 col-xxl-6">
 
                 <div class="card overflow-hidden">
-                    <div class="social-graph-wrapper widget-twitter d-flex justify-content-center align-items-center" style="height: 120px;">
+
+                    <div class="social-graph-wrapper @if($loop->first) widget-facebook @elseif($loop->even)  widget-linkedin @elseif($loop->last) widget-twitter @else widget-googleplus @endif d-flex justify-content-center align-items-center" style="height: 120px;">
                         <span class="s-icon">{{$group->name}}</span>
                     </div>
                     <div class="d-flex justify-content-center gap-3">
@@ -36,14 +37,16 @@
                         </div>
                         <div class="col-3 border-end">
                             <div class="pt-3 pb-3 ps-0 pe-0 text-center">
-                                <h4 class="m-1"><span class="counter">{{$group->level->level ?? ''}}</span></h4>
+                                <h4 class="m-1"><span class="counter">{{Str::limit($group->level->level ?? '',10,'...')}}</span></h4>
                                 <p class="m-0">{{__('level.level')}}</p>
                             </div>
                         </div>
                         <div class="col-3 border-end">
                             <div class="pt-3 pb-3 ps-0 pe-0 text-center">
-                                <h4 class="m-1"><span class="counter">1</span></h4>
-                                <p class="m-0">{{__('course.courses')}}</p>
+                                <a href="{{route('courses.show',$group->course->id , '')}}">
+                                <h4 class="m-1"><span class="counter">{{Str::limit($group->course->title ?? '',10,'...')}} </span></h4>
+                                <p class="m-0">{{__('course.course')}}</p>
+                                </a>
                             </div>
                         </div>
                         <div class="col-3">
