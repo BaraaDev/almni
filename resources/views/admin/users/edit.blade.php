@@ -20,10 +20,21 @@
                     <div class="card-body">
                         @include('layouts.admin.alert.validation-errors')
                         <div class="basic-form">
-                            <form class="needs-validation" method="post" action="{{route('users.update',$model->id)}}" files="true" enctype="multipart/form-data" novalidate>
+                            <form class="needs-validation" id="alert-form" method="post" action="{{route('users.update',$model->id)}}" files="true" enctype="multipart/form-data" novalidate>
                                 @csrf
                                 {{ method_field('put') }}
-                                @include('admin.users.form')
+                                <div class="row">
+                                    @include('admin.users.form')
+                                    <div class="mb-3 col-6">
+                                        <label class="form-label">{{__('role.roles')}}</label>
+
+                                        {!! Form::select('roles[]',$roles,$userRole,[
+                                            'class' => 'js-example-programmatic-multi default-select form-control',
+                                            'multiple'
+                                        ]) !!}
+                                        @error('roles') <div class="invalid-feedback">{{$message}}</div> @enderror
+                                    </div>
+                                </div>
                                 <button type="submit" class="btn mt-3 me-2 btn-primary">{{__('home.update')}}</button>
                             </form>
                         </div>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StudentRequest;
 use App\Http\Requests\UserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -10,6 +11,19 @@ use Nette\Utils\Random;
 
 class StudentController extends Controller
 {
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    function __construct()
+    {
+        $this->middleware('permission:student-list');
+        $this->middleware('permission:student-create', ['only' => ['create','store']]);
+        $this->middleware('permission:student-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:student-delete', ['only' => ['destroy']]);
+    }
 
     public function index()
     {
@@ -24,21 +38,22 @@ class StudentController extends Controller
         return view('admin.users.students.create');
     }
 
-    public function store(Request $request)
+    public function store(StudentRequest $request)
     {
-        $user = User::create($request->all());
-        $user->password = bcrypt($request->input('password'));
-        $user->userType = 'student';
-        $user->groups()->sync($request->group_id);
+        $student = User::create($request->all());
+        $student->groups()->sync($request->group_id);
+        $student->password = bcrypt($request->input('password'));
+        $student->userType = 'student';
+        $student->groups()->sync($request->group_id);
 
         if($request->file('photo')) {
-            $user
+            $student
                 ->addMediaFromRequest('photo')
                 ->UsingName($random = Random::generate('30'))
                 ->UsingFileName($random)
                 ->toMediaCollection('user');
         }
-        $user->save();
+        $student->save();
 
         return redirect()->route('students.index')
             ->with(['success' => __('home.User created successfully')]);
@@ -51,19 +66,19 @@ class StudentController extends Controller
 
     public function update(Request $request,$id)
     {
-        $user = User::findOrFail($id);
-
-        $user->update($request->all());
-        $user->password = bcrypt($request->input('password'));
+        $student = User::findOrFail($id);
+        $student->groups()->sync($request->group_id);
+        $student->update($request->all());
+        $student->password = bcrypt($request->input('password'));
         if($request->hasFile('photo')) {
-            $user
+            $student
                 ->clearMediaCollection('user')
                 ->addMediaFromRequest('photo')
                 ->UsingName($random = Random::generate('30'))
                 ->UsingFileName($random)
                 ->toMediaCollection('user');
         }
-        $user->save();
+        $student->save();
 
 
         return redirect()->route('students.index')

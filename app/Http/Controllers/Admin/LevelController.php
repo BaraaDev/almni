@@ -9,6 +9,20 @@ use Illuminate\Http\Request;
 
 class LevelController extends Controller
 {
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    function __construct()
+    {
+        $this->middleware('permission:level-list');
+        $this->middleware('permission:level-create', ['only' => ['create','store']]);
+        $this->middleware('permission:level-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:level-delete', ['only' => ['destroy']]);
+    }
+
     public function index()
     {
         $levels = Level::all();

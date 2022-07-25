@@ -17,5 +17,6 @@ return [
     'Subject successfully edited'       => 'Subject successfully edited',
     'Subject deleted successfully'      => 'Subject deleted successfully',
     'Enter the subject name'            => 'Enter the subject name',
+    'There are no course materials for the teacher'            => 'There are no course materials for the teacher',
 
 ];

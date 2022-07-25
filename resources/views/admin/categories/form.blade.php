@@ -1,8 +1,8 @@
 <div class="row">
     <div class="mb-3 col-12">
-        <label class="form-label">{{__('group.group')}} <span style="color: red">*</span></label>
+        <label class="form-label">{{__('category.category')}} <span style="color: red">*</span></label>
         <input type="text" name="name" class="form-control input-default @error('name') is-invalid @enderror"
-               placeholder="{{__('group.Enter the group name')}}"
+               placeholder="{{__('category.Enter the category name')}}"
                value="{{Request::old('name') ? Request::old('name') : $model->name}}" required>
         @error('name') <div class="invalid-feedback">{{$message}}</div> @enderror
     </div>

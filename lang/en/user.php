@@ -18,6 +18,7 @@ return [
     'bio'                                => 'Bio',
     'job'                                => 'Job',
     'age'                                => 'Age',
+    'nickname'                           => 'Nickname',
     'location'                           => 'Location',
     'update profile'                     => 'Update Profile',
     'save profile'                       => 'Save Profile',
@@ -26,6 +27,6 @@ return [
     'Enter your password'                => 'Enter your password',
     'Enter your age'                     => 'Enter your age',
     'Enter your phone number'            => 'Enter your phone number',
-    'Enter your phone number2'           => 'Another Phone Number(Optinal)',
+    'Enter your phone number2'           => 'Another Phone Number(Optional)',
     'There are no users'                 => 'There are no users',
 ];

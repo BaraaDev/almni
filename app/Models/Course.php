@@ -12,17 +12,41 @@ class Course extends Model implements HasMedia
 {
     use HasFactory, SoftDeletes, InteractsWithMedia;
 
-    protected $fillable = ['title','description','course_date','price','discount','level_id','subject_id','category_id','instructor_id','status'];
+    protected $fillable = ['title','description','course_date','price','discount','level_id','subject_id','category_id','status'];
 
     public function category()
     {
         return $this->belongsTo(Category::class);
     }
 
+    public function level()
+    {
+        return $this->belongsTo(Level::class);
+    }
+
     public function subject()
     {
         return $this->belongsTo(Subject::class);
     }
+
+    public function lectures()
+    {
+        return $this->hasMany(Lecture::class,'course_id','id');
+    }
+
+
+    public function groups()
+    {
+        return $this->hasMany(Group::class,'course_id','id');
+    }
+
+
+    public function courseInstructor()
+    {
+        return $this->belongsToMany(User::class,'course_instructor','instructor_id','course_id');
+    }
+
+
     public function getPhotoAttribute()
     {
         return $this->getFirstMediaUrl('course')

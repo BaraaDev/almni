@@ -24,7 +24,16 @@ class CourseRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'title'              => 'required|string|min:3|max:199',
+            'description'        => 'required|string|max:600',
+            'course_date'        => 'required|date',
+            'price'              => 'required|numeric',
+            'discount'           => 'required|numeric',
+            'subject_id'         => 'nullable|exists:subjects,id',
+            'level_id'           => 'nullable|exists:levels,id',
+            'category_id'        => 'nullable|exists:categories,id',
+            'instructor_id'      => 'nullable|exists:users,id',
+            'status'             => 'string|in:active,stopped',
         ];
     }
 }

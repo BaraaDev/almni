@@ -16,8 +16,6 @@ return new class extends Migration
         Schema::create('cities', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('city','600');
-            $table->integer('create_user_id');
-            $table->integer('update_user_id')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

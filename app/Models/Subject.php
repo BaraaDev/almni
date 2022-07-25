@@ -14,6 +14,17 @@ class Subject extends Model implements HasMedia
 
     protected $fillable = ['name','status'];
 
+    public function instructor()
+    {
+        return $this->belongsToMany(User::class,'subject_instructor');
+    }
+
+    public function scopeStatus($query,$arg)
+    {
+        return $query->where('status',$arg);
+    }
+
+
     public function getPhotoAttribute()
     {
         return $this->getFirstMediaUrl('subject')
