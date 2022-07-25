@@ -20,7 +20,7 @@
                     <div class="card-body">
                         @include('layouts.admin.alert.validation-errors')
                         <div class="basic-form">
-                            <form class="needs-validation" method="post" action="{{route('courses.update',$model->id)}}" files="true" enctype="multipart/form-data" novalidate>
+                            <form class="needs-validation" id="alert-form" method="post" action="{{route('courses.update',$model->id)}}" files="true" enctype="multipart/form-data" novalidate>
                                 @csrf
                                 {{ method_field('put') }}
                                 @include('admin.courses.form')

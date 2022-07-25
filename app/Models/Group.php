@@ -24,4 +24,9 @@ class Group extends Model
     {
         return $this->belongsToMany(User::class,'group_user');
     }
+
+    public function scopeStatus($query,$arg)
+    {
+        return $query->where('status',$arg);
+    }
 }

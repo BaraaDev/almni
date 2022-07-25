@@ -44,6 +44,9 @@ return [
     'add image'                              => 'Add image',
     'add video'                              => 'Add Video',
     'add PDF'                                => 'Add PDf',
+    'Back'                                   => 'Back',
+    'details'                                => 'Details',
+    'download'                               => 'Download',
     'location'                               => 'Location',
     'Notice'                                 => 'Notice :-',
     'roles'                                  => 'Roles',
@@ -77,5 +80,7 @@ return [
     'User deleted successfully'              => 'User deleted successfully',
     'Are you sure to delete'                 => 'Are you sure to delete?',
     'Well done'                              => 'Well done',
+    'There is no data'                       => 'There is no data',
+    'alert form'                             => 'Are you sure you want to leave?',
 
 ];

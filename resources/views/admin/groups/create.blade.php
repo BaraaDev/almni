@@ -20,7 +20,7 @@
                     <div class="card-body">
                         @include('layouts.admin.alert.validation-errors')
                         <div class="basic-form">
-                            <form class="needs-validation" method="post" action="{{route('groups.store')}}" files="true" enctype="multipart/form-data" novalidate>
+                            <form class="needs-validation" id="alert-form" method="post" action="{{route('groups.store')}}" files="true" enctype="multipart/form-data" novalidate>
                                 @csrf
                                 @include('admin.groups.form')
                                 <button type="submit" class="btn mt-3 me-2 btn-primary">{{__('home.create')}}</button>

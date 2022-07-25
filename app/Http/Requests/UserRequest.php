@@ -21,7 +21,7 @@ class UserRequest extends FormRequest
     {
         return [
             'name'                      => 'required|string|min:3|max:199',
-            'password'                  => 'required|string|min:3|max:199',
+            'password'                  => 'required|string|min:8',
             'username'                  => 'required|string|min:3|max:199',Rule::unique('users')->ignore($this->id),
             'phone'                     => 'required|numeric|digits:11',Rule::unique('users')->ignore($this->id),
             'phone2'                    => 'nullable|numeric|digits:11',
@@ -33,10 +33,11 @@ class UserRequest extends FormRequest
             'facebook'                  => 'nullable|string',
             'twitter'                   => 'nullable|string',
             'instagram'                 => 'nullable|string',
-            'whatsApp'                  => 'nullable|string',
+            'whatsApp'                  => 'nullable|numeric',
             'telegram'                  => 'nullable|string',
             'city_id'                   => 'nullable|exists:cities,id',
             'photo'                     => 'nullable|image:jpg, jpeg, png, bmp, gif, svg,webp',
+            'status'                    => 'required|string|in:active,stopped',
         ];
     }
 
@@ -51,7 +52,7 @@ class UserRequest extends FormRequest
             'email'                     => 'required|string|min:3|max:255|email',Rule::unique('users')->ignore($this->id),
             'bio'                       => 'nullable|string|max:255',
             'gender'                    => 'string|in:male,female',
-            'status'                    => 'string|in:active,stopped',
+            'status'                    => 'required|string|in:active,stopped',
             'age'                       => 'nullable|date',
             'job'                       => 'nullable|string|min:4|max:60',
             'location'                  => 'nullable|string|max:255',
@@ -64,6 +65,7 @@ class UserRequest extends FormRequest
             'AskFM'                     => 'nullable|string',
             'city_id'                   => 'nullable|exists:cities,id',
             'photo'                     => 'nullable|image:jpg, jpeg, png, bmp, gif, svg,webp',
+
         ];
     }
 

@@ -51,7 +51,7 @@
     </div>
 
     <div class="mb-3 col-12">
-        <label for="file">{{__('home.add image')}} <span style="color: red">*</span></label>
+        <label for="file">{{__('home.add image')}}</label>
         <div class="form-file">
             <input id="file" type="file" name="photo" class="form-file-input form-control">
         </div>
@@ -93,15 +93,15 @@
         @error('level_id') <div class="invalid-feedback">{{$message}}</div> @enderror
     </div>
 
-{{--    <div class="mb-3 col-6">--}}
-{{--        <label class="form-label">{{__('group.group')}}</label>--}}
-{{--        @inject('group','App\Models\Group')--}}
-{{--        {!! Form::select('group_id[]',$group->pluck('name','id'),$model->groups->pluck('id')->all(),[--}}
-{{--            'class' => 'default-select form-control multi-select'. ( $errors->has('group_id') ? ' is-invalid' : '' ),--}}
-{{--            'multiple',--}}
-{{--        ]) !!}--}}
-{{--        @error('group_id') <div class="invalid-feedback">{{$message}}</div> @enderror--}}
-{{--    </div>--}}
+    <div class="mb-3 col-6">
+        <label class="form-label">{{__('group.groups')}}</label>
+        @inject('group','App\Models\Group')
+        {!! Form::select('group_id[]',$group->status('active')->pluck('name','id'),$model->groups->pluck('id')->all(),[
+            'class' => 'js-example-programmatic-multi default-select form-control',
+            'multiple'
+        ]) !!}
+        @error('group_id') <div class="invalid-feedback">{{$message}}</div> @enderror
+    </div>
 
 
     <div class="mb-3 col-6">

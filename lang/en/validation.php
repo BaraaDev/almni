@@ -166,10 +166,21 @@ return [
     */
 
     'attributes' => [
-        'city_id'          => 'city',
-        'governorate_id'   => 'governorate',
-        'country_id'       => 'country',
-        'phone2'           => 'Another Phone',
+        'city_id'               => 'city',
+        'governorate_id'        => 'governorate',
+        'country_id'            => 'country',
+        'phone2'                => 'Another Phone',
+        'group_id'              => 'Group',
+        'level_id'              => 'Level',
+        'subject_id'            => 'Subject',
+        'initial_price'         => 'Initial Price',
+        'final_price'           => 'Final Price',
+        'test_date'             => 'Test Date',
+        'instructor_id'         => 'Instructor',
+        'long_description'      => 'Long Description',
+        'short_description'     => 'Short Description',
+        'course_id'             => 'Course',
+        'user_id'               => 'User',
     ],
 
 ];

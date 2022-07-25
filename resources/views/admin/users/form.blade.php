@@ -1,4 +1,4 @@
-<div class="row">
+
     <div class="mb-3 col-6">
         <label class="form-label">{{__('home.name')}} <span style="color: red">*</span></label>
         <input type="text" name="name" class="form-control input-default @error('name') is-invalid @enderror" placeholder="{{__('user.Enter the full name')}}" value="{{Request::old('name') ? Request::old('name') : $model->name}}" required>
@@ -119,46 +119,6 @@
         <input type="text" name="YouTube" class="form-control input-default" placeholder="{{__('home.username YouTube')}}" value="{{Request::old('YouTube') ? Request::old('YouTube') : $model->YouTube}}">
     </div>
 
-    <div class="col-6">
-        <label class="form-label">{{__('home.roles')}}</label>
-        <div class="accordion accordion-primary" id="accordion-one">
-            <div class="accordion-item">
-                <div class="accordion-header collapsed rounded-lg" id="headingOne" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-controls="collapseOne"   aria-expanded="true" role="button">
-                    <span class="accordion-header-icon"></span>
-                    <span class="accordion-header-text">Roles</span>
-                    <span class="accordion-header-indicator"></span>
-                </div>
-                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-bs-parent="#accordion-one">
-                    <div class="accordion-body-text row">
-                        <div class="col-md-6">
-                            <div class="form-check custom-checkbox mb-3 checkbox-primary">
-                                <input type="checkbox" class="form-check-input" id="customRadioBox1" name="optradioCustom">
-                                <label class="form-check-label" for="customRadioBox1">Admin</label>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-check custom-checkbox mb-3 checkbox-primary">
-                                <input type="checkbox" class="form-check-input" id="customRadioBox2" name="optradioCustom">
-                                <label class="form-check-label" for="customRadioBox2">Supervisor</label>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-check custom-checkbox mb-3 checkbox-primary">
-                                <input type="checkbox" class="form-check-input" id="customRadioBox3" name="optradioCustom">
-                                <label class="form-check-label" for="customRadioBox3">secretary</label>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-check custom-checkbox mb-3 checkbox-primary">
-                                <input type="checkbox" class="form-check-input" id="customRadioBox4" name="optradioCustom">
-                                <label class="form-check-label" for="customRadioBox4">Recepion</label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <div class="mb-3 col-6">
         <label class="form-label">{{__('home.status')}} <span style="color: red">*</span></label>
@@ -169,5 +129,5 @@
         </select>
         @error('status') <div class="invalid-feedback">{{$message}}</div> @enderror
     </div>
-</div>
+
 

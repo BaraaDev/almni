@@ -1,5 +1,5 @@
 @extends('layouts.admin.app')
-@section('title') {{__('student.create student') . $title}} @endsection
+@section('title') {{__('student.edit student') . $title}} @endsection
 
 @section('head')
     <link href="{{asset('admin/vendor/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css')}}" rel="stylesheet">
@@ -13,17 +13,17 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">{{__('student.create student')}}</h4>
+                        <h4 class="card-title">{{__('student.edit student')}}</h4>
                     </div>
 
                     <div class="card-body">
                         @include('layouts.admin.alert.validation-errors')
                         <div class="basic-form">
-                            <form class="needs-validation" method="post" action="{{route('students.update',$model->id)}}" files="true" enctype="multipart/form-data" novalidate>
+                            <form class="needs-validation" id="alert-form" method="post" action="{{route('students.update',$model->id)}}" files="true" enctype="multipart/form-data" novalidate>
                                 @csrf
                                 {{ method_field('put') }}
                                 @include('admin.users.students.form')
-                                <button type="submit" class="btn mt-3 me-2 btn-primary">{{__('home.create')}}</button>
+                                <button type="submit" class="btn mt-3 me-2 btn-primary">{{__('home.edit')}}</button>
                             </form>
                         </div>
                     </div>

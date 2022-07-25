@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\LectureRequest;
 use App\Models\Lecture;
 use Illuminate\Http\Request;
 use Nette\Utils\Random;
@@ -10,6 +11,19 @@ use function Ramsey\Uuid\v1;
 
 class LectureController extends Controller
 {
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    function __construct()
+    {
+        $this->middleware('permission:lecture-list');
+        $this->middleware('permission:lecture-create', ['only' => ['create','store']]);
+        $this->middleware('permission:lecture-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:lecture-delete', ['only' => ['destroy']]);
+    }
 
     public function index()
     {
@@ -24,7 +38,7 @@ class LectureController extends Controller
     }
 
 
-    public function store(Request $request)
+    public function store(LectureRequest $request)
     {
         $lecture = Lecture::create($request->all());
 
@@ -72,7 +86,7 @@ class LectureController extends Controller
     }
 
 
-    public function update(Request $request, $id)
+    public function update(LectureRequest $request, $id)
     {
         $lecture = Lecture::findOrFail($id);
         $lecture->update($request->all());
@@ -101,8 +115,8 @@ class LectureController extends Controller
             $lecture
                 ->clearMediaCollection('videoLecture')
                 ->addMediaFromRequest('video')
-                ->UsingName(Random::generate('30'))
-                ->UsingFileName(Random::generate('30'))
+                ->UsingName($random = Random::generate('30'))
+                ->UsingFileName($random)
                 ->toMediaCollection('videoLecture');
         }
         $lecture->save();

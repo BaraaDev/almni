@@ -13,13 +13,13 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">{{__('city.create city')}}</h4>
+                        <h4 class="card-title">{{__('city.edit city')}}</h4>
                     </div>
 
                     <div class="card-body">
                         @include('layouts.admin.alert.validation-errors')
                         <div class="basic-form">
-                            <form class="needs-validation" method="post" action="{{route('cities.update',$model->id)}}" files="true" enctype="multipart/form-data" novalidate>
+                            <form class="needs-validation" id="alert-form" method="post" action="{{route('cities.update',$model->id)}}" files="true" enctype="multipart/form-data" novalidate>
                                 @csrf
                                 {{ method_field('put') }}
                                 @include('admin.cities.form')

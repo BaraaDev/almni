@@ -8,13 +8,13 @@
 
     <div class="mb-3 col-12">
         <label class="form-label">{{__('home.description')}} <span style="color: red">*</span></label>
-        <textarea name="description" class="form-control input-default @error('description') is-invalid @enderror" placeholder="{{__('course.Enter the course description')}}" required>{{Request::old('description') ? Request::old('description') : $model->description}}</textarea>
+        <textarea name="description" class="form-control input-default @error('description') is-invalid @enderror" placeholder="{{__('lecture.Enter the lecture description')}}" required>{{Request::old('description') ? Request::old('description') : $model->description}}</textarea>
         @error('description') <div class="invalid-feedback">{{$message}}</div> @enderror
     </div>
 
 
     <div class="mb-3 col-6">
-        <label for="file">{{__('home.add image')}} <span style="color: red">*</span></label>
+        <label for="file">{{__('home.add image')}}</label>
         <div class="form-file">
             <input id="file" type="file" name="image" class="form-file-input form-control">
         </div>
@@ -54,7 +54,7 @@
     </div>
 
     <div class="mb-3 col-6">
-        <label class="form-label">{{__('user.user')}}</label>
+        <label class="form-label">{{__('instructor.instructor')}}</label>
         @inject('instructor','App\Models\User')
         {!! Form::select('instructor_id',$instructor->type('instructor')->pluck('name','id'),Request::old('instructor_id') ? Request::old('instructor_id') :  $model->instructor_id ,[
             'class' => 'default-select form-control'. ( $errors->has('instructor_id') ? ' is-invalid' : '' ),

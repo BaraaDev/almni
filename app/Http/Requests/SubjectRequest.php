@@ -25,7 +25,7 @@ class SubjectRequest extends FormRequest
     {
         return [
             'name'        => 'required|string|min:3|max:199',
-            'status'      => 'string|in:active,stopped',
+            'status'      => 'required|string|in:active,stopped',
         ];
     }
 }

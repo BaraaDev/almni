@@ -7,9 +7,26 @@ use App\Http\Requests\UserRequest;
 use App\Models\City;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    function __construct()
+    {
+        $this->middleware('permission:user-list');
+        $this->middleware('permission:user-create', ['only' => ['create','store']]);
+        $this->middleware('permission:user-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:user-delete', ['only' => ['destroy']]);
+    }
+
+
     public function index()
     {
         $users = User::all();
@@ -18,7 +35,9 @@ class UserController extends Controller
 
     public function create()
     {
-        return view('admin.users.create');
+        $roles = Role::pluck('name','name')->all();
+
+        return view('admin.users.create',compact('roles'));
     }
 
 
@@ -26,6 +45,7 @@ class UserController extends Controller
     {
         $user = User::create($request->all());
         $user->password = bcrypt($request->input('password'));
+        $user->assignRole($request->input('roles'));
         if($request->file('photo')) {
             $user
                 ->addMediaFromRequest('photo')
@@ -51,7 +71,9 @@ class UserController extends Controller
     public function edit($id)
     {
         $model = User::findOrFail($id);
-        return view('admin.users.edit',compact('model'));
+        $roles = Role::pluck('name','name')->all();
+        $userRole = $model->roles->pluck('name','name')->all();
+        return view('admin.users.edit',compact('model','roles','userRole'));
     }
 
     public function update(UserRequest $request,$id)
@@ -60,6 +82,10 @@ class UserController extends Controller
 
         $user->update($request->all());
         $user->password = bcrypt($request->input('password'));
+        DB::table('model_has_roles')->where('model_id',$id)->delete();
+
+
+        $user->assignRole($request->input('roles'));
         if($request->hasFile('photo')) {
             $user
                 ->clearMediaCollection('user')

@@ -10,6 +10,21 @@ use Nette\Utils\Random;
 
 class SubjectController extends Controller
 {
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    function __construct()
+    {
+        $this->middleware('permission:subject-list');
+        $this->middleware('permission:subject-create', ['only' => ['create','store']]);
+        $this->middleware('permission:subject-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:subject-delete', ['only' => ['destroy']]);
+    }
+
+
     public function index()
     {
         $subjects = Subject::all();

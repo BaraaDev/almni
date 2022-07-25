@@ -7,7 +7,11 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('admin/vendor/select2/css/select2.min.css')}}">
 @endsection
+
 @section('content')
+
+
+
     <div class="container-fluid">
         <!-- ===== User Starts ===== -->
         <div class="row">
@@ -20,7 +24,7 @@
                     <div class="card-body">
                         @include('layouts.admin.alert.validation-errors')
                         <div class="basic-form">
-                            <form class="needs-validation" method="post" action="{{route('categories.store')}}" files="true" enctype="multipart/form-data" novalidate>
+                            <form class="needs-validation" id="alert-form" method="post" action="{{route('categories.store')}}" files="true" enctype="multipart/form-data" novalidate>
                                 @csrf
                                 @include('admin.categories.form')
                                 <button type="submit" class="btn mt-3 me-2 btn-primary">{{__('home.create')}}</button>

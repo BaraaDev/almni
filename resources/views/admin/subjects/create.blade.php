@@ -1,6 +1,6 @@
 @extends('layouts.admin.app')
 @inject('model','App\Models\City')
-@section('title') {{__('level.create level') . $title}} @endsection
+@section('title') {{__('subject.create subject') . $title}} @endsection
 
 @section('head')
     <link href="{{asset('admin/vendor/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css')}}" rel="stylesheet">
@@ -20,7 +20,7 @@
                     <div class="card-body">
                         @include('layouts.admin.alert.validation-errors')
                         <div class="basic-form">
-                            <form class="needs-validation" method="post" action="{{route('subjects.store')}}" files="true" enctype="multipart/form-data" novalidate>
+                            <form class="needs-validation" id="alert-form" method="post" action="{{route('subjects.store')}}" files="true" enctype="multipart/form-data" novalidate>
                                 @csrf
                                 @include('admin.subjects.form')
                                 <button type="submit" class="btn mt-3 me-2 btn-primary">{{__('home.create')}}</button>

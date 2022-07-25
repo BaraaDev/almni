@@ -9,6 +9,21 @@ use Illuminate\Http\Request;
 
 class GroupController extends Controller
 {
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    function __construct()
+    {
+        $this->middleware('permission:group-list');
+        $this->middleware('permission:group-create', ['only' => ['create','store']]);
+        $this->middleware('permission:group-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:group-delete', ['only' => ['destroy']]);
+    }
+
+
     public function index()
     {
         $groups = Group::all();

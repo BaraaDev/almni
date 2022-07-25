@@ -11,11 +11,58 @@ use Nette\Utils\Random;
 
 class CourseController extends Controller
 {
-    public function index()
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    function __construct()
     {
-        $courses = Course::all();
+        $this->middleware('permission:course-list');
+        $this->middleware('permission:course-create', ['only' => ['create','store']]);
+        $this->middleware('permission:course-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:course-delete', ['only' => ['destroy']]);
+    }
+
+    public function index(Request $request)
+    {
+        $courses = Course::orderBy('id','DESC')->where(function ($q) use($request){
+            if($request->keyword){
+                $q->where('title' , 'LIKE' , '%'.$request->keyword.'%')
+                    ->orWhere('description' , 'LIKE' , '%'.$request->keyword.'%')
+                    ->orWhere('course_date' , 'LIKE' , '%'.$request->keyword.'%')
+                    ->orWhere('price' , 'LIKE' , '%'.$request->keyword.'%')
+                    ->orWhere('discount' , 'LIKE' , '%'.$request->keyword.'%')
+                    ->orWhereHas('level', function ($q) use ($request){
+                        if($request->keyword){
+                            $q->where('level' , 'LIKE' , '%'.$request->keyword.'%');
+                        }
+                    })->orWhereHas('subject', function ($q) use ($request){
+                        if($request->keyword){
+                            $q->where('name' , 'LIKE' , '%'.$request->keyword.'%');
+                        }
+                    })->orWhereHas('category', function ($q) use ($request){
+                        if($request->keyword){
+                            $q->where('name' , 'LIKE' , '%'.$request->keyword.'%');
+                        }
+                    })->orWhereHas('courseInstructor', function ($q) use ($request){
+                        if($request->keyword){
+                            $q->where('name' , 'LIKE' , '%'.$request->keyword.'%')
+                                ->orWhere('nickname' , 'LIKE' , '%'.$request->keyword.'%')
+                                ->orWhere('email' , 'LIKE' , '%'.$request->keyword.'%')
+                                ->orWhere('phone' , 'LIKE' , '%'.$request->keyword.'%')
+                                ->orWhere('phone2' , 'LIKE' , '%'.$request->keyword.'%')
+                                ->orWhere('whatsApp' , 'LIKE' , '%'.$request->keyword.'%')
+                                ->orWhere('address' , 'LIKE' , '%'.$request->keyword.'%')
+                                ->orWhere('facebook' , 'LIKE' , '%'.$request->keyword.'%')
+                                ->orWhere('twitter' , 'LIKE' , '%'.$request->keyword.'%')
+                                ->orWhere('linkedin' , 'LIKE' , '%'.$request->keyword.'%');
+                        }
+                    });
+            }})->paginate(25);
         $subjects = Subject::limit(4)->get();
-        return view('admin.courses.index',compact('courses','subjects'));
+        return view('admin.courses.index',compact('courses','subjects','request'));
     }
 
     public function create()
@@ -23,10 +70,10 @@ class CourseController extends Controller
         return view('admin.courses.create');
     }
 
-    public function store(Request $request)
+    public function store(CourseRequest $request)
     {
         $course = Course::create($request->all());
-
+        $course->courseInstructor()->sync($request->instructor_id);
         if($request->hasFile('image')) {
             $course
                 ->addMediaFromRequest('image')

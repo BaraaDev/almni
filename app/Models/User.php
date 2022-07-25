@@ -10,18 +10,20 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\Permission\Traits\HasRoles;
 
-        class User extends Authenticatable implements HasMedia
+class User extends Authenticatable implements HasMedia
 {
-    use HasApiTokens, HasFactory, Notifiable, InteractsWithMedia, SoftDeletes;
+    use HasApiTokens, HasFactory, Notifiable, InteractsWithMedia, SoftDeletes, HasRoles;
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
-    protected $fillable = ['name','username', 'nickname', 'email', 'password', 'bio', 'age', 'job', 'phone', 'phone2', 'address', 'postal_code',
-        'location', 'city_id', 'level_id', 'group_id', 'subject_id', 'initial_price','final_price','test_date','userType','status','whatsApp'];
+    protected $fillable = ['name','username', 'nickname','password', 'email', 'bio', 'age', 'job', 'phone', 'phone2', 'address', 'postal_code',
+        'location', 'city_id', 'level_id',  'initial_price','final_price','test_date','userType','status','whatsApp',
+        'facebook','twitter','linkedin','AskFM','YouTube','website','instagram'];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -30,6 +32,7 @@ use Spatie\MediaLibrary\InteractsWithMedia;
      */
     protected $hidden = [
         'password',
+        'api_token',
         'remember_token',
     ];
 
@@ -47,9 +50,25 @@ use Spatie\MediaLibrary\InteractsWithMedia;
         return $this->belongsTo(City::class);
     }
 
+    public function level()
+    {
+        return $this->belongsTo(Level::class);
+    }
+
     public function groups()
     {
-        return $this->belongsToMany(Group::class,'group_user','user_id','group_id','id','id',User::class);
+        return $this->belongsToMany(Group::class,'group_student','student_id','group_id');
+    }
+
+    public function subjects()
+    {
+        return $this->belongsToMany(Subject::class,'subject_instructor','instructor_id','subject_id');
+    }
+
+
+    public function courseInstructor()
+    {
+        return $this->belongsToMany(User::class,'course_instructor','course_id','instructor_id');
     }
 
     public function getPhotoAttribute()

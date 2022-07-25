@@ -456,11 +456,13 @@
 			MagnificPopup();
 		},
 
-		
 		load:function(){
-			handlePreloader();
-			handleNiceSelect();
-			handleSupport();
+			// Added by Omar
+			if(handlePreloader() && handleNiceSelect() && andleSupport()) {
+				handlePreloader();
+				handleNiceSelect();
+				handleSupport();
+			}
 		},
 		
 		resize:function(){

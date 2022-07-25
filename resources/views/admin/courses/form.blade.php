@@ -71,6 +71,16 @@
     </div>
 
     <div class="mb-3 col-6">
+        <label class="form-label">{{__('instructor.instructors')}}</label>
+        @inject('instructor','App\Models\User')
+        {!! Form::select('instructor_id[]',$instructor->status('active')->type('instructor')->pluck('name','id'),$model->courseInstructor->pluck('id')->all(),[
+            'class' => 'js-example-programmatic-multi default-select form-control',
+            'multiple'
+        ]) !!}
+        @error('instructor_id') <div class="invalid-feedback">{{$message}}</div> @enderror
+    </div>
+
+    <div class="mb-3 col-6">
         <label class="form-label">{{__('home.status')}} <span style="color: red">*</span></label>
         <select name="status"  class="default-select form-control @error('status') is-invalid @enderror" required>
             <option disabled>{{__('home.please choose')}}</option>

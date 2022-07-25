@@ -27,7 +27,7 @@ class GroupRequest extends FormRequest
             'name'         => 'required|string|min:3|max:199',
             'description'  => 'nullable|string|max:500',
             'level_id'     => 'nullable|exists:levels,id',
-            'status'       => 'string|in:active,stopped',
+            'status'       => 'required|string|in:active,stopped',
         ];
     }
 }
