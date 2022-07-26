@@ -25,10 +25,13 @@ class RoleController extends Controller
     }
 
 
-    public function index()
+    public function index(Request $request)
     {
-        $roles = Role::orderBy('id','DESC')->paginate(5);
-        return view('admin.roles.index',compact('roles'));
+        $roles = Role::orderBy('id','DESC')->where(function ($q) use($request){
+            if($request->keyword){
+                $q->where('name' , 'LIKE' , '%'.$request->keyword.'%');
+            }})->paginate(25);
+        return view('admin.roles.index',compact('roles','request'));
     }
 
 

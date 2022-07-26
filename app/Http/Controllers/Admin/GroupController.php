@@ -24,10 +24,27 @@ class GroupController extends Controller
     }
 
 
-    public function index()
+    public function index(Request $request)
     {
-        $groups = Group::all();
-        return view('admin.groups.index',compact('groups'));
+        $groups = Group::orderBy('id','DESC')->where(function ($q) use($request){
+            if($request->keyword){
+                $q->where('name' , 'LIKE' , '%'.$request->keyword.'%')
+                    ->orWhere('description' , 'LIKE' , '%'.$request->keyword.'%')
+                    ->orWhereHas('level', function ($q) use ($request){
+                        if($request->keyword){
+                            $q->where('level' , 'LIKE' , '%'.$request->keyword.'%');
+                        }
+                    })->orWhereHas('course', function ($q) use ($request){
+                        if($request->keyword){
+                            $q->where('title' , 'LIKE' , '%'.$request->keyword.'%')
+                                ->orWhere('description' , 'LIKE' , '%'.$request->keyword.'%')
+                                ->orWhere('course_date' , 'LIKE' , '%'.$request->keyword.'%')
+                                ->orWhere('price' , 'LIKE' , '%'.$request->keyword.'%')
+                                ->orWhere('discount' , 'LIKE' , '%'.$request->keyword.'%');
+                        }
+                    });
+            }})->paginate(25);
+        return view('admin.groups.index',compact('groups','request'));
     }
 
     public function create()

@@ -2,7 +2,7 @@
     <div class="mb-3 col-6">
         <label class="form-label">{{__('home.name')}} <span style="color: red">*</span></label>
         <input type="text" name="name" class="form-control input-default @error('name') is-invalid @enderror" placeholder="{{__('user.Enter the full name')}}" value="{{Request::old('name') ? Request::old('name') : $model->name}}" required>
-        @error('name') <div class="invalid-feedback">{{$message}}</div> @enderror
+            @error('name') <div class="invalid-feedback">{{$message}}</div> @enderror
     </div>
 
     <div class="mb-3 col-6">
@@ -110,7 +110,7 @@
     </div>
 
     <div class="mb-3 col-md-4 col-6">
-        <label class="form-label">{{__('home.instagram')}}</label>
+        <label class="form-label">{{__('home.AskFM')}}</label>
         <input type="text" name="AskFM" class="form-control input-default" placeholder="{{__('home.username AskFM')}}" value="{{Request::old('AskFM') ? Request::old('AskFM') : $model->AskFM}}">
     </div>
 

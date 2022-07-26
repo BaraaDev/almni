@@ -10,13 +10,5 @@ class City extends Model
 {
     use HasFactory, SoftDeletes;
     protected $guarded = [];
-    public function create_user()
-    {
-        return $this->belongsTo(User::class);
-    }
 
-    public function update_user()
-    {
-        return $this->belongsTo(User::class);
-    }
 }

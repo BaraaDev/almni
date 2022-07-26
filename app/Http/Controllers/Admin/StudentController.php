@@ -25,11 +25,34 @@ class StudentController extends Controller
         $this->middleware('permission:student-delete', ['only' => ['destroy']]);
     }
 
-    public function index()
+    public function index(Request $request)
     {
         $allStudents = User::count();
-        $students = User::status('active')->type('student')->get();
-        return view('admin.users.students.index',compact('allStudents','students'));
+        $students = User::status('active')->type('student')->orderBy('id','DESC')->where(function ($q) use($request){
+            if($request->keyword){
+                $q->where('name' , 'LIKE' , '%'.$request->keyword.'%')
+                    ->orWhere('nickname' , 'LIKE' , '%'.$request->keyword.'%')
+                    ->orWhere('email' , 'LIKE' , '%'.$request->keyword.'%')
+                    ->orWhere('phone' , 'LIKE' , '%'.$request->keyword.'%')
+                    ->orWhere('phone2' , 'LIKE' , '%'.$request->keyword.'%')
+                    ->orWhere('whatsApp' , 'LIKE' , '%'.$request->keyword.'%')
+                    ->orWhere('address' , 'LIKE' , '%'.$request->keyword.'%')
+                    ->orWhereHas('level', function ($q) use ($request){
+                        if($request->keyword){
+                            $q->where('name' , 'LIKE' , '%'.$request->keyword.'%');
+                        }
+                    })->orWhereHas('city', function ($q) use ($request){
+                        if($request->keyword){
+                            $q->where('city' , 'LIKE' , '%'.$request->keyword.'%');
+                        }
+                    })->orWhereHas('groups', function ($q) use ($request){
+                        if($request->keyword){
+                            $q->where('name' , 'LIKE' , '%'.$request->keyword.'%')
+                                ->orWhere('description' , 'LIKE' , '%'.$request->keyword.'%');
+                        }
+                    });
+            }})->paginate(25);
+        return view('admin.users.students.index',compact('allStudents','students','request'));
     }
 
 
@@ -94,10 +117,33 @@ class StudentController extends Controller
     }
 
 
-    public function waiting()
+    public function waiting(Request $request)
     {
-        $users = User::status('stopped')->type('student')->get();
-        return view('admin.users.students.waiting',compact('users'));
+        $users = User::status('stopped')->type('student')->orderBy('id','DESC')->where(function ($q) use($request){
+            if($request->keyword){
+                $q->where('name' , 'LIKE' , '%'.$request->keyword.'%')
+                    ->orWhere('nickname' , 'LIKE' , '%'.$request->keyword.'%')
+                    ->orWhere('email' , 'LIKE' , '%'.$request->keyword.'%')
+                    ->orWhere('phone' , 'LIKE' , '%'.$request->keyword.'%')
+                    ->orWhere('phone2' , 'LIKE' , '%'.$request->keyword.'%')
+                    ->orWhere('whatsApp' , 'LIKE' , '%'.$request->keyword.'%')
+                    ->orWhere('address' , 'LIKE' , '%'.$request->keyword.'%')
+                    ->orWhereHas('level', function ($q) use ($request){
+                        if($request->keyword){
+                            $q->where('name' , 'LIKE' , '%'.$request->keyword.'%');
+                        }
+                    })->orWhereHas('city', function ($q) use ($request){
+                        if($request->keyword){
+                            $q->where('city' , 'LIKE' , '%'.$request->keyword.'%');
+                        }
+                    })->orWhereHas('groups', function ($q) use ($request){
+                        if($request->keyword){
+                            $q->where('name' , 'LIKE' , '%'.$request->keyword.'%')
+                                ->orWhere('description' , 'LIKE' , '%'.$request->keyword.'%');
+                        }
+                    });
+            }})->paginate(25);
+        return view('admin.users.students.waiting',compact('users','request'));
     }
 
 

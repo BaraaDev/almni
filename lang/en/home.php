@@ -77,6 +77,7 @@ return [
     'username YouTube'                       => 'Username YouTube',
     'User created successfully'              => 'User created successfully',
     'User successfully edited'               => 'User successfully edited',
+    'User successfully updated'               => 'User successfully updated',
     'User deleted successfully'              => 'User deleted successfully',
     'Are you sure to delete'                 => 'Are you sure to delete?',
     'Well done'                              => 'Well done',

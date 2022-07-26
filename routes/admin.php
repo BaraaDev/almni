@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\InstructorController;
 use App\Http\Controllers\Admin\LectureController;
 use App\Http\Controllers\Admin\LevelController;
+use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\Admin\SubjectController;
@@ -38,5 +39,7 @@ Route::group([
         Route::resource('/lectures', LectureController::class);
         Route::resource('/instructors', InstructorController::class);
         Route::resource('/roles',RoleController::class);
+        Route::get('/profile',[ProfileController::class,'profile'])->name('profile');
+        Route::post('/profile',[ProfileController::class,'edit_my_Profile'])->name('editProfile');
     });
 });

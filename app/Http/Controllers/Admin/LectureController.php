@@ -25,10 +25,44 @@ class LectureController extends Controller
         $this->middleware('permission:lecture-delete', ['only' => ['destroy']]);
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $lectures = Lecture::all();
-        return view('admin.lectures.index',compact('lectures'));
+        $lectures = Lecture::orderBy('id','DESC')->where(function ($q) use($request){
+            if($request->keyword){
+                $q->where('name' , 'LIKE' , '%'.$request->keyword.'%')
+                    ->orWhere('description' , 'LIKE' , '%'.$request->keyword.'%')
+                    ->orWhere('course_date' , 'LIKE' , '%'.$request->keyword.'%')
+                    ->orWhere('price' , 'LIKE' , '%'.$request->keyword.'%')
+                    ->orWhere('discount' , 'LIKE' , '%'.$request->keyword.'%')
+                    ->orWhereHas('course', function ($q) use ($request){
+                        if($request->keyword){
+                            $q->where('title' , 'LIKE' , '%'.$request->keyword.'%')
+                                ->orWhere('description' , 'LIKE' , '%'.$request->keyword.'%')
+                                ->orWhere('course_date' , 'LIKE' , '%'.$request->keyword.'%')
+                                ->orWhere('price' , 'LIKE' , '%'.$request->keyword.'%')
+                                ->orWhere('discount' , 'LIKE' , '%'.$request->keyword.'%');
+                        }
+                    })->orWhereHas('group', function ($q) use ($request){
+                        if($request->keyword){
+                            $q->where('name' , 'LIKE' , '%'.$request->keyword.'%')
+                            ->orWhere('description' , 'LIKE' , '%'.$request->keyword.'%');
+                        }
+                    })->orWhereHas('instructor', function ($q) use ($request){
+                        if($request->keyword){
+                            $q->where('name' , 'LIKE' , '%'.$request->keyword.'%')
+                                ->orWhere('nickname' , 'LIKE' , '%'.$request->keyword.'%')
+                                ->orWhere('email' , 'LIKE' , '%'.$request->keyword.'%')
+                                ->orWhere('phone' , 'LIKE' , '%'.$request->keyword.'%')
+                                ->orWhere('phone2' , 'LIKE' , '%'.$request->keyword.'%')
+                                ->orWhere('whatsApp' , 'LIKE' , '%'.$request->keyword.'%')
+                                ->orWhere('address' , 'LIKE' , '%'.$request->keyword.'%')
+                                ->orWhere('facebook' , 'LIKE' , '%'.$request->keyword.'%')
+                                ->orWhere('twitter' , 'LIKE' , '%'.$request->keyword.'%')
+                                ->orWhere('linkedin' , 'LIKE' , '%'.$request->keyword.'%');
+                        }
+                    });
+            }})->paginate(25);
+        return view('admin.lectures.index',compact('lectures','request'));
     }
 
 

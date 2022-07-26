@@ -11,6 +11,8 @@ return [
     'update user'                        => 'Update User',
     'update users'                       => 'Update User',
     'name'                               => 'Name',
+    'Personal Information'                               => 'Personal Information',
+    'Account Setting'                               => 'Account Setting',
     'user name'                          => 'User Name',
     'create user'                        => 'Create User',
     'email address'                      => 'Email Address',

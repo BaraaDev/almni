@@ -25,10 +25,13 @@ class SubjectController extends Controller
     }
 
 
-    public function index()
+    public function index(Request $request)
     {
-        $subjects = Subject::all();
-        return view('admin.subjects.index',compact('subjects'));
+        $subjects = Subject::orderBy('id','DESC')->where(function ($q) use($request){
+            if($request->keyword){
+                $q->where('name' , 'LIKE' , '%'.$request->keyword.'%');
+            }})->paginate(25);
+        return view('admin.subjects.index',compact('subjects','request'));
     }
 
     public function create()

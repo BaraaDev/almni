@@ -49,7 +49,7 @@ class InstructorController extends Controller
                         $q->where('name' , 'LIKE' , '%'.$request->keyword.'%');
                     }
                 });
-        }})->paginate(25);;
+        }})->paginate(25);
         activity()
             ->event('d')
 

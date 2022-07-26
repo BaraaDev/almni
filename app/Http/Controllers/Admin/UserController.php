@@ -27,10 +27,40 @@ class UserController extends Controller
     }
 
 
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::all();
-        return view('admin.users.index',compact('users'));
+        $users = User::orderBy('id','DESC')->where(function ($q) use($request){
+            if($request->keyword){
+                $q->where('name' , 'LIKE' , '%'.$request->keyword.'%')
+                    ->orWhere('username' , 'LIKE' , '%'.$request->keyword.'%')
+                    ->orWhere('email' , 'LIKE' , '%'.$request->keyword.'%')
+                    ->orWhere('job' , 'LIKE' , '%'.$request->keyword.'%')
+                    ->orWhere('phone' , 'LIKE' , '%'.$request->keyword.'%')
+                    ->orWhere('phone2' , 'LIKE' , '%'.$request->keyword.'%')
+                    ->orWhere('whatsApp' , 'LIKE' , '%'.$request->keyword.'%')
+                    ->orWhere('address' , 'LIKE' , '%'.$request->keyword.'%')
+                    ->orWhere('bio' , 'LIKE' , '%'.$request->keyword.'%')
+                    ->orWhere('facebook' , 'LIKE' , '%'.$request->keyword.'%')
+                    ->orWhere('twitter' , 'LIKE' , '%'.$request->keyword.'%')
+                    ->orWhere('linkedin' , 'LIKE' , '%'.$request->keyword.'%')
+                    ->orWhere('instagram' , 'LIKE' , '%'.$request->keyword.'%')
+                    ->orWhere('AskFM' , 'LIKE' , '%'.$request->keyword.'%')
+                    ->orWhere('YouTube' , 'LIKE' , '%'.$request->keyword.'%')
+                    ->orWhereHas('level', function ($q) use ($request){
+                        if($request->keyword){
+                            $q->where('name' , 'LIKE' , '%'.$request->keyword.'%');
+                        }
+                    })->orWhereHas('city', function ($q) use ($request){
+                        if($request->keyword){
+                            $q->where('city' , 'LIKE' , '%'.$request->keyword.'%');
+                        }
+                    })->orWhereHas('roles', function ($q) use ($request){
+                        if($request->keyword){
+                            $q->where('name' , 'LIKE' , '%'.$request->keyword.'%');
+                        }
+                    });
+            }})->paginate(25);
+        return view('admin.users.index',compact('users','request'));
     }
 
     public function create()

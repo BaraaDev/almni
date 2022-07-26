@@ -23,10 +23,13 @@ class LevelController extends Controller
         $this->middleware('permission:level-delete', ['only' => ['destroy']]);
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $levels = Level::all();
-        return view('admin.levels.index',compact('levels'));
+        $levels = Level::orderBy('id','DESC')->where(function ($q) use($request){
+            if($request->keyword){
+                $q->where('level' , 'LIKE' , '%'.$request->keyword.'%');
+            }})->paginate(25);
+        return view('admin.levels.index',compact('levels','request'));
     }
 
     public function create()
