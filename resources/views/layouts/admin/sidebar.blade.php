@@ -204,6 +204,72 @@
                 </li>{{-- End roles --}}
             @endcan
             {{--      /////////////////////////////      --}}
+
+            @can('expenses-list')
+                {{-- Start expenses --}}
+                <li>
+                    <a class="has-arrow" href="javascript:void(0);" aria-expanded="false">
+                        <i class="bi bi-people"></i>
+                        <span class="nav-text">{{__('expenses.expenses')}} </span>
+                    </a>
+                    <ul aria-expanded="false">
+                        <li><a href="{{route('expenses.index')}}">{{__('expenses.all expenses')}}</a></li>
+                        @can('expenses-create')
+                            <li><a href="{{route('expenses.create')}}">{{__('expenses.add new expenses')}}</a></li>
+                        @endcan
+                    </ul>
+                </li>{{-- End expenses --}}
+            @endcan
+            {{--      /////////////////////////////      --}}
+
+
+            @can('salaries-list')
+                {{-- Start salaries --}}
+                <li>
+                    <a class="has-arrow" href="javascript:void(0);" aria-expanded="false">
+                        <i class="bi bi-people"></i>
+                        <span class="nav-text">{{__('salary.salaries')}} </span>
+                    </a>
+                    <ul aria-expanded="false">
+                        <li><a href="{{route('salaries.index')}}">{{__('salary.all salaries')}}</a></li>
+                    </ul>
+                </li>{{-- End salaries --}}
+            @endcan
+            {{--      /////////////////////////////      --}}
+
+
+            @can('bunches-list')
+                {{-- Start bunches --}}
+                <li>
+                    <a class="has-arrow" href="javascript:void(0);" aria-expanded="false">
+                        <i class="bi bi-people"></i>
+                        <span class="nav-text">{{__('bunche.bunches')}} </span>
+                    </a>
+                    <ul aria-expanded="false">
+                        <li><a href="{{route('bunches.index')}}">{{__('bunche.all bunches')}}</a></li>
+                    </ul>
+                </li>{{-- End bunches --}}
+            @endcan
+            {{--      /////////////////////////////      --}}
+
+            @can(['reports-salaries' , 'reports-bunches'])
+                {{-- Start bunches --}}
+                <li>
+                    <a class="has-arrow" href="javascript:void(0);" aria-expanded="false">
+                        <i class="bi bi-people"></i>
+                        <span class="nav-text">{{__('home.reports')}} </span>
+                    </a>
+                    <ul aria-expanded="false">
+                        @can('reports-salaries')
+                        <li><a href="{{route('reports.salaries')}}">{{__('salary.salaries')}}</a></li>
+                        @endcan
+                        @can('reports-bunches')
+                        <li><a href="{{route('reports.bunches')}}">{{__('bunche.bunches')}}</a></li>
+                        @endcan
+                    </ul>
+                </li>{{-- End bunches --}}
+            @endcan
+            {{--      /////////////////////////////      --}}
         </ul>
 
         <div class="copyright">

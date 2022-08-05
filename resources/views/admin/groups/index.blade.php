@@ -51,30 +51,27 @@
                             @endcan
                     </div>
                     <div class="row">
-                        <div class="col-3 border-end">
+                        <div class="col-4 border-end">
                             <div class="pt-3 pb-3 ps-0 pe-0 text-center">
-                                <h4 class="m-1"><span class="counter">89</span></h4>
-                                <p class="m-0">Students</p>
+                                <a href="{{route('group.student',$group->id)}}">
+                                    <h4 class="m-1"><span class="counter">{{$group->users->count()}}</span></h4>
+                                    <p class="m-0">{{__('student.students')}}</p>
+                                </a>
+
                             </div>
                         </div>
-                        <div class="col-3 border-end">
+                        <div class="col-4 border-end">
                             <div class="pt-3 pb-3 ps-0 pe-0 text-center">
                                 <h4 class="m-1"><span class="counter">{{Str::limit($group->level->level ?? '',10,'...')}}</span></h4>
                                 <p class="m-0">{{__('level.level')}}</p>
                             </div>
                         </div>
-                        <div class="col-3 border-end">
+                        <div class="col-4  border-end">
                             <div class="pt-3 pb-3 ps-0 pe-0 text-center">
                                 <a href="{{route('courses.show',$group->course->id ?? '' , '')}}">
                                     <h4 class="m-1"><span class="counter">{{Str::limit($group->course->title ?? '',10,'...')}} </span></h4>
                                     <p class="m-0">{{__('course.course')}}</p>
                                 </a>
-                            </div>
-                        </div>
-                        <div class="col-3">
-                            <div class="pt-3 pb-3 ps-0 pe-0 text-center">
-                                <h4 class="m-1"><span class="counter">4</span></h4>
-                                <p class="m-0">Lectures</p>
                             </div>
                         </div>
                     </div>
@@ -86,18 +83,7 @@
                 </div>
             @endforelse
         </div>
-        <div class="pagination-down">
-            <div class="d-flex align-items-center justify-content-between flex-wrap">
-                <h4 class="sm-mb-0 mb-3">Showing <span>1-6 </span>from <span>100 </span>data</h4>
-                <ul>
-                    <li><a href="javascript:void(0);"><i class="fas fa-chevron-left"></i></a></li>
-                    <li><a href="javascript:void(0);" class="active">1</a></li>
-                    <li><a href="javascript:void(0);">2</a></li>
-                    <li><a href="javascript:void(0);">3</a></li>
-                    <li><a href="javascript:void(0);"><i class="fas fa-chevron-right"></i></a></li>
-                </ul>
-            </div>
-        </div>
+        {{$groups->links('pagination::bootstrap-5')}}
     </div>
 
 @endsection

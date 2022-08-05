@@ -1,0 +1,26 @@
+<?php
+
+return [
+    'expense'                            => 'Expense',
+    'price'                              => 'Expense price',
+    'count'                              => 'Count',
+    'date'                               => 'Expenses date',
+    'expenses'                           => 'Expenses',
+    'all expenses'                       => 'All Expenses',
+    'create expense'                     => 'Create Expense',
+    'create expenses'                    => 'Create Expenses',
+    'edit expense'                       => 'Edit Expense',
+    'update expense'                     => 'Update Expense',
+    'add new expenses'                   => 'Add New Expense',
+    'expense names'                      => 'Expense Names',
+    'deleted expenses'                   => 'Deleted Expenses',
+    'delete expense'                     => 'Delete Expense',
+    'View all expenses'                  => 'View all expenses',
+    'Expense created successfully'       => 'Expense created successfully',
+    'Expense successfully edited'        => 'Expense successfully edited',
+    'Expense deleted successfully'       => 'Expense deleted successfully',
+    'Enter the expense title'            => 'Enter the expense title',
+    'Enter the expense price'            => 'Enter the expense price',
+    'Enter the expense count'            => 'Enter the expense count',
+    'Enter the expense date'             => 'Enter the expense date',
+];

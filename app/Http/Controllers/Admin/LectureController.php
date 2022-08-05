@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\LectureRequest;
 use App\Models\Lecture;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Nette\Utils\Random;
 use function Ramsey\Uuid\v1;
 
@@ -62,12 +63,20 @@ class LectureController extends Controller
                         }
                     });
             }})->paginate(25);
+
+        activity()
+            ->causedBy(Auth::user()->id)
+            ->log(__('log.See lectures'));
         return view('admin.lectures.index',compact('lectures','request'));
     }
 
 
     public function create()
     {
+        activity()
+            ->causedBy(Auth::user()->id)
+            ->log(__('log.See create lectures'));
+
         return view('admin.lectures.create');
     }
 
@@ -101,6 +110,11 @@ class LectureController extends Controller
         }
         $lecture->save();
 
+        activity()
+            ->performedOn($lecture)
+            ->event(__('home.create'))
+            ->causedBy(Auth::user()->id)
+            ->log(__('log.create new lecture'));
         return redirect()->route('lectures.index')
             ->with(['success' => __('lecture.Lecture created successfully')]);
     }
@@ -109,6 +123,10 @@ class LectureController extends Controller
     public function show($id)
     {
         $model = Lecture::findOrFail($id);
+
+        activity()
+            ->causedBy(Auth::user()->id)
+            ->log(__('log.See show lectures'));
         return view('admin.lectures.show',compact('model'));
     }
 
@@ -116,6 +134,10 @@ class LectureController extends Controller
     public function edit($id)
     {
         $model = Lecture::findOrFail($id);
+
+        activity()
+            ->causedBy(Auth::user()->id)
+            ->log(__('log.See edit lectures'));
         return view('admin.lectures.edit',compact('model'));
     }
 
@@ -155,6 +177,11 @@ class LectureController extends Controller
         }
         $lecture->save();
 
+        activity()
+            ->performedOn($lecture)
+            ->event(__('home.update'))
+            ->causedBy(Auth::user()->id)
+            ->log(__('log.update lecture'));
 
         return redirect()->route('lectures.index')
             ->with(['success' => __('lecture.Lecture successfully edited')]);
@@ -165,6 +192,11 @@ class LectureController extends Controller
     {
         $lecture = Lecture::findOrFail($id);
         $lecture->delete();
+
+        activity()
+            ->event(__('home.delete'))
+            ->causedBy(Auth::user()->id)
+            ->log(__('log.delete lecture'));
         return redirect()->route('lectures.index')
             ->with(['success' => __('lecture.Lecture deleted successfully')]);
     }

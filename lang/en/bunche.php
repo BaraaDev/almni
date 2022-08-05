@@ -1,0 +1,25 @@
+<?php
+
+return [
+    'bunche'                            => 'Bunche',
+    'bunches'                           => 'Bunches',
+    'all bunches'                       => 'All Bunches',
+    'create bunche'                     => 'Create Bunche',
+    'create bunches'                    => 'Create Bunches',
+    'edit bunche'                       => 'Edit Bunche',
+    'update bunche'                     => 'Update Bunche',
+    'add new bunches'                   => 'Add New Bunche',
+    'bunche names'                      => 'Bunche Names',
+    'deleted bunches'                   => 'Deleted Cities',
+    'delete bunche'                     => 'Delete Bunche',
+    'no bunche'                         => 'No Bunche',
+    'no status'                         => '<span class="badge  light badge-danger"> No Status </span>',
+    'no price'                          => '<span class="badge  light badge-danger"> No Price </span>',
+    'no deposit'                        => '<span class="badge  light badge-danger"> No Deposit </span>',
+    'View all bunches'                  => 'View all bunches',
+    'Bunche created successfully'       => 'Bunche created successfully',
+    'Bunche successfully edited'        => 'Bunche successfully edited',
+    'Bunche deleted successfully'       => 'Bunche deleted successfully',
+    'Enter the bunche name'             => 'Enter the bunche name',
+    'Enter the bunche description'      => 'Enter the bunche description',
+];

@@ -62,24 +62,7 @@
                 </div>
             @endforelse
 
-            <!-- ==== Nav Pagination ==== -->
-            <nav>
-                <ul class="pagination d-flex justify-content-center pagination-gutter">
-                    <li class="page-item page-indicator">
-                        <a class="page-link" href="javascript:void(0)">
-                            <i class="la la-angle-left"></i></a>
-                    </li>
-                    <li class="page-item active"><a class="page-link" href="javascript:void(0)">1</a>
-                    </li>
-                    <li class="page-item"><a class="page-link" href="javascript:void(0)">2</a></li>
-                    <li class="page-item"><a class="page-link" href="javascript:void(0)">3</a></li>
-                    <li class="page-item"><a class="page-link" href="javascript:void(0)">4</a></li>
-                    <li class="page-item page-indicator">
-                        <a class="page-link" href="javascript:void(0)">
-                            <i class="la la-angle-right"></i></a>
-                    </li>
-                </ul>
-            </nav><!-- ==== Nav Pagination ==== -->
         </div>
+        {{$users->links('pagination::bootstrap-5')}}
     </div>
 @endsection

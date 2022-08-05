@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CategoryController extends Controller
 {
@@ -33,17 +34,32 @@ class CategoryController extends Controller
                         }
                     });
             }})->paginate(25);
+
+
+        activity()
+            ->causedBy(Auth::user()->id)
+            ->log(__('log.See categories'));
         return view('admin.categories.index',compact('categories','request'));
     }
 
     public function create()
     {
+        activity()
+            ->causedBy(Auth::user()->id)
+            ->log(__('log.See create categories'));
+
         return view('admin.categories.create');
     }
 
     public function store(CategoryRequest $request)
     {
-        $user = Category::create($request->all());
+        $category = Category::create($request->all());
+
+        activity()
+            ->performedOn($category)
+            ->event(__('home.create'))
+            ->causedBy(Auth::user()->id)
+            ->log(__('log.create new category'));
 
         return redirect()->route('categories.index')
             ->with(['success' => __('category.Category created successfully')]);
@@ -51,14 +67,25 @@ class CategoryController extends Controller
     public function edit($id)
     {
         $model = Category::findOrFail($id);
+
+
+        activity()
+            ->causedBy(Auth::user()->id)
+            ->log(__('log.See edit categories'));
         return view('admin.categories.edit',compact('model'));
     }
 
     public function update(CategoryRequest $request,$id)
     {
-        $user = Category::findOrFail($id);
-        $user->update($request->all());
+        $category = Category::findOrFail($id);
+        $category->update($request->all());
 
+
+        activity()
+            ->performedOn($category)
+            ->event(__('home.update'))
+            ->causedBy(Auth::user()->id)
+            ->log(__('log.update category'));
         return redirect()->route('categories.index')
             ->with(['success' => __('category.Category successfully edited')]);
     }
@@ -67,6 +94,12 @@ class CategoryController extends Controller
     {
         $categories = Category::findOrFail($id);
         $categories->delete();
+
+
+        activity()
+            ->event(__('home.delete'))
+            ->causedBy(Auth::user()->id)
+            ->log(__('log.delete category'));
         return redirect()->route('categories.index')
             ->with(['success' => __('category.Category deleted successfully')]);
     }

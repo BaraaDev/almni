@@ -97,6 +97,7 @@
                 </div>
             </div>
         </div>
+        {{$roles->links('pagination::bootstrap-5')}}
     </div>
 @endsection
 

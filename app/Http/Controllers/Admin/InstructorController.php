@@ -50,18 +50,20 @@ class InstructorController extends Controller
                     }
                 });
         }})->paginate(25);
-        activity()
-            ->event('d')
 
+
+        activity()
             ->causedBy(Auth::user()->id)
-            ->withProperties(['customProperty' => 'customValue'])
-            ->log('Look, I logged something');
+            ->log(__('log.See instructors'));
         return view('admin.users.instructors.index',compact('allInstructors','instructors','request'));
     }
 
 
     public function create()
     {
+        activity()
+            ->causedBy(Auth::user()->id)
+            ->log(__('log.See create instructors'));
         return view('admin.users.instructors.create');
     }
 
@@ -83,6 +85,12 @@ class InstructorController extends Controller
         }
         $instructor->save();
 
+
+        activity()
+            ->performedOn($instructor)
+            ->event(__('home.create'))
+            ->causedBy(Auth::user()->id)
+            ->log(__('log.create new instructor'));
         return redirect()->route('instructors.index')
             ->with(['success' => __('home.User created successfully')]);
     }
@@ -96,6 +104,10 @@ class InstructorController extends Controller
     public function edit($id)
     {
         $model = User::status('active')->type('instructor')->findOrFail($id);
+
+        activity()
+            ->causedBy(Auth::user()->id)
+            ->log(__('log.See edit instructors'));
         return view('admin.users.instructors.edit',compact('model'));
     }
 
@@ -120,7 +132,11 @@ class InstructorController extends Controller
 
         $instructor->save();
 
-
+        activity()
+            ->performedOn($instructor)
+            ->event(__('home.update'))
+            ->causedBy(Auth::user()->id)
+            ->log(__('log.update instructor'));
         return redirect()->route('instructors.index')
             ->with(['success' => __('home.User successfully edited')]);
     }
@@ -130,6 +146,12 @@ class InstructorController extends Controller
     {
         $instructors = User::findOrFail($id);
         $instructors->delete();
+
+
+        activity()
+            ->event(__('home.delete'))
+            ->causedBy(Auth::user()->id)
+            ->log(__('log.delete instructor'));
         return redirect()->route('instructors.index')
             ->with(['success' => __('home.User deleted successfully')]);
     }

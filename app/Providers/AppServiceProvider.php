@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
+use Spatie\Activitylog\Models\Activity;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -26,5 +27,6 @@ class AppServiceProvider extends ServiceProvider
     {
         $Dashboard_title = ' - Dashboard';
         View::share('title', $Dashboard_title);
+        View::share('activities', Activity::orderBy('created_at','DESC')->limit(30)->get());
     }
 }

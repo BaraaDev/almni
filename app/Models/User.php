@@ -22,8 +22,8 @@ class User extends Authenticatable implements HasMedia
      * @var array<int, string>
      */
     protected $fillable = ['name','username', 'nickname','password', 'email', 'bio', 'age', 'job', 'phone', 'phone2', 'address', 'postal_code',
-        'location', 'city_id', 'level_id',  'initial_price','final_price','test_date','userType','status','whatsApp',
-        'facebook','twitter','linkedin','AskFM','YouTube','website','instagram'];
+        'location', 'city_id', 'level_id', 'test_date','userType','status','whatsApp',
+        'facebook','twitter','linkedin','AskFM','YouTube','website','instagram','salary'];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -71,6 +71,15 @@ class User extends Authenticatable implements HasMedia
         return $this->belongsToMany(User::class,'course_instructor','course_id','instructor_id');
     }
 
+    public function salaries()
+    {
+        return $this->hasMany(Salary::class,'user_id');
+    }
+
+    public function bunche()
+    {
+        return $this->hasMany(Bunche::class,'user_id');
+    }
     public function getPhotoAttribute()
     {
         return $this->getFirstMediaUrl('user')

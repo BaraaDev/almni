@@ -53,7 +53,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <button type="submit" class="btn mt-3 me-2 btn-primary">{{__('home.create')}}</button>
+                                <button type="submit" class="btn mt-3 me-2 btn-primary">{{__('home.edit')}}</button>
                             </form>
                         </div>
                     </div>

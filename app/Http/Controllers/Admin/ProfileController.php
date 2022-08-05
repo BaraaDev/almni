@@ -6,8 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Nette\Utils\Random;
-use phpDocumentor\Reflection\DocBlock\Tags\Author;
-use voku\helper\ASCII;
 
 class ProfileController extends Controller
 {
@@ -27,6 +25,7 @@ class ProfileController extends Controller
         if($request->name != $user->name){
             $array['name'] =  $request->name;
         }
+        $user->password = bcrypt($request->input('password'));
 
         if($request->email != $user->email){
             $email = User::where('email' , $request->email)->first();

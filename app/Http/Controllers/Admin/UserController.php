@@ -7,6 +7,7 @@ use App\Http\Requests\UserRequest;
 use App\Models\City;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
 
@@ -29,7 +30,7 @@ class UserController extends Controller
 
     public function index(Request $request)
     {
-        $users = User::orderBy('id','DESC')->where(function ($q) use($request){
+        $users = User::orderBy('id','DESC')->status('active')->type('admin')->where(function ($q) use($request){
             if($request->keyword){
                 $q->where('name' , 'LIKE' , '%'.$request->keyword.'%')
                     ->orWhere('username' , 'LIKE' , '%'.$request->keyword.'%')
@@ -60,6 +61,12 @@ class UserController extends Controller
                         }
                     });
             }})->paginate(25);
+
+
+        activity()
+            ->causedBy(Auth::user()->id)
+            ->log(__('log.See users'));
+
         return view('admin.users.index',compact('users','request'));
     }
 
@@ -67,6 +74,9 @@ class UserController extends Controller
     {
         $roles = Role::pluck('name','name')->all();
 
+        activity()
+            ->causedBy(Auth::user()->id)
+            ->log(__('log.See create users'));
         return view('admin.users.create',compact('roles'));
     }
 
@@ -76,6 +86,7 @@ class UserController extends Controller
         $user = User::create($request->all());
         $user->password = bcrypt($request->input('password'));
         $user->assignRole($request->input('roles'));
+        $user->userType = 'admin';
         if($request->file('photo')) {
             $user
                 ->addMediaFromRequest('photo')
@@ -85,7 +96,11 @@ class UserController extends Controller
         }
         $user->save();
 
-
+        activity()
+            ->performedOn($user)
+            ->event(__('home.create'))
+            ->causedBy(Auth::user()->id)
+            ->log(__('log.create new admin'));
 
         return redirect()->route('users.index')
             ->with(['success' => __('home.User created successfully')]);
@@ -94,6 +109,10 @@ class UserController extends Controller
     public function show($id)
     {
         $user = User::findOrFail($id);
+
+        activity()
+            ->causedBy(Auth::user()->id)
+            ->log(__('log.See show users'));
         return view('admin.users.show',compact('user'));
     }
 
@@ -103,6 +122,10 @@ class UserController extends Controller
         $model = User::findOrFail($id);
         $roles = Role::pluck('name','name')->all();
         $userRole = $model->roles->pluck('name','name')->all();
+
+        activity()
+            ->causedBy(Auth::user()->id)
+            ->log(__('log.See edit users'));
         return view('admin.users.edit',compact('model','roles','userRole'));
     }
 
@@ -113,7 +136,7 @@ class UserController extends Controller
         $user->update($request->all());
         $user->password = bcrypt($request->input('password'));
         DB::table('model_has_roles')->where('model_id',$id)->delete();
-
+        $user->userType = 'admin';
 
         $user->assignRole($request->input('roles'));
         if($request->hasFile('photo')) {
@@ -126,6 +149,11 @@ class UserController extends Controller
         }
         $user->save();
 
+        activity()
+            ->performedOn($user)
+            ->event(__('home.update'))
+            ->causedBy(Auth::user()->id)
+            ->log(__('log.update admin'));
 
         return redirect()->route('users.index')
             ->with(['success' => __('home.User successfully edited')]);
@@ -135,6 +163,13 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
         $user->delete();
+
+        activity()
+            ->performedOn($user)
+            ->event(__('home.update'))
+            ->causedBy(Auth::user()->id)
+            ->log(__('log.update admin'));
+
         return redirect()->route('users.index')
             ->with(['success' => __('home.User deleted successfully')]);
     }

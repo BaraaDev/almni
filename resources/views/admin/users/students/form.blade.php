@@ -47,7 +47,8 @@
 
     <div class="mb-3 col-md-4 col-6">
         <label class="form-label">{{__('home.whatsApp')}} <span style="color: red">*</span></label>
-        <input type="tel" name="whatsApp" class="form-control input-default" placeholder="{{__('home.number whatsApp')}}" value="{{Request::old('whatsApp') ? Request::old('whatsApp') : $model->whatsApp}}" required>
+        <input type="tel" name="whatsApp" class="form-control input-default @error('whatsApp') is-invalid @enderror" placeholder="{{__('home.number whatsApp')}}" value="{{Request::old('whatsApp') ? Request::old('whatsApp') : $model->whatsApp}}" required>
+        @error('whatsApp') <div class="invalid-feedback">{{$message}}</div> @enderror
     </div>
 
     <div class="mb-3 col-12">
@@ -70,18 +71,6 @@
             'class' => 'default-select form-control'. ( $errors->has('city_id') ? ' is-invalid' : '' ),
         ]) !!}
         @error('city_id') <div class="invalid-feedback">{{$message}}</div> @enderror
-    </div>
-
-    <div class="mb-3 col-lg-3 col-6">
-        <label for="mdate">{{__('home.initial price')}}</label>
-        <input type="text" name="initial_price" class="form-control @error('initial_price') is-invalid @enderror" placeholder="{{__('home.Enter your initial price')}}" value="{{Request::old('initial_price') ? Request::old('initial_price') : $model->initial_price}}">
-        @error('initial_price') <div class="invalid-feedback">{{$message}}</div> @enderror
-    </div>
-
-    <div class="mb-3 col-lg-3 col-6">
-        <label for="mdate">{{__('home.final price')}}</label>
-        <input type="text" name="final_price" class="form-control  @error('final_price') is-invalid @enderror" placeholder="{{__('home.Enter your initial price')}}" value="{{Request::old('final_price') ? Request::old('final_price') : $model->final_price}}">
-        @error('final_price') <div class="invalid-feedback">{{$message}}</div> @enderror
     </div>
 
     <div class="mb-3 col-6">

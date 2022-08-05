@@ -100,5 +100,6 @@
                 </div>
             @endforelse
         </div>
+        {{$instructors->links('pagination::bootstrap-5')}}
     </div>
 @endsection

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
@@ -31,6 +32,10 @@ class RoleController extends Controller
             if($request->keyword){
                 $q->where('name' , 'LIKE' , '%'.$request->keyword.'%');
             }})->paginate(25);
+
+        activity()
+            ->causedBy(Auth::user()->id)
+            ->log(__('log.See roles'));
         return view('admin.roles.index',compact('roles','request'));
     }
 
@@ -38,6 +43,10 @@ class RoleController extends Controller
     public function create()
     {
         $permission = Permission::get();
+
+        activity()
+            ->causedBy(Auth::user()->id)
+            ->log(__('log.See create roles'));
         return view('admin.roles.create',compact('permission'));
     }
 
@@ -54,6 +63,11 @@ class RoleController extends Controller
         $role->syncPermissions($request->input('permission'));
 
 
+        activity()
+            ->performedOn($role)
+            ->event(__('home.create'))
+            ->causedBy(Auth::user()->id)
+            ->log(__('log.create new role'));
         return redirect()->route('roles.index')
             ->with(['success',__('role.Role created successfully')]);
     }
@@ -66,7 +80,9 @@ class RoleController extends Controller
             ->where("role_has_permissions.role_id",$id)
             ->get();
 
-
+        activity()
+            ->causedBy(Auth::user()->id)
+            ->log(__('log.See show roles'));
         return view('admin.roles.show',compact('role','rolePermissions'));
     }
 
@@ -79,7 +95,9 @@ class RoleController extends Controller
             ->where("role_has_permissions.role_id",$id)
             ->pluck('role_has_permissions.permission_id','role_has_permissions.permission_id')
             ->all();
-
+        activity()
+            ->causedBy(Auth::user()->id)
+            ->log(__('log.See edit roles'));
 
         return view('admin.roles.edit',compact('role','permission','rolePermissions'));
     }
@@ -98,6 +116,12 @@ class RoleController extends Controller
         $role->save();
         $role->syncPermissions($request->input('permission'));
 
+        activity()
+            ->performedOn($role)
+            ->event(__('home.update'))
+            ->causedBy(Auth::user()->id)
+            ->log(__('log.update role'));
+
         return redirect()->route('roles.index')
             ->with(['success',__('role.Role updated successfully')]);
     }
@@ -106,6 +130,12 @@ class RoleController extends Controller
     public function destroy($id)
     {
         DB::table("roles")->where('id',$id)->delete();
+
+        activity()
+            ->event(__('home.delete'))
+            ->causedBy(Auth::user()->id)
+            ->log(__('log.delete role'));
+
         return redirect()->route('roles.index')
             ->with(['success',__('role.Role deleted successfully')]);
     }

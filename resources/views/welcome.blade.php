@@ -36,19 +36,17 @@
 <div class="barba-container" data-barba="container">
 
 
-    <main class="main-content
-  bg-beige-1
-">
+    <main class="main-contentbg-beige-1">
 
         <div class="content-wrapper  js-content-wrapper">
 
             <section class="form-page js-mouse-move-container">
                 <div class="form-page__img bg-dark-1">
                     <div class="form-page-composition">
-                        <div class="-bg"><img data-move="30" class="js-mouse-move" src="{{asset('comming-soon/img/login/bg.png')}}" alt="bg"></div>
+                        <div class="-bg"><img data-move="30" class="js-mouse-move" src="{{asset('comming-soon/img/bg.png')}}" alt="bg"></div>
                         <div class="-el-1"><img data-move="20" class="js-mouse-move" src="{{asset('comming-soon/img/Place.png')}}" alt="image"></div>
 
-                        <div class="-el-4"><img data-move="40" class="js-mouse-move" src="{{asset('comming-soon/img/home-9/hero/3.png')}}" alt="icon"></div>
+                        <div class="-el-4"><img data-move="40" class="js-mouse-move" src="{{asset('comming-soon/img/3.png')}}" alt="icon"></div>
                     </div>
                 </div>
 
@@ -58,7 +56,7 @@
                             <div class="col-xl-6 col-lg-8">
                                 <div class="px-50 py-50 md:px-25 md:py-25 bg-white shadow-1 rounded-16">
                                     <div class="container">
-                                        <img src="{{asset('comming-soon/img/general/logo-full.png')}}" alt="" style="width: 100px">
+                                        <img src="{{asset('comming-soon/img/logo-full.png')}}" alt="" style="width: 100px">
                                         <h3 id="headline">Countdown to Lanch 3lmni Acadamy</h3>
                                         <div id="countdown">
                                             <ul>

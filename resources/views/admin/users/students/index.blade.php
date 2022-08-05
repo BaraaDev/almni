@@ -128,7 +128,6 @@
                                     <th>{{__('user.name')}}</th>
                                     <th>{{__('student.Student ID')}}</th>
                                     <th>{{__('student.Join Date')}}</th>
-                                    <th>{{__('student.Payment status')}}</th>
                                     <th>{{__('home.action')}}</th>
                                 </tr>
                                 </thead>
@@ -143,13 +142,6 @@
                                     </td>
                                     <td>{{$student->id}}</td>
                                     <td>{{$student->created_at->translatedFormat('M d, Y')}}</td>
-                                    @if(empty($student->initial_price || $student->final_price))
-                                        <td><span class="badge light badge-primary">{{__('student.not paid yet')}}</span></td>
-                                    @elseif($student->initial_price)
-                                        <td><span class="badge light badge-warning">{{__('student.pay a deposit')}}</span></td>
-                                    @elseif($student->final_price)
-                                        <td><span class="badge light badge-success">{{__('home.completed')}}</span></td>
-                                    @endif
                                     <td class="text-center">
                                         <div class="dropdown">
                                             <a href="javascript:void(0);" class="btn-link btn sharp tp-btn-light btn-dark" data-bs-toggle="dropdown" aria-expanded="false">
@@ -185,6 +177,7 @@
                 </div>
             </div>
         </div>
+        {{$students->links('pagination::bootstrap-5')}}
     </div>
 @endsection
 

@@ -17,13 +17,14 @@
         @error('email') <div class="invalid-feedback">{{$message}}</div> @enderror
     </div>
 
+
     <div class="mb-3 col-6">
         <label class="form-label">{{__('user.password')}} <span style="color: red">*</span></label>
 
         <div class="input-group transparent-append">
 
             <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
-            <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" id="dlab-password" placeholder="{{__('user.Enter your password')}}" {{ isset($model) && $model->password  ? ''  : 'required' }} >
+            <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" id="dlab-password" placeholder="{{__('user.Enter your password')}}" required >
             <span class="input-group-text show-pass">
                 <i class="fa fa-eye-slash"></i>
                 <i class="fa fa-eye"></i>
@@ -67,11 +68,16 @@
         @error('bio') <div class="invalid-feedback">{{$message}}</div> @enderror
     </div>
 
-    <div class="mb-3 col-12">
+    <div class="mb-3 col-6">
         <label for="file">{{__('home.add image')}} <span style="color: red">*</span></label>
         <div class="form-file">
             <input id="file" type="file" name="photo" class="form-file-input form-control">
         </div>
+    </div>
+
+    <div class="mb-3 col-6">
+        <label class="form-label">{{__('home.salary')}}</label>
+        <input type="text" name="salary" class="form-control input-default" placeholder="{{__('home.Enter salary')}}" value="{{Request::old('salary') ? Request::old('salary') : $model->salary}}">
     </div>
 
     <div class="mb-3 col-6">

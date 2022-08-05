@@ -7,6 +7,7 @@ use App\Http\Requests\CourseRequest;
 use App\Models\Course;
 use App\Models\Subject;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Nette\Utils\Random;
 
 class CourseController extends Controller
@@ -62,18 +63,27 @@ class CourseController extends Controller
                     });
             }})->paginate(25);
         $subjects = Subject::limit(4)->get();
+
+
+        activity()
+            ->causedBy(Auth::user()->id)
+            ->log(__('log.See courses'));
         return view('admin.courses.index',compact('courses','subjects','request'));
     }
 
     public function create()
     {
+        activity()
+            ->causedBy(Auth::user()->id)
+            ->log(__('log.See create courses'));
+
         return view('admin.courses.create');
     }
 
     public function store(CourseRequest $request)
     {
         $course = Course::create($request->all());
-        $course->courseInstructor()->sync($request->instructor_id);
+        $course->courseInstructor()->sync($request->course_id);
         if($request->hasFile('image')) {
             $course
                 ->addMediaFromRequest('image')
@@ -91,6 +101,12 @@ class CourseController extends Controller
         }
         $course->save();
 
+
+        activity()
+            ->performedOn($course)
+            ->event(__('home.create'))
+            ->causedBy(Auth::user()->id)
+            ->log(__('log.create new course'));
         return redirect()->route('courses.index')
             ->with(['success' => __('course.Course created successfully')]);
     }
@@ -98,12 +114,23 @@ class CourseController extends Controller
     public function show($id)
     {
         $model = Course::findOrFail($id);
+
+
+        activity()
+            ->causedBy(Auth::user()->id)
+            ->log(__('log.See show courses'));
+
         return view('admin.courses.show',compact('model'));
     }
 
     public function edit($id)
     {
         $model = Course::findOrFail($id);
+
+
+        activity()
+            ->causedBy(Auth::user()->id)
+            ->log(__('log.See edit courses'));
         return view('admin.courses.edit',compact('model'));
     }
 
@@ -133,6 +160,12 @@ class CourseController extends Controller
         $course->save();
 
 
+        activity()
+            ->performedOn($course)
+            ->event(__('home.update'))
+            ->causedBy(Auth::user()->id)
+            ->log(__('log.update course'));
+
         return redirect()->route('courses.index')
             ->with(['success' => __('course.Course successfully edited')]);
     }
@@ -141,6 +174,12 @@ class CourseController extends Controller
     {
         $courses = Course::findOrFail($id);
         $courses->delete();
+
+
+        activity()
+            ->event(__('home.delete'))
+            ->causedBy(Auth::user()->id)
+            ->log(__('log.delete course'));
         return redirect()->route('courses.index')
             ->with(['success' => __('course.Course deleted successfully')]);
     }

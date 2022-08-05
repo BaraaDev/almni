@@ -33,8 +33,6 @@ return new class extends Migration
             $table->integer('level_id')->nullable();
             $table->integer('group_id')->nullable();
             $table->integer('subject_id')->nullable();
-            $table->string('initial_price')->nullable();
-            $table->string('final_price')->nullable();
             $table->date('test_date')->nullable();
             $table->string('facebook')->nullable();
             $table->string('twitter')->nullable();
@@ -44,6 +42,7 @@ return new class extends Migration
             $table->string('whatsApp')->nullable();
             $table->string('YouTube')->nullable();
             $table->string('website')->nullable();
+            $table->decimal('salary')->nullable();
             $table->string('api_token','100')->nullable();
             $table->enum('userType',['admin','student','instructor'])->nullable();
             $table->enum('status',['active','stopped']);

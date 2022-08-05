@@ -26,6 +26,7 @@
         @include('layouts.admin.alert.success')
         <div class="row">
             @forelse($users as $user)
+
             <div class="col-xl-4 col-lg-6 col-sm-6">
                 <div class="card overflow-hidden">
                     <div class="card-body">
@@ -62,15 +63,8 @@
                                @endphp
                                 <h3 class="mb-1">{{$age}}</h3><span>{{__('user.age')}}</span>
                             </div>
-                            <div class="col-6 pt-3 pb-3">
-                                @if(!empty($user->getRoleNames()))
-                                    @forelse($user->getRoleNames() as $v)
-                                        <h3 class="mb-1" title="{{$v}}">{{Str::limit($v,11,'..')}}</h3>
-                                    @empty
-                                        <h3 class="mb-1">{{__('role.no roles')}}</h3>
-                                    @endforelse
-                                        <span>Role</span>
-                                @endif
+                            <div class="col-6 pt-3 pb-3 border-end">
+                                <h3 class="mb-1" title="{{$user->salary}}">{{numtoks($user->salary)}}</h3><span>{{__('home.salary')}}</span>
                             </div>
                         </div>
                     </div>
@@ -83,17 +77,6 @@
             @endforelse
 
         </div>
-        <div class="pagination-down">
-            <div class="d-flex align-items-center justify-content-between flex-wrap">
-                <h4 class="sm-mb-0 mb-3">Showing <span>1-6 </span>from <span>100 </span>data</h4>
-                <ul>
-                    <li><a href="javascript:void(0);"><i class="fas fa-chevron-left"></i></a></li>
-                    <li><a href="javascript:void(0);" class="active">1</a></li>
-                    <li><a href="javascript:void(0);">2</a></li>
-                    <li><a href="javascript:void(0);">3</a></li>
-                    <li><a href="javascript:void(0);"><i class="fas fa-chevron-right"></i></a></li>
-                </ul>
-            </div>
-        </div>
+        {{$users->links('pagination::bootstrap-5')}}
     </div>
 @endsection

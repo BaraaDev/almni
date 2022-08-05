@@ -97,5 +97,6 @@
                 </div>
             </div>
         </div>
+        {{$categories->links('pagination::bootstrap-5')}}
     </div>
 @endsection

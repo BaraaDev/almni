@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\SubjectRequest;
 use App\Models\Subject;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Nette\Utils\Random;
 
 class SubjectController extends Controller
@@ -31,11 +32,19 @@ class SubjectController extends Controller
             if($request->keyword){
                 $q->where('name' , 'LIKE' , '%'.$request->keyword.'%');
             }})->paginate(25);
+
+        activity()
+            ->causedBy(Auth::user()->id)
+            ->log(__('log.See subjects'));
         return view('admin.subjects.index',compact('subjects','request'));
     }
 
     public function create()
     {
+        activity()
+            ->causedBy(Auth::user()->id)
+            ->log(__('log.See create subjects'));
+
         return view('admin.subjects.create');
     }
 
@@ -51,12 +60,25 @@ class SubjectController extends Controller
                 ->toMediaCollection('subject');
         }
         $subject->save();
+
+        activity()
+            ->performedOn($subject)
+            ->event(__('home.create'))
+            ->causedBy(Auth::user()->id)
+            ->log(__('log.create new subject'));
+
         return redirect()->route('subjects.index')
             ->with(['success' => __('subject.Subject created successfully')]);
     }
     public function edit($id)
     {
         $model = Subject::findOrFail($id);
+
+        activity()
+            ->causedBy(Auth::user()->id)
+            ->log(__('log.See edit subjects'));
+
+
         return view('admin.subjects.edit',compact('model'));
     }
 
@@ -75,6 +97,13 @@ class SubjectController extends Controller
         }
         $subject->save();
 
+        activity()
+            ->performedOn($subject)
+            ->event(__('home.update'))
+            ->causedBy(Auth::user()->id)
+            ->log(__('log.update subject'));
+
+
         return redirect()->route('subjects.index')
             ->with(['success' => __('subject.Subject successfully edited')]);
     }
@@ -83,6 +112,11 @@ class SubjectController extends Controller
     {
         $subjects = Subject::findOrFail($id);
         $subjects->delete();
+
+        activity()
+            ->event(__('home.delete'))
+            ->causedBy(Auth::user()->id)
+            ->log(__('log.delete subject'));
         return redirect()->route('subjects.index')
             ->with(['success' => __('subject.Subject deleted successfully')]);
     }

@@ -97,5 +97,6 @@
                 </div>
             </div>
         </div>
+        {{$cities->links('pagination::bootstrap-5')}}
     </div>
 @endsection

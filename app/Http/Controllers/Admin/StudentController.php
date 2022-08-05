@@ -7,6 +7,7 @@ use App\Http\Requests\StudentRequest;
 use App\Http\Requests\UserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Nette\Utils\Random;
 
 class StudentController extends Controller
@@ -27,7 +28,7 @@ class StudentController extends Controller
 
     public function index(Request $request)
     {
-        $allStudents = User::count();
+        $allStudents = User::status('active')->type('student')->count();
         $students = User::status('active')->type('student')->orderBy('id','DESC')->where(function ($q) use($request){
             if($request->keyword){
                 $q->where('name' , 'LIKE' , '%'.$request->keyword.'%')
@@ -52,12 +53,20 @@ class StudentController extends Controller
                         }
                     });
             }})->paginate(25);
+
+        activity()
+            ->causedBy(Auth::user()->id)
+            ->log(__('log.See students'));
         return view('admin.users.students.index',compact('allStudents','students','request'));
     }
 
 
     public function create()
     {
+        activity()
+            ->causedBy(Auth::user()->id)
+            ->log(__('log.See create students'));
+
         return view('admin.users.students.create');
     }
 
@@ -78,12 +87,21 @@ class StudentController extends Controller
         }
         $student->save();
 
+        activity()
+            ->performedOn($student)
+            ->event(__('home.create'))
+            ->causedBy(Auth::user()->id)
+            ->log(__('log.create new student'));
+
         return redirect()->route('students.index')
             ->with(['success' => __('home.User created successfully')]);
     }
     public function edit($id)
     {
         $model = User::findOrFail($id);
+        activity()
+            ->causedBy(Auth::user()->id)
+            ->log(__('log.See edit students'));
         return view('admin.users.students.edit',compact('model'));
     }
 
@@ -93,6 +111,7 @@ class StudentController extends Controller
         $student->groups()->sync($request->group_id);
         $student->update($request->all());
         $student->password = bcrypt($request->input('password'));
+        $student->userType = 'student';
         if($request->hasFile('photo')) {
             $student
                 ->clearMediaCollection('user')
@@ -103,6 +122,11 @@ class StudentController extends Controller
         }
         $student->save();
 
+        activity()
+            ->performedOn($student)
+            ->event(__('home.update'))
+            ->causedBy(Auth::user()->id)
+            ->log(__('log.update student'));
 
         return redirect()->route('students.index')
             ->with(['success' => __('home.User successfully edited')]);
@@ -112,6 +136,11 @@ class StudentController extends Controller
     {
         $students = User::findOrFail($id);
         $students->delete();
+
+        activity()
+            ->event(__('home.delete'))
+            ->causedBy(Auth::user()->id)
+            ->log(__('log.delete student'));
         return redirect()->route('students.index')
             ->with(['success' => __('home.User deleted successfully')]);
     }
@@ -143,6 +172,11 @@ class StudentController extends Controller
                         }
                     });
             }})->paginate(25);
+
+        activity()
+            ->event(__('home.delete'))
+            ->causedBy(Auth::user()->id)
+            ->log(__('log.See waiting students'));
         return view('admin.users.students.waiting',compact('users','request'));
     }
 

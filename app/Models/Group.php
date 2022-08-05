@@ -22,7 +22,7 @@ class Group extends Model
     }
     public function users()
     {
-        return $this->belongsToMany(User::class,'group_user');
+        return $this->belongsToMany(User::class,'group_student','student_id','group_id');
     }
 
     public function scopeStatus($query,$arg)

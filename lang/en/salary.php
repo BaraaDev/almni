@@ -1,0 +1,26 @@
+<?php
+
+return [
+    'salary'                            => 'Salary',
+    'price'                             => 'Salary price',
+    'count'                             => 'Count',
+    'date'                              => 'Salaries date',
+    'salaries'                          => 'Salaries',
+    'all salaries'                      => 'All Salaries',
+    'create salary'                     => 'Create Salary',
+    'create salaries'                   => 'Create Salaries',
+    'edit salary'                       => 'Edit Salary',
+    'update salary'                     => 'Update Salary',
+    'add new salaries'                  => 'Add New Salary',
+    'salary names'                      => 'Salary Names',
+    'deleted salaries'                  => 'Deleted Salaries',
+    'delete salary'                     => 'Delete Salary',
+    'View all salaries'                 => 'View all salaries',
+    'Salary created successfully'       => 'Salary created successfully',
+    'Salary successfully edited'        => 'Salary successfully edited',
+    'Salary deleted successfully'       => 'Salary deleted successfully',
+    'Enter the salary title'            => 'Enter the salary title',
+    'Enter the salary price'            => 'Enter the salary price',
+    'Enter the salary count'            => 'Enter the salary count',
+    'Enter the salary date'             => 'Enter the salary date',
+];

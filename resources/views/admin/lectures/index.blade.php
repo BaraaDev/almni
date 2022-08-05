@@ -108,5 +108,6 @@
                 </div>
             </div>
         </div>
+        {{$lectures->links('pagination::bootstrap-5')}}
     </div>
 @endsection
