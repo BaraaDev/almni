@@ -23,7 +23,7 @@
     <div class="container-fluid">
         <div class="row">
             @forelse($instructors as $instructor)
-            <div class="col-xl-4 col-xxl-6 col-md-6">
+            <div class="col-xl-4 col-xxl-4 col-md-2">
                 <div class="card instructors-box">
                     <div class="card-header border-0">
                         <div class="dropdown">
@@ -74,24 +74,23 @@
                                     <div class="info-box">
                                         <span>
                                             <img src="{{asset('admin/images/medal.png')}}" alt="">
-                                            Achievement
+                                            {{ __('home.hourly time') }}
                                         </span>
-                                        <h4>100</h4>
+                                        <h4>{{ $instructor->hourly_time }}</h4>
                                     </div>
-                                    <div class="info-box">
+                                    <div class="info-box" title="{{$instructor->hourly_time * $instructor->lectures->count()}} ">
                                         <span>
-                                            <img src="{{asset('admin/images/svg/achievement.svg')}}" alt="">
-                                            Achievement
+                                            <img src="{{asset('admin/images/svg/achievement.svg')}}" alt=""> Number Lectures
                                         </span>
-                                        <h4>100</h4>
+                                        <h4 >{{$instructor->lectures->count()}}</h4>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="card-footer pt-0 border-0">
-                        <a href="#" class="btn btn-secondary  btn-block">View Class</a>
-                    </div>
+{{--                    <div class="card-footer pt-0 border-0">--}}
+{{--                        <a href="#" class="btn btn-secondary  btn-block">View Class</a>--}}
+{{--                    </div>--}}
                 </div>
             </div>
             @empty

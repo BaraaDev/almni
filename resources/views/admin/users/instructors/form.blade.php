@@ -101,6 +101,13 @@
         <input type="text" name="linkedin" class="form-control input-default" placeholder="{{__('home.username linkedin')}}" value="{{Request::old('linkedin') ? Request::old('linkedin') : $model->linkedin}}">
     </div>
 
+
+    <div class="mb-3 col-6">
+        <label class="form-label">{{__('home.hourly time')}} <span style="color: red">*</span></label>
+        <input type="text" name="hourly_time" class="form-control input-default @error('hourly_time') is-invalid @enderror" placeholder="{{__('home.Enter the hourly time')}}" value="{{Request::old('hourly_time') ? Request::old('hourly_time') : $model->hourly_time}}" required>
+        @error('hourly_time') <div class="invalid-feedback">{{$message}}</div> @enderror
+    </div>
+
     <div class="mb-3 col-6">
         <label class="form-label">{{__('home.status')}} <span style="color: red">*</span></label>
         <select name="status"  class="default-select form-control @error('status') is-invalid @enderror " required>

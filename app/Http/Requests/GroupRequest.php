@@ -24,10 +24,13 @@ class GroupRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'         => 'required|string|min:3|max:199',
-            'description'  => 'nullable|string|max:500',
-            'level_id'     => 'nullable|exists:levels,id',
-            'status'       => 'required|string|in:active,stopped',
+            'name'              => 'required|string|min:3|max:199',
+            'description'       => 'nullable|string|max:500',
+            'level_id'          => 'nullable|exists:levels,id',
+            'classroom_id'      => 'required|exists:classrooms,id',
+            'months'            => 'required',
+            'days'              => 'required',
+            'status'            => 'required|string|in:active,stopped',
         ];
     }
 }

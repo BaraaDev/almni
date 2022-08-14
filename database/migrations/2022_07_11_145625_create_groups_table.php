@@ -19,6 +19,11 @@ return new class extends Migration
             $table->text('description');
             $table->integer('course_id')->nullable();
             $table->integer('level_id')->nullable();
+            $table->integer('classroom_id')->nullable();
+            $table->string('months')->nullable();
+            $table->string('days')->nullable();
+            $table->time('time_start')->nullable();
+            $table->time('time_end')->nullable();
             $table->enum('status',['active','stopped']);
             $table->timestamps();
             $table->softDeletes();

@@ -35,7 +35,6 @@
                 <div class="card students-list">
                     <div class="card-header border-0 flex-wrap pb-0">
                         <h4>Courses List</h4>
-                        <h5 id="totalPrice">total price:</h5>
                         <div class="input-group search-area w-auto">
                       <span class="input-group-text"><a href="javascript:void(0)"><svg width="24" height="24" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M27.414 24.586L22.337 19.509C23.386 17.928 24 16.035 24 14C24 8.486 19.514 4 14 4C8.486 4 4 8.486 4 14C4 19.514 8.486 24 14 24C16.035 24 17.928 23.386 19.509 22.337L24.586 27.414C25.366 28.195 26.634 28.195 27.414 27.414C28.195 26.633 28.195 25.367 27.414 24.586ZM7 14C7 10.14 10.14 7 14 7C17.86 7 21 10.14 21 14C21 17.86 17.86 21 14 21C10.14 21 7 17.86 7 14Z" fill="var(--primary)"></path>
@@ -61,6 +60,7 @@
                                     <th>{{__('home.price')}}</th>
                                     <th>{{__('home.deposit')}}</th>
                                     <th>{{__('group.groups')}}</th>
+                                    <th>{{__('course.course')}}</th>
                                     <th>{{__('user.Join')}}</th>
                                     <th>{{__('home.status')}}</th>
                                     <th>{{__('home.Show more')}}</th>
@@ -79,7 +79,8 @@
                                     </td>
                                     <td> @forelse($bunches as $bunche) {{$bunche->price . ' '. __('home.le')}} @empty {!! __('bunche.no price') !!}  @endforelse</td>
                                     <td>@forelse($bunches as $bunche) {{$bunche->deposit . ' '. __('home.le')}} @empty {!! __('bunche.no deposit')!!}  @endforelse</td>
-                                    <td> @forelse($user->groups->slice(0,2) as $group) <a href="{{route('groups.edit',$group->id )}}">{{$group->name}} </a> @empty <span class="badge  light badge-danger"> {{__('group.no group')}} </span> @endforelse</td>
+                                    <td> @forelse($user->groups->slice(0,1) as $group) {{$group->name}} @empty <span class="badge  light badge-danger"> {{__('group.no group')}} </span> @endforelse</td>
+                                    <td> @forelse($user->courseStudent->slice(0,1) as $course) {{$course->title}} @empty <span class="badge  light badge-danger"> {{__('course.no courses')}} </span> @endforelse</td>
                                     <td>{{$user->created_at->format('M d, Y')}}</td>
                                     <td class="sort" @foreach($bunches as $bunche) data-sort="{{$bunche->status}}" @endforeach>
                                         @forelse($bunches as $bunche)
@@ -114,8 +115,7 @@
                                                             <div class="row">
                                                                 <div class="mb-3 col-12">
                                                                     <label>{{__('course.course')}} <span style="color: red">*</span></label>
-                                                                    @inject('course','App\Models\Course')
-                                                                    {!! Form::select('course_id',$course->status('active')->pluck('title','id'),old('course_id'),[
+                                                                    {!! Form::select('course_id',$user->courseStudent->pluck('title','id'),old('course_id'),[
                                                                         'class' => 'default-select form-control'. ( $errors->has('course_id') ? ' is-invalid' : '' ),
                                                                         'placeholder' => __('home.please choose')
                                                                     ]) !!}
@@ -124,8 +124,7 @@
 
                                                                 <div class="mb-3 col-12">
                                                                     <label>{{__('group.group')}} <span style="color: red">*</span></label>
-                                                                    @inject('group','App\Models\Group')
-                                                                    {!! Form::select('group_id',$group->status('active')->pluck('name','id'),old('group_id'),[
+                                                                    {!! Form::select('group_id',$user->groups->pluck('name','id'),old('group_id'),[
                                                                         'class' => 'default-select form-control'. ( $errors->has('group_id') ? ' is-invalid' : '' ),
                                                                         'placeholder' => __('home.please choose')
                                                                     ]) !!}

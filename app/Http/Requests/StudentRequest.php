@@ -24,7 +24,7 @@ class StudentRequest extends FormRequest
         return [
             'name'                => 'required|string|min:3|max:199',
             'password'            => 'required|string|min:8',
-            'phone'               => 'required|numeric|digits:11',Rule::unique('users')->ignore($this->id),
+            'phone'               => 'required|numeric|digits:11',
             'phone2'              => 'nullable|numeric|digits:11',
             'email'               => 'required|string|min:3|max:255|email',Rule::unique('users')->ignore($this->id),
             'age'                 => 'nullable|date',
@@ -33,8 +33,10 @@ class StudentRequest extends FormRequest
             'city_id'             => 'nullable|exists:cities,id',
             'level_id'            => 'nullable|exists:levels,id',
             'group_id'            => 'nullable|exists:groups,id',
+            'classroom_id'        => 'nullable|exists:classrooms,id',
             'photo'               => 'nullable|image:jpg, jpeg, png, bmp, gif, svg,webp',
-            'status'              => 'required|string|in:active,stopped',
+            'gender'              => 'required|string|in:male,female',
+            'status'              => 'required|string|in:active,stopped,waiting',
         ];
     }
 
@@ -54,7 +56,8 @@ class StudentRequest extends FormRequest
             'level_id'            => 'nullable|exists:levels,id',
             'group_id'            => 'nullable|exists:groups,id',
             'photo'               => 'nullable|image:jpg, jpeg, png, bmp, gif, svg,webp',
-            'status'              => 'required|string|in:active,stopped',
+            'gender'              => 'required|string|in:male,female',
+            'status'              => 'required|string|in:active,stopped,waiting',
         ];
     }
 

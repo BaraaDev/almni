@@ -58,15 +58,15 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @forelse($salaries as $bunche)
+                                @forelse($salaries as $salary)
 
                                     <tr>
                                         <td>{{$loop->iteration}}</td>
 
-                                        <td>{{$bunche->user->name ?? ''}}</td>
-                                        <td>{{$bunche->user->job ?? ''}}</td>
-                                        <td>{{$bunche->salary}}</td>
-                                        <td>{{$bunche->date}}</td>
+                                        <td>{{$salary->user->name ?? ''}}</td>
+                                        <td>{{$salary->user->job ?? ''}}</td>
+                                        <td>{{$salary->salary}}</td>
+                                        <td>{{$salary->date}}</td>
                                         <td>
                                             <div class="dropdown">
                                                 <a href="javascript:void(0);" class="btn-link btn sharp tp-btn-light btn-dark" data-bs-toggle="dropdown" aria-expanded="false">
@@ -76,14 +76,17 @@
                                                 </a>
                                                 <div class="dropdown-menu dropdown-menu-start">
                                                     {!! Form::open([
-                                                        'route' => ['salaries.destroy',$bunche->id],
+                                                        'route' => ['salaries.destroy',$salary->id],
                                                         'method' => 'delete'
                                                     ])!!}
                                                     @can('salaries-delete')
                                                     <button type="submit" class="dropdown-item">{{__('home.delete')}}</button>
                                                     @endcan
                                                     @can('salaries-edit')
-                                                    <a class="dropdown-item" href="{{route('salaries.edit',$bunche->id)}}">{{__('home.edit')}}</a>
+                                                    <a class="dropdown-item" href="{{route('salaries.edit',$salary->id)}}">{{__('home.edit')}}</a>
+                                                    @endcan
+                                                    @can('reports-salary')
+                                                        <a class="dropdown-item" href="{{route('reports.salary',$salary->id)}}">{{__('home.Print')}}</a>
                                                     @endcan
                                                     {!! Form::close() !!}
                                                 </div>

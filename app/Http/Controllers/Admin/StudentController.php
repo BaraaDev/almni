@@ -5,6 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StudentRequest;
 use App\Http\Requests\UserRequest;
+use App\Models\Category;
+use App\Models\Classroom;
+use App\Models\Level;
+use App\Models\LifeStage;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -29,7 +33,11 @@ class StudentController extends Controller
     public function index(Request $request)
     {
         $allStudents = User::status('active')->type('student')->count();
-        $students = User::status('active')->type('student')->orderBy('id','DESC')->where(function ($q) use($request){
+        $levels = Level::all();
+        $classes = Classroom::all();
+        $life_stages = LifeStage::all();
+        $categories = Category::all();
+        $students = User::type('student')->orderBy('id','DESC')->where(function ($q) use($request){
             if($request->keyword){
                 $q->where('name' , 'LIKE' , '%'.$request->keyword.'%')
                     ->orWhere('nickname' , 'LIKE' , '%'.$request->keyword.'%')
@@ -57,7 +65,8 @@ class StudentController extends Controller
         activity()
             ->causedBy(Auth::user()->id)
             ->log(__('log.See students'));
-        return view('admin.users.students.index',compact('allStudents','students','request'));
+        return view('admin.users.students.index',compact('allStudents',
+            'classes','students','request','levels','life_stages','categories'));
     }
 
 
@@ -77,6 +86,7 @@ class StudentController extends Controller
         $student->password = bcrypt($request->input('password'));
         $student->userType = 'student';
         $student->groups()->sync($request->group_id);
+        $student->courseStudent()->sync($request->course_id);
 
         if($request->file('photo')) {
             $student
@@ -109,6 +119,7 @@ class StudentController extends Controller
     {
         $student = User::findOrFail($id);
         $student->groups()->sync($request->group_id);
+        $student->courseStudent()->sync($request->course_id);
         $student->update($request->all());
         $student->password = bcrypt($request->input('password'));
         $student->userType = 'student';
@@ -148,7 +159,7 @@ class StudentController extends Controller
 
     public function waiting(Request $request)
     {
-        $users = User::status('stopped')->type('student')->orderBy('id','DESC')->where(function ($q) use($request){
+        $users = User::status('waiting')->type('student')->orderBy('id','DESC')->where(function ($q) use($request){
             if($request->keyword){
                 $q->where('name' , 'LIKE' , '%'.$request->keyword.'%')
                     ->orWhere('nickname' , 'LIKE' , '%'.$request->keyword.'%')

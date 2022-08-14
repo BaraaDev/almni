@@ -122,7 +122,6 @@ class UserController extends Controller
         $model = User::findOrFail($id);
         $roles = Role::pluck('name','name')->all();
         $userRole = $model->roles->pluck('name','name')->all();
-
         activity()
             ->causedBy(Auth::user()->id)
             ->log(__('log.See edit users'));

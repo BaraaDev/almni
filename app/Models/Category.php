@@ -11,6 +11,8 @@ class Category extends Model
     use HasFactory, SoftDeletes;
 
     protected $guarded = [];
+
+
     public function subject()
     {
         return $this->belongsTo(Subject::class);

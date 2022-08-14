@@ -33,6 +33,9 @@ return new class extends Migration
             $table->integer('level_id')->nullable();
             $table->integer('group_id')->nullable();
             $table->integer('subject_id')->nullable();
+            $table->integer('classroom_id')->nullable();
+            $table->integer('category_id')->nullable();
+            $table->integer('life_stage_id')->nullable();
             $table->date('test_date')->nullable();
             $table->string('facebook')->nullable();
             $table->string('twitter')->nullable();
@@ -43,9 +46,10 @@ return new class extends Migration
             $table->string('YouTube')->nullable();
             $table->string('website')->nullable();
             $table->decimal('salary')->nullable();
+            $table->decimal('salary_time')->nullable();
             $table->string('api_token','100')->nullable();
             $table->enum('userType',['admin','student','instructor'])->nullable();
-            $table->enum('status',['active','stopped']);
+            $table->enum('status',['active','stopped','waiting']);
             $table->enum('gender',['male','female'])->nullable();
             $table->rememberToken();
             $table->timestamps();

@@ -64,10 +64,16 @@ class SalaryController extends Controller
         return view('admin.reports.salary',compact('salaries','request'));
     }
 
+    public function salary($id)
+    {
+        $invoice = Salary::findOrFail($id);
+        return view('admin.users.salary.invoice',compact('invoice'));
+    }
 
     public function store(SalaryRequest $request)
     {
         $salaries = Salary::create($request->all());
+
 
         activity()
             ->performedOn($salaries)

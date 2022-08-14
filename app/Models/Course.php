@@ -47,6 +47,12 @@ class Course extends Model implements HasMedia
     }
 
 
+    public function courseStudent()
+    {
+        return $this->belongsToMany(User::class,'course_user','student_id','course_id');
+    }
+
+
     public function getPhotoAttribute()
     {
         return $this->getFirstMediaUrl('course')

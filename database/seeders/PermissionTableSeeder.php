@@ -88,19 +88,32 @@ class PermissionTableSeeder extends Seeder
             'expenses-edit',
             'expenses-delete',
 
-            // permission expenses
+            // permission salaries
             'salaries-list',
             'salaries-create',
             'salaries-edit',
             'salaries-delete',
             'reports-salaries',
+            'reports-salary',
 
-            // permission expenses
+            // permission bunches
             'bunches-list',
             'bunches-create',
             'bunches-edit',
             'bunches-delete',
             'reports-bunches',
+
+            // permission classrooms
+            'classrooms-list',
+            'classrooms-create',
+            'classrooms-edit',
+            'classrooms-delete',
+
+            // permission life-stage
+            'life-stage-list',
+            'life-stage-create',
+            'life-stage-edit',
+            'life-stage-delete',
         ];
 
 

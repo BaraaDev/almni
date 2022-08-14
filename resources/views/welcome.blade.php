@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="{{asset('comming-soon/css/vendors.css')}}">
     <link rel="stylesheet" href="{{asset('comming-soon/css/main.css')}}">
 
-    <title>Educrat</title>
+    <title>عlmni</title>
 </head>
 
 <body class="preloader-visible" data-barba="wrapper">
@@ -54,9 +54,9 @@
                     <div class="container">
                         <div class="row justify-center items-center">
                             <div class="col-xl-6 col-lg-8">
-                                <div class="px-50 py-50 md:px-25 md:py-25 bg-white shadow-1 rounded-16">
+                                <div class="px-50 py-50 md:px-25 md:py-25 bg-white shadow-1 rounded-16   text-center">
                                     <div class="container">
-                                        <img src="{{asset('comming-soon/img/logo-full.png')}}" alt="" style="width: 100px">
+                                        <img src="{{asset('comming-soon/img/logo-full.png')}}" alt="" style="width: 200px">
                                         <h3 id="headline">Countdown to Lanch 3lmni Acadamy</h3>
                                         <div id="countdown">
                                             <ul>
@@ -67,8 +67,7 @@
                                             </ul>
                                         </div>
                                         <div id="content" class="emoji">
-                                            <span>🥳</span>
-                                            <span>🎉</span>
+                                    
                                             <span><a href="#">Click Here</a></span>
                                         </div>
                                     </div>
@@ -99,7 +98,7 @@
             mm = String(today.getMonth() + 1).padStart(2, "0"),
             yyyy = today.getFullYear(),
             nextYear = yyyy + 1,
-            dayMonth = "08/1/",
+            dayMonth = "08/6/",
             birthday = dayMonth + yyyy;
 
         today = mm + "/" + dd + "/" + yyyy;

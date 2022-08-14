@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\BuncheController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CityController;
+use App\Http\Controllers\Admin\ClassroomController;
 use App\Http\Controllers\Admin\CourseController;
 use App\Http\Controllers\Admin\ExpenseController;
 use App\Http\Controllers\Admin\GroupController;
@@ -10,6 +11,7 @@ use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\InstructorController;
 use App\Http\Controllers\Admin\LectureController;
 use App\Http\Controllers\Admin\LevelController;
+use App\Http\Controllers\Admin\LifeStageController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\SalaryController;
@@ -40,6 +42,7 @@ Route::group([
         Route::get('/participants/waiting', [StudentController::class,'waiting'])->name('participants.waiting');
         Route::resource('/cities', CityController::class);
         Route::resource('/levels', LevelController::class);
+        Route::resource('/life-stages', LifeStageController::class);
         Route::resource('/subjects', SubjectController::class);
         Route::resource('/groups', GroupController::class);
         Route::get('/group/{id}/students',[GroupController::class,'student'])->name('group.student');
@@ -53,8 +56,10 @@ Route::group([
         Route::resource('/expenses',ExpenseController::class);
         Route::resource('/salaries',SalaryController::class);
         Route::resource('/bunches',BuncheController::class);
+        Route::resource('/classrooms',ClassroomController::class);
         Route::get('/reports/bunches',[BuncheController::class,'bunches'])->name('reports.bunches');
         Route::get('/reports/salaries',[SalaryController::class,'salaries'])->name('reports.salaries');
+        Route::get('/reports/salaries/{id}',[SalaryController::class,'salary'])->name('reports.salary');
         Route::get('/profile',[ProfileController::class,'profile'])->name('profile');
         Route::post('/profile',[ProfileController::class,'edit_my_Profile'])->name('editProfile');
     });

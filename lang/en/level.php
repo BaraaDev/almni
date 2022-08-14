@@ -7,6 +7,7 @@ return [
     'create level'                     => 'Create Level',
     'create levels'                   => 'Create Levels',
     'edit level'                       => 'Edit Level',
+    'no level'                       => 'No Level',
     'update level'                     => 'Update Level',
     'add new levels'                  => 'Add New Levels',
     'level names'                      => 'Level Names',

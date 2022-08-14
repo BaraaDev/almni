@@ -5,24 +5,26 @@
 @section('head')
     <link href="{{asset('admin/vendor/datatables/css/jquery.dataTables.min.css')}}" rel="stylesheet">
 @endsection
-@section('content')
 
-    @section('search')
-        <div class="nav-item d-flex align-items-center">
-            <form action="" method="get">
-                <div class="input-group search-area">
+@section('search')
+    <div class="nav-item d-flex align-items-center">
+        <form action="" method="get">
+            <div class="input-group search-area">
                     <span class="input-group-text"><a href="javascript:void(0)"><svg width="24" height="24" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M27.414 24.586L22.337 19.509C23.386 17.928 24 16.035 24 14C24 8.486 19.514 4 14 4C8.486 4 4 8.486 4 14C4 19.514 8.486 24 14 24C16.035 24 17.928 23.386 19.509 22.337L24.586 27.414C25.366 28.195 26.634 28.195 27.414 27.414C28.195 26.633 28.195 25.367 27.414 24.586ZM7 14C7 10.14 10.14 7 14 7C17.86 7 21 10.14 21 14C21 17.86 17.86 21 14 21C10.14 21 7 17.86 7 14Z" fill="var(--secondary)"/>
                         </svg>
                         </a>
                     </span>
 
-                    <input name="keyword"  value="{{Request::old('keyword') ? Request::old('keyword') : $request->keyword}}" type="text" class="form-control" placeholder="Search here...">
-                </div>
-            </form>
-        </div>
+                <input name="keyword"  value="{{Request::old('keyword') ? Request::old('keyword') : $request->keyword}}" type="text" class="form-control" placeholder="Search here...">
+            </div>
+        </form>
+    </div>
 
-    @endsection
+@endsection
+@section('content')
+
+
     <!-- row -->
     <div class="container-fluid">
 
@@ -108,16 +110,48 @@
                 @include('layouts.admin.alert.success')
                 <div class="card students-list">
                     <div class="card-header border-0 flex-wrap pb-0">
-                        <h4>Students List</h4>
+                        <h4>{{__('student.all students')}}</h4>
                         <div class="input-group search-area w-auto">
-                            <span class="input-group-text">
-                                <a href="javascript:void(0)">
-                                    <svg width="24" height="24" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M27.414 24.586L22.337 19.509C23.386 17.928 24 16.035 24 14C24 8.486 19.514 4 14 4C8.486 4 4 8.486 4 14C4 19.514 8.486 24 14 24C16.035 24 17.928 23.386 19.509 22.337L24.586 27.414C25.366 28.195 26.634 28.195 27.414 27.414C28.195 26.633 28.195 25.367 27.414 24.586ZM7 14C7 10.14 10.14 7 14 7C17.86 7 21 10.14 21 14C21 17.86 17.86 21 14 21C10.14 21 7 17.86 7 14Z" fill="var(--primary)"></path>
-                                    </svg>
+                            <span class="input-group-text"><a href="javascript:void(0)"><svg width="24" height="24" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M27.414 24.586L22.337 19.509C23.386 17.928 24 16.035 24 14C24 8.486 19.514 4 14 4C8.486 4 4 8.486 4 14C4 19.514 8.486 24 14 24C16.035 24 17.928 23.386 19.509 22.337L24.586 27.414C25.366 28.195 26.634 28.195 27.414 27.414C28.195 26.633 28.195 25.367 27.414 24.586ZM7 14C7 10.14 10.14 7 14 7C17.86 7 21 10.14 21 14C21 17.86 17.86 21 14 21C10.14 21 7 17.86 7 14Z" fill="var(--primary)"></path>
+                                </svg>
                                 </a>
                             </span>
-                            <input type="text" class="form-control" placeholder="Search here...">
+                            <input type="text" class="form-control" id="tableSearchBar" placeholder="Search here...">
+                            <select class="form-select filter" aria-label="Default select example" id="filter-class">
+                                <option>{{__('classrooms.classrooms')}}</option>
+                                <option value="No Class">{{__('classrooms.no classrooms')}}</option>
+                                @foreach($classes as $class)
+                                    <option value="{{$class->name}}">{{$class->name}}</option>
+                                @endforeach
+                            </select>
+                            <select class="form-select filter" aria-label="Default select example" id="filter-level">
+                                <option>{{__('level.levels')}}</option>
+                                <option value="No Level">{{__('level.no level')}}</option>
+                                @foreach($levels as $level)
+                                    <option value="{{$level->level}}">{{$level->level}}</option>
+                                @endforeach
+                            </select>
+                            <select class="form-select filter" aria-label="Default select example" id="filter-lifestage">
+                                <option>{{__('life_stage.life Stages')}}</option>
+                                <option value="No lifestage">{{__('life_stage.no life stage')}}</option>
+                                @foreach($life_stages as $life_stage)
+                                    <option value="{{$life_stage->stage}}">{{$life_stage->stage}}</option>
+                                @endforeach
+                            </select>
+                            <select class="form-select filter" aria-label="Default select example" id="filter-category">
+                                <option>{{__('category.categories')}}</option>
+                                <option value="no category">{{__('category.no category')}}</option>
+                                @foreach($categories as $category)
+                                    <option value="{{$category->name}}">{{$category->name}}</option>
+                                @endforeach
+                            </select>
+                            <select class="form-select filter" aria-label="Default select example" id="filter-sort">
+                                <option>Status</option>
+                                <option value="Active">Active</option>
+                                <option value="Waiting">Waiting</option>
+                                <option value="Stopped">Stopped</option>
+                            </select>
                         </div>
                     </div>
                     <div class="card-body py-0">
@@ -126,8 +160,14 @@
                                 <thead>
                                 <tr>
                                     <th>{{__('user.name')}}</th>
-                                    <th>{{__('student.Student ID')}}</th>
+                                    <th>{{__('home.phone')}}</th>
+                                    <th>{{__('classrooms.classroom')}}</th>
+                                    <th>{{__('level.level')}}</th>
+                                    <th>{{__('category.category')}}</th>
+                                    <th>{{__('life_stage.life Stage')}}</th>
+                                    <th>{{__('home.gender')}}</th>
                                     <th>{{__('student.Join Date')}}</th>
+                                    <th>{{__('home.status')}}</th>
                                     <th>{{__('home.action')}}</th>
                                 </tr>
                                 </thead>
@@ -140,8 +180,28 @@
                                             <h4 class="mb-0 fs-16 font-w500">{{$student->name}}</h4>
                                         </div>
                                     </td>
-                                    <td>{{$student->id}}</td>
+                                    <td>{{$student->phone}}</td>
+                                    <td class="class" data-class="{{$student->classroom->name ?? __('classrooms.no classrooms')}}">{{$student->classroom->name ?? __('classrooms.no classrooms')}}</td>
+                                    <td class="level" data-level="{{$student->level->level ?? __('level.no level')}}">{{$student->level->level ?? __('level.no level')}}</td>
+                                    <td class="category" data-category="{{$student->category->name ?? __('category.no category')}}">{{$student->category->name ?? __('category.no category')}}</td>
+                                    <td class="lifestage" data-lifeStage="{{$student->life_stage->stage ?? __('life_stage.life Stage')}}">{{$student->life_stage->stage ?? __('life_stage.life Stage')}}</td>
+                                    <td>
+                                        @if($student->gender == 'male')
+                                            <span class="badge  light badge-info">{{$student->gender}}</span>
+                                        @elseif($student->gender == 'female')
+                                            <span class="badge light badge-danger">{{$student->gender}}</span>
+                                        @endif
+                                    </td>
                                     <td>{{$student->created_at->translatedFormat('M d, Y')}}</td>
+                                    <td class="sort" @if($student->status == 'active') data-sort="Active" @elseif($student->status == 'waiting') data-sort="Waiting" @elseif($student->status == 'stopped') data-sort="Stopped" @endif >
+                                        @if($student->status == 'active')
+                                            <span class="badge  light badge-success">{{$student->status}}</span>
+                                        @elseif($student->status == 'waiting')
+                                            <a href="{{route('participants.waiting')}}"><span class="badge light badge-warning">{{$student->status}}</span></a>
+                                        @elseif($student->status == 'stopped')
+                                            <span class="badge light badge-danger">{{$student->status}}</span>
+                                        @endif
+                                    </td>
                                     <td class="text-center">
                                         <div class="dropdown">
                                             <a href="javascript:void(0);" class="btn-link btn sharp tp-btn-light btn-dark" data-bs-toggle="dropdown" aria-expanded="false">
@@ -189,4 +249,95 @@
     <script src="{{asset('admin/js/plugins-init/datatables.init.js')}}"></script>
     <script src="{{asset('admin/vendor/owl-carousel/owl.carousel.js')}}"></script>
     <script src="{{asset('admin/js/dashboard/instructor-student.js')}}"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('#tableSearchBar').on("keyup", function() {
+                var value = $(this).val().toLocaleLowerCase();
+                $("#application-tbl1 tr").filter(function() {
+                    $(this).toggle($(this).text().toLocaleLowerCase().indexOf(value) > -1)
+                });
+            });
+            // Filter
+            $('.filter').change(function(){
+                filter_function();
+            });
+
+            $('#application-tbl1 tbody tr').show();
+
+            function filter_function(){
+                $('#application-tbl1 tbody tr').hide();
+
+                var classFlag      = 0;
+                var classValue     = $('#filter-class').val();
+                var levelFlag      = 0;
+                var levelValue     = $('#filter-level').val();
+                var lifestageFlag  = 0;
+                var lifestageValue = $('#filter-lifestage').val();
+                var categoryFlag   = 0;
+                var categoryValue  = $('#filter-category').val();
+                var sortFlag       = 0;
+                var sortValue      = $('#filter-sort').val();
+
+                //traversing each row one by one
+                $('#application-tbl1 tr').each(function() {
+
+                    if(classValue == 0){
+                        classFlag = 1;
+                    }
+                    else if(classValue == $(this).find('td.class').data('class')){
+                        classFlag = 1;       //if value is same display row
+                    }
+                    else{
+                        classFlag = 0;
+                    }
+
+                    if(levelValue == 0){
+                        levelFlag = 1;
+                    }
+                    else if(levelValue == $(this).find('td.level').data('level')){
+                        levelFlag = 1;
+                    }
+                    else{
+                        levelFlag = 0;
+                    }
+
+                    if(lifestageValue == 0){
+                        lifestageFlag = 1;
+                    }
+                    else if(lifestageValue == $(this).find('td.lifestage').data('lifestage')){
+                        lifestageFlag = 1;
+                    }
+                    else{
+                        lifestageFlag = 0;
+                    }
+
+                    if(categoryValue == 0){
+                        categoryFlag = 1;
+                    }
+                    else if(categoryValue == $(this).find('td.category').data('category')){
+                        categoryFlag = 1;
+                    }
+                    else{
+                        categoryFlag = 0;
+                    }
+
+                    if(sortValue == 0){
+                        sortFlag = 1;
+                    }
+                    else if(sortValue == $(this).find('td.sort').data('sort')){
+                        sortFlag = 1;
+                    }
+                    else{
+                        sortFlag = 0;
+                    }
+
+                    if(classFlag && levelFlag && sortFlag && lifestageFlag && categoryFlag){
+                        $(this).show();
+                    }
+                });
+            }
+        });
+
+    </script>
 @endsection

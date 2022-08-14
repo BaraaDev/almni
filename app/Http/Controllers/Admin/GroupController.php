@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\GroupRequest;
 use App\Models\Group;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -57,16 +58,25 @@ class GroupController extends Controller
 
     public function create()
     {
+
+        $students = User::status('waiting')->type('student')->pluck('name','id');
+//
+//
+//        $group_student = DB::table('group_student')->get();
+//
+//        dd($group_student->where('student_id', $students->id));
         activity()
             ->causedBy(Auth::user()->id)
             ->log(__('log.See create groups'));
-        return view('admin.groups.create');
+        return view('admin.groups.create',compact('students'));
     }
 
     public function store(GroupRequest $request)
     {
         $group = Group::create($request->all());
-
+        $group->users()->sync($request->student_id);
+        $group['days']        = $request->days;
+        $group->save();
         activity()
             ->performedOn($group)
             ->event(__('home.create'))
@@ -79,7 +89,6 @@ class GroupController extends Controller
     public function edit($id)
     {
         $model = Group::findOrFail($id);
-
         activity()
             ->causedBy(Auth::user()->id)
             ->log(__('log.See edit groups'));
@@ -88,10 +97,19 @@ class GroupController extends Controller
 
     public function update(GroupRequest $request,$id)
     {
-        $group = Group::findOrFail($id);
-        $group->update($request->all());
-
-
+        $group                = Group::findOrFail($id);
+        $group->name          = $request->name;
+        $group->description   = $request->description;
+        $group->level_id      = $request->level_id;
+        $group->course_id     = $request->course_id;
+        $group->months        = $request->months;
+        $group['days']        = $request->days;
+        $group->time_start    = $request->time_start;
+        $group->time_end      = $request->time_end;
+        $group->classroom_id  = $request->classroom_id;
+        $group->status        = $request->status;
+        $group->users()->sync($request->student_id);
+        $group->save();
         activity()
             ->performedOn($group)
             ->event(__('home.update'))
@@ -117,6 +135,7 @@ class GroupController extends Controller
     public function student($id)
     {
         $group = Group::findOrFail($id);
+
         return view('admin.groups.student',compact('group'));
     }
 
@@ -125,7 +144,7 @@ class GroupController extends Controller
 
         $ad = DB::table('arrival_missed')->insert(
             [
-                'arrival_missed'            => $request->arrival,
+                'arrival_missed'        => $request->arrival,
                 'student_id'            => $request->student_id,
                 'created_at'            => Carbon::now(),
                 'updated_at'            => Carbon::now(),

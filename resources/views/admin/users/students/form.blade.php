@@ -28,7 +28,7 @@
 
 
     <div class="mb-3 col-6">
-        <label class="form-label">{{__('home.date')}}</label>
+        <label class="form-label">{{__('home.date of birthday')}}</label>
         <input type="date" name="age" class="form-control input-default @error('age') is-invalid @enderror" placeholder="{{__('user.Enter your age')}}" value="{{Request::old('age') ? Request::old('age') : $model->age}}">
         @error('age') <div class="invalid-feedback">{{$message}}</div> @enderror
     </div>
@@ -46,8 +46,8 @@
     </div>
 
     <div class="mb-3 col-md-4 col-6">
-        <label class="form-label">{{__('home.whatsApp')}} <span style="color: red">*</span></label>
-        <input type="tel" name="whatsApp" class="form-control input-default @error('whatsApp') is-invalid @enderror" placeholder="{{__('home.number whatsApp')}}" value="{{Request::old('whatsApp') ? Request::old('whatsApp') : $model->whatsApp}}" required>
+        <label class="form-label">{{__('home.whatsApp')}} </label>
+        <input type="tel" name="whatsApp" class="form-control input-default @error('whatsApp') is-invalid @enderror" placeholder="{{__('home.number whatsApp')}}" value="{{Request::old('whatsApp') ? Request::old('whatsApp') : $model->whatsApp}}">
         @error('whatsApp') <div class="invalid-feedback">{{$message}}</div> @enderror
     </div>
 
@@ -69,6 +69,7 @@
         @inject('city','App\Models\City')
         {!! Form::select('city_id',$city->pluck('city','id'),Request::old('city_id') ? Request::old('city_id') :  $model->city_id ,[
             'class' => 'default-select form-control'. ( $errors->has('city_id') ? ' is-invalid' : '' ),
+            'placeholder' => __('home.please choose')
         ]) !!}
         @error('city_id') <div class="invalid-feedback">{{$message}}</div> @enderror
     </div>
@@ -77,30 +78,91 @@
         <label class="form-label">{{__('level.level')}}</label>
         @inject('level','App\Models\Level')
         {!! Form::select('level_id',$level->pluck('level','id'),Request::old('level_id') ? Request::old('level_id') :  $model->level_id ,[
+            'placeholder' => __('home.please choose'),
             'class' => 'default-select form-control'. ( $errors->has('level_id') ? ' is-invalid' : '' ),
         ]) !!}
         @error('level_id') <div class="invalid-feedback">{{$message}}</div> @enderror
     </div>
 
     <div class="mb-3 col-6">
+        <label class="form-label">{{__('category.category')}}</label>
+        @inject('category','App\Models\Category')
+        {!! Form::select('category_id',$category->pluck('name','id'),Request::old('category_id') ? Request::old('category_id') :  $model->category_id ,[
+            'class' => 'default-select form-control',
+            'placeholder' => __('home.please choose')
+        ]) !!}
+        @error('category_id') <div class="invalid-feedback">{{$message}}</div> @enderror
+    </div>
+
+
+
+    <div class="mb-3 col-6">
+        <label class="form-label">{{__('life_stage.life Stage')}}</label>
+        @inject('life_stage','App\Models\LifeStage')
+        {!! Form::select('life_stage_id',$life_stage->pluck('stage','id'),Request::old('life_stage_id') ? Request::old('life_stage_id') :  $model->life_stage_id ,[
+            'placeholder' => __('home.please choose'),
+            'class' => 'default-select form-control'. ( $errors->has('life_stage_id') ? ' is-invalid' : '' ),
+        ]) !!}
+        @error('life_stage_id') <div class="invalid-feedback">{{$message}}</div> @enderror
+    </div>
+
+    <div class="mb-3 col-6">
         <label class="form-label">{{__('group.groups')}}</label>
         @inject('group','App\Models\Group')
         {!! Form::select('group_id[]',$group->status('active')->pluck('name','id'),$model->groups->pluck('id')->all(),[
+            'placeholder' => __('home.please choose'),
             'class' => 'js-example-programmatic-multi default-select form-control',
             'multiple'
         ]) !!}
         @error('group_id') <div class="invalid-feedback">{{$message}}</div> @enderror
     </div>
 
+    <div class="mb-3 col-6">
+        <label class="form-label">{{__('course.course')}}</label>
+        @inject('course','App\Models\Course')
+        {!! Form::select('course_id[]',$course->status('active')->pluck('title','id'),$model->courseStudent->pluck('id')->all(),[
+            'placeholder' => __('home.please choose'),
+            'class' => 'js-example-programmatic-multi default-select form-control',
+            'multiple'
+        ]) !!}
+        @error('course_id') <div class="invalid-feedback">{{$message}}</div> @enderror
+    </div>
+
+
+    <div class="mb-3 col-6">
+        <label class="form-label">{{__('classrooms.classroom')}}</label>
+        @inject('classroom','App\Models\Classroom')
+        {!! Form::select('classroom_id',$classroom->status('active')->pluck('name','id'),Request::old('classroom_id') ? Request::old('classroom_id') :  $model->classroom_id ,[
+            'class' => 'default-select form-control',
+            'placeholder' => __('home.please choose')
+        ]) !!}
+        @error('classroom_id') <div class="invalid-feedback">{{$message}}</div> @enderror
+    </div>
+
+
+
+    <div class="mb-3 col-6">
+        <label class="form-label">{{__('home.gender')}} <span style="color: red">*</span></label>
+        <select name="gender" class="default-select form-control @error('gender') is-invalid @enderror" required>
+            <option>{{__('home.please choose')}}</option>
+            <option value="male" {{ isset($model) && $model->gender == 'male' ? 'selected'  : '' }}>{{__('home.male')}}</option>
+            <option value="female" {{ isset($model) && $model->gender == 'female' ? 'selected'  : '' }}>{{__('home.female')}}</option>
+        </select>
+        @error('gender') <div class="invalid-feedback">{{$message}}</div> @enderror
+    </div>
+
 
     <div class="mb-3 col-6">
         <label class="form-label">{{__('home.status')}} <span style="color: red">*</span></label>
         <select name="status"  class="default-select form-control @error('status') is-invalid @enderror " required>
-            <option disabled>{{__('home.please choose')}}</option>
-            <option value="active" {{ isset($model) && $model->status == 'active' ? 'selected'  : '' }}>{{__('home.active')}}</option>
+            <option>{{__('home.please choose')}}</option>
             <option value="stopped" {{ isset($model) && $model->status == 'stopped' ? 'selected'  : '' }}>{{__('home.stopped')}}</option>
+            <option value="active" {{ isset($model) && $model->status == 'active' ? 'selected'  : '' }}>{{__('home.active')}}</option>
+            <option value="waiting" {{ isset($model) && $model->status == 'waiting' ? 'selected'  : '' }}>{{__('home.waiting')}}</option>
         </select>
         @error('status') <div class="invalid-feedback">{{$message}}</div> @enderror
     </div>
+
+
 </div>
 

@@ -55,7 +55,7 @@ class LevelController extends Controller
             ->performedOn($level)
             ->event(__('home.create'))
             ->causedBy(Auth::user()->id)
-            ->log(__('log.create new lecture'));
+            ->log(__('log.create new level'));
         return redirect()->route('levels.index')
             ->with(['success' => __('level.Level created successfully')]);
     }

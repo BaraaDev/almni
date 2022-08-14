@@ -20,6 +20,7 @@ return [
     'Enter the course title'           => 'Enter the course title',
     'Enter course date'                => 'Enter course date',
     'There are no courses'             => 'There are no courses',
+    'no courses'                       => 'No Courses',
     'Course Date'                      => 'Course Date',
     'details this course'              => 'Details This Course',
 

@@ -34,6 +34,7 @@ class BuncheController extends Controller
                     ->orWhere('job' , 'LIKE' , '%'.$request->keyword.'%')
                     ->orWhere('salary' , 'LIKE' , '%'.$request->keyword.'%');
             }})->paginate(25);
+
         activity()
             ->causedBy(Auth::user()->id)
             ->log(__('log.See bunches'));

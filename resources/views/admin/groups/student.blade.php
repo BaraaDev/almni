@@ -108,7 +108,7 @@
             @include('layouts.admin.alert.success')
             <div class="card students-list">
                 <div class="card-header border-0 flex-wrap pb-0">
-                    <h4>Students List</h4>
+                    <h4>{{__('student.students')}}</h4>
                     <div class="input-group search-area w-auto">
                             <span class="input-group-text">
                                 <a href="javascript:void(0)">
@@ -150,7 +150,7 @@
                                             @csrf
                                             <input type="hidden" name="arrival" value="arrival">
                                             <input type="hidden" name="student_id" value="{{$student->id}}">
-                                            <button class="dropdown-item" type="submit">{{__('student.arrival')}}</button>
+                                            <button class="btn btn-success btn-sm" type="submit" title="Click to register attendance">{{__('student.arrival')}}</button>
                                         </form>
                                     </td>
 
@@ -159,7 +159,7 @@
                                             @csrf
                                             <input type="hidden" name="missed" value="missed">
                                             <input type="hidden" name="student_id" value="{{$student->id}}">
-                                            <button class="dropdown-item" type="submit">{{__('student.missed')}}</button>
+                                            <button class="btn btn-danger btn-sm" type="submit" title="Click to register absence">{{__('student.missed')}}</button>
                                         </form>
                                     </td>
 

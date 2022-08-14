@@ -27,7 +27,7 @@ class BuncheRequest extends FormRequest
             'deposit'        => 'required|numeric',
             'price'          => 'required|numeric',
             'user_id'        => 'nullable|exists:users,id',
-            'course_id'      => 'nullable|exists:courses,id',
+            'course_id'      => 'required|exists:courses,id',
             'group_id'       => 'nullable|exists:groups,id',
             'date'           => 'required|date',
         ];

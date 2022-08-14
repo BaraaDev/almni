@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('bunches', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('user_id');
-            $table->integer('group_id');
-            $table->integer('course_id');
+            $table->integer('group_id')->nullable();
+            $table->integer('course_id')->nullable();
             $table->decimal('deposit');
             $table->decimal('price');
             $table->date('date');

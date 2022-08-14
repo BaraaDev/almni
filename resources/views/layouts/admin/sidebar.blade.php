@@ -118,6 +118,23 @@
             @endcan
             {{--      /////////////////////////////      --}}
 
+            @can('life-stage-list')
+                {{-- Start levels --}}
+                <li>
+                    <a class="has-arrow" href="javascript:void(0);" aria-expanded="false">
+                        <i class="bi bi-people"></i>
+                        <span class="nav-text">{{__('life_stage.life Stage')}} </span>
+                    </a>
+                    <ul aria-expanded="false">
+                        <li><a href="{{route('life-stages.index')}}">{{__('life_stage.all life Stages')}}</a></li>
+                        @can('life-stage-create')
+                            <li><a href="{{route('life-stages.create')}}">{{__('life_stage.add new life Stages')}}</a></li>
+                        @endcan
+                    </ul>
+                </li>{{-- End levels --}}
+            @endcan
+            {{--      /////////////////////////////      --}}
+
             @can('category-list')
             {{-- Start categories --}}
             <li>
@@ -153,6 +170,24 @@
             {{-- End courses --}}
             @endcan
             {{--      /////////////////////////////      --}}
+
+            @can('classrooms-list')
+                {{-- Start classrooms --}}
+                <li>
+                    <a class="has-arrow" href="javascript:void(0);" aria-expanded="false">
+                        <i class="bi bi-people"></i>
+                        <span class="nav-text">{{__('classrooms.classrooms')}} </span>
+                    </a>
+                    <ul aria-expanded="false">
+                        <li><a href="{{route('classrooms.index')}}">{{__('classrooms.all classrooms')}}</a></li>
+                        @can('classrooms-create')
+                            <li><a href="{{route('classrooms.create')}}">{{__('classrooms.add new classrooms')}}</a></li>
+                        @endcan
+                    </ul>
+                </li>{{-- End classrooms --}}
+            @endcan
+            {{--      /////////////////////////////      --}}
+
 
             @can('group-list')
                 {{-- Start groups --}}
@@ -270,6 +305,8 @@
                 </li>{{-- End bunches --}}
             @endcan
             {{--      /////////////////////////////      --}}
+
+
         </ul>
 
         <div class="copyright">
