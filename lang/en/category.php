@@ -1,8 +1,10 @@
 <?php
 
 return [
+
     'category'                            => 'Category',
     'categories'                          => 'Categories',
+    'Top Categories'                      => 'Top Categories',
     'all categories'                      => 'All Categories',
     'create category'                     => 'Create Category',
     'create categories'                   => 'Create Categories',

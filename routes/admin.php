@@ -45,9 +45,9 @@ Route::group([
         Route::resource('/life-stages', LifeStageController::class);
         Route::resource('/subjects', SubjectController::class);
         Route::resource('/groups', GroupController::class);
-        Route::get('/group/{id}/students',[GroupController::class,'student'])->name('group.student');
-        Route::post('/students/arrival',[GroupController::class,'Arrival'])->name('student.arrival');
-        Route::post('/students/missed',[GroupController::class,'missed'])->name('student.missed');
+        Route::get('/group/{id}/students',[GroupController::class,'student'])->name('group.instructors');
+        Route::post('/students/arrival',[GroupController::class,'Arrival'])->name('instructors.arrival');
+        Route::post('/students/missed',[GroupController::class,'missed'])->name('instructors.missed');
         Route::resource('/categories', CategoryController::class);
         Route::resource('/courses', CourseController::class);
         Route::resource('/lectures', LectureController::class);

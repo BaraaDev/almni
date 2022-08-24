@@ -1,6 +1,6 @@
 @extends('layouts.admin.app')
 
-@section('title') {{__('student.students') . $title}} @endsection
+@section('title') {{__('instructors.students') . $title}} @endsection
 
 @section('head')
     <link href="{{asset('admin/vendor/datatables/css/jquery.dataTables.min.css')}}" rel="stylesheet">
@@ -37,8 +37,8 @@
                                     <path d="M14.1665 19.1666C17.8331 19.1666 20.8331 16.1666 20.8331 12.4999C20.8331 8.83325 17.8331 5.83325 14.1665 5.83325C10.4998 5.83325 7.49981 8.83325 7.49981 12.4999C7.49981 16.1666 10.4998 19.1666 14.1665 19.1666ZM21.6665 17.6666C24.4998 19.9999 28.6665 19.4999 30.9998 16.6666C33.3331 13.8333 32.8331 9.66659 29.9998 7.33325C28.8331 6.33325 27.3331 5.83325 25.8331 5.83325C24.3331 5.83325 22.8331 6.33325 21.6665 7.33325C24.4998 9.66659 24.9998 13.6666 22.6665 16.6666C22.4998 16.9999 21.9998 17.3333 21.6665 17.6666ZM38.1665 32.3333C37.1665 26.1666 31.9998 21.6666 25.8331 21.6666C24.3331 21.6666 22.9998 21.8333 21.6665 22.3333C25.9998 23.8333 29.1665 27.6666 29.8331 32.1666C29.9998 32.9999 29.3331 33.9999 28.3331 33.9999H28.1665H36.4998C37.4998 33.9999 38.1665 33.3333 38.1665 32.3333C38.1665 32.4999 38.1665 32.3333 38.1665 32.3333ZM14.1665 21.6666C7.99981 21.6666 2.66647 26.1666 1.83314 32.3333C1.66647 33.1666 2.33314 34.1666 3.33314 34.1666H3.49981H24.8331C25.8331 34.1666 26.4998 33.4999 26.4998 32.4999V32.3333C25.6665 26.1666 20.3331 21.6666 14.1665 21.6666Z" fill="var(--secondary)"/>
                                 </svg>
                             </span>
-                            <h4>{{$group->users->count()}}</h4>
-                            <span class="pb-3 d-block">{{__('student.total students')}}</span>
+                            <h4>{{$group->students->count()}}</h4>
+                            <span class="pb-3 d-block">{{__('instructors.total students')}}</span>
                         </div>
                     </div>
                 </div>
@@ -108,7 +108,7 @@
             @include('layouts.admin.alert.success')
             <div class="card students-list">
                 <div class="card-header border-0 flex-wrap pb-0">
-                    <h4>{{__('student.students')}}</h4>
+                    <h4>{{__('instructors.students')}}</h4>
                     <div class="input-group search-area w-auto">
                             <span class="input-group-text">
                                 <a href="javascript:void(0)">
@@ -126,15 +126,15 @@
                             <thead>
                             <tr>
                                 <th>{{__('user.name')}}</th>
-                                <th>{{__('student.Student ID')}}</th>
-                                <th>{{__('student.Join Date')}}</th>
-                                <th>{{__('student.arrival')}}</th>
-                                <th>{{__('student.missed')}}</th>
+                                <th>{{__('instructors.Student ID')}}</th>
+                                <th>{{__('instructors.Join Date')}}</th>
+                                <th>{{__('instructors.arrival')}}</th>
+                                <th>{{__('instructors.missed')}}</th>
                                 <th>{{__('home.action')}}</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @forelse($group->users as $student)
+                            @forelse($group->students as $student)
                                 <tr>
                                     <td>
                                         <div class="d-flex align-items-center">
@@ -146,20 +146,20 @@
                                     <td>{{$student->created_at->translatedFormat('M d, Y')}}</td>
 
                                     <td>
-                                        <form method="post" action="{{route('student.arrival')}}">
+                                        <form method="post" action="{{route('instructors.arrival')}}">
                                             @csrf
                                             <input type="hidden" name="arrival" value="arrival">
                                             <input type="hidden" name="student_id" value="{{$student->id}}">
-                                            <button class="btn btn-success btn-sm" type="submit" title="Click to register attendance">{{__('student.arrival')}}</button>
+                                            <button class="btn btn-success btn-sm" type="submit" title="Click to register attendance">{{__('instructors.arrival')}}</button>
                                         </form>
                                     </td>
 
                                     <td>
-                                        <form method="post" action="{{route('student.missed')}}">
+                                        <form method="post" action="{{route('instructors.missed')}}">
                                             @csrf
                                             <input type="hidden" name="missed" value="missed">
                                             <input type="hidden" name="student_id" value="{{$student->id}}">
-                                            <button class="btn btn-danger btn-sm" type="submit" title="Click to register absence">{{__('student.missed')}}</button>
+                                            <button class="btn btn-danger btn-sm" type="submit" title="Click to register absence">{{__('instructors.missed')}}</button>
                                         </form>
                                     </td>
 
@@ -176,10 +176,10 @@
                                                     'route' => ['students.destroy',$student->id],
                                                     'method' => 'delete'
                                                 ])!!}
-                                                @can('student-delete')
+                                                @can('instructors-delete')
                                                     <button class="dropdown-item" onclick="return confirm('{{__('home.Are you sure to delete')}}');"  type="submit">{{__('home.delete')}}</button>
                                                 @endcan
-                                                @can('student-edit')
+                                                @can('instructors-edit')
                                                     <a class="dropdown-item" href="{{route('students.edit',$student->id)}}">{{__('home.edit')}}</a>
                                                 @endcan
                                                 {!! Form::close() !!}
@@ -209,5 +209,5 @@
     <script src="{{asset('admin/vendor/datatables/js/jquery.dataTables.min.js')}}"></script>
     <script src="{{asset('admin/js/plugins-init/datatables.init.js')}}"></script>
     <script src="{{asset('admin/vendor/owl-carousel/owl.carousel.js')}}"></script>
-    <script src="{{asset('admin/js/dashboard/instructor-student.js')}}"></script>
+    <script src="{{asset('admin/js/dashboard/instructor-instructors.js')}}"></script>
 @endsection

@@ -7,6 +7,14 @@
         @error('name') <div class="invalid-feedback">{{$message}}</div> @enderror
     </div>
 
+    <div class="mb-3 col-12">
+        <label class="form-label">{{__('home.icon')}} <span style="color: red">*</span></label>
+        <input type="text" name="icon" class="form-control input-default @error('icon') is-invalid @enderror"
+               placeholder="{{__('home.Enter icon')}}"
+               value="{{Request::old('icon') ? Request::old('icon') : $model->icon}}" required>
+        @error('icon') <div class="invalid-feedback">{{$message}}</div> @enderror
+    </div>
+
 
 <div class="mb-3 col-6">
     <label class="form-label">{{__('subject.subject')}}</label>

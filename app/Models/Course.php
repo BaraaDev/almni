@@ -12,7 +12,7 @@ class Course extends Model implements HasMedia
 {
     use HasFactory, SoftDeletes, InteractsWithMedia;
 
-    protected $fillable = ['title','description','course_date','price','discount','level_id','subject_id','category_id','status'];
+    protected $fillable = ['title','slug','description','short_description','course_date','price','discount','level_id','subject_id','category_id','status'];
 
     public function category()
     {

@@ -25,6 +25,7 @@ class CategoryRequest extends FormRequest
     {
         return [
             'name'           => 'required|string|min:3|max:199',
+            'icon'           => 'required|string|max:199',
             'subject_id'     => 'nullable|exists:subjects,id',
             'status'         => 'required|string|in:active,stopped',
         ];

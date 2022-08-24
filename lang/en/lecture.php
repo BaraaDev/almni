@@ -4,6 +4,7 @@ return [
     'lecture'                           => 'Lecture',
     'lectures'                          => 'Lectures',
     'all lectures'                      => 'All Lectures',
+    'Total lectures'                      => 'Total lectures',
     'create lecture'                    => 'Create Lecture',
     'create lectures'                   => 'Create Lectures',
     'edit lecture'                      => 'Edit Lecture',

@@ -24,17 +24,17 @@
 
         <div class="footer-columns">
             <div class="row y-gap-30">
-                <div class="col-xl-2 col-lg-4 col-md-6">
-                    <div class="text-17 fw-500 mb-25 uppercase text-white">ABOUT</div>
+                <div class="col-xl-3 col-lg-3 col-md-3">
+                    <div class="text-17 fw-500 mb-25 uppercase text-white">{{__('home.About the site')}}</div>
                     <div class="d-flex y-gap-10 flex-column">
-                        <a href="about.html">About Us</a>
-                        <a href="contact.html">Contact Us</a>
-                        <a href="terms.html">Terms</a>
-                        <a href="help-center.html">Help Center</a>
+                        <a href="{{route('about')}}">{{__('home.About')}}</a>
+                        <a href="{{route('contact')}}">{{__('home.Contact')}}</a>
+                        <a href="{{route('terms')}}">{{__('home.Terms')}}</a>
+                        <a href="{{route('help_center')}}">{{__('home.Help Center')}}</a>
                     </div>
                 </div>
 
-                <div class="col-xl-4 col-lg-8">
+                <div class="col-xl-3 col-lg-3 col-md-3">
                     <div class="text-17 fw-500 mb-25 uppercase text-white">CATEGORIES</div>
                     <div class="row y-gap-20 justify-between">
                         <div class="col-md-6">
@@ -47,7 +47,7 @@
                     </div>
                 </div>
 
-                <div class="col-xl-2 offset-xl-1 col-lg-4 col-md-6">
+                <div class="col-xl-3 col-lg-3 col-md-3">
                     <div class="text-17 fw-500 mb-25 uppercase text-white">SUPPORT</div>
                     <div class="d-flex y-gap-10 flex-column">
                         <a href="help-center.html">FAQS</a>
@@ -55,7 +55,7 @@
                     </div>
                 </div>
 
-                <div class="col-xl-3 col-lg-4 col-md-6">
+                <div class="col-xl-3 col-lg-3 col-md-3">
                     <div class="text-17 fw-500 mb-25 uppercase text-white">GET IN TOUCH</div>
                     <div class="footer-columns-form">
                         <div>We don’t send spam so don’t worry.</div>
@@ -74,24 +74,14 @@
             <div class="row y-gap-20 items-center justify-between">
                 <div class="col-auto">
                     <div class="d-flex h-100 items-center text-white">
-                        © 2022 عlmin. All Right Reserved.
+                        3lmin © {{date('Y')}}, All Right Reserved.
                     </div>
                 </div>
 
                 <div class="col-auto">
                     <div class="d-flex x-gap-20 y-gap-20 flex-wrap items-center">
-                        <div>
-                            <div class="d-flex x-gap-15 text-white">
-                                <a href="help-center.html">Help</a>
-                                <a href="terms.html">Privacy Policy</a>
-                                <a href="terms.html">Cookie Notice</a>
-                                <a href="terms.html">Security</a>
-                                <a href="terms.html">Terms of Use</a>
-                            </div>
-                        </div>
-
-                        <div>
-                            <a href="https://www.programmerscaffe.com" target="_blank"
+                        <div title="By: Baraa Samy, AbdelRhaman Haridy">
+                            <a href="https://programmerscaffe.com" target="_blank" rel="nofollow"
                                 class="button px-30 h-50 -purple-1 rounded-200 text-white">
                                 Made By Programmers Caffe
                             </a>

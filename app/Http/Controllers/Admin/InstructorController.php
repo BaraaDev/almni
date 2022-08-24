@@ -73,6 +73,7 @@ class InstructorController extends Controller
     {
         $instructor = User::create($request->all());
         $instructor->subjects()->sync($request->subject_id);
+        $instructor->groupInstructor()->sync($request->group_id);
         $instructor->password = bcrypt($request->input('password'));
         $instructor->userType = 'instructor';
 
@@ -120,6 +121,7 @@ class InstructorController extends Controller
 
         $instructor->update($request->all());
         $instructor->subjects()->sync($request->subject_id);
+        $instructor->groupInstructor()->sync($request->group_id);
         $instructor->password = bcrypt($request->input('password'));
         if($request->hasFile('photo')) {
             $instructor

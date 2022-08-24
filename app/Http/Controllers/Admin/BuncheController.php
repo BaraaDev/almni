@@ -28,7 +28,7 @@ class BuncheController extends Controller
 
     public function index(Request $request)
     {
-        $users = User::orderBy('id','DESC')->status('active')->type('student')->where(function ($q) use($request){
+        $users = User::orderBy('id','DESC')->status('active')->type('instructors')->where(function ($q) use($request){
             if($request->keyword){
                 $q->where('name' , 'LIKE' , '%'.$request->keyword.'%')
                     ->orWhere('job' , 'LIKE' , '%'.$request->keyword.'%')

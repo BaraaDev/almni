@@ -48,7 +48,7 @@ return new class extends Migration
             $table->decimal('salary')->nullable();
             $table->decimal('salary_time')->nullable();
             $table->string('api_token','100')->nullable();
-            $table->enum('userType',['admin','student','instructor'])->nullable();
+            $table->enum('userType',['admin','instructors','instructor'])->nullable();
             $table->enum('status',['active','stopped','waiting']);
             $table->enum('gender',['male','female'])->nullable();
             $table->rememberToken();

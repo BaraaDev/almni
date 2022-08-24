@@ -94,8 +94,6 @@
         @error('category_id') <div class="invalid-feedback">{{$message}}</div> @enderror
     </div>
 
-
-
     <div class="mb-3 col-6">
         <label class="form-label">{{__('life_stage.life Stage')}}</label>
         @inject('life_stage','App\Models\LifeStage')
@@ -140,7 +138,6 @@
     </div>
 
 
-
     <div class="mb-3 col-6">
         <label class="form-label">{{__('home.gender')}} <span style="color: red">*</span></label>
         <select name="gender" class="default-select form-control @error('gender') is-invalid @enderror" required>
@@ -162,7 +159,4 @@
         </select>
         @error('status') <div class="invalid-feedback">{{$message}}</div> @enderror
     </div>
-
-
 </div>
-

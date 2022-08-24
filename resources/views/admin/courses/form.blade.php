@@ -12,6 +12,12 @@
     </div>
 
     <div class="mb-3 col-12">
+        <label class="form-label">{{__('home.short description')}}</label>
+        <textarea name="short_description" class="form-control input-default @error('short_description') is-invalid @enderror" placeholder="{{__('course.Enter the course short description')}}">{{Request::old('short_description') ? Request::old('short_description') : $model->short_description}}</textarea>
+        @error('short_description') <div class="invalid-feedback">{{$message}}</div> @enderror
+    </div>
+
+    <div class="mb-3 col-12">
         <label class="form-label">{{__('home.description')}} <span style="color: red">*</span></label>
         <textarea name="description" class="form-control input-default @error('description') is-invalid @enderror" placeholder="{{__('course.Enter the course description')}}" required>{{Request::old('description') ? Request::old('description') : $model->description}}</textarea>
         @error('description') <div class="invalid-feedback">{{$message}}</div> @enderror

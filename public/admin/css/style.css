@@ -20,7 +20,6 @@
 @import url(../vendor/aos/css/aos.min.css);
 @import url(../vendor/perfect-scrollbar/css/perfect-scrollbar.css);
 @import url(../vendor/metismenu/css/metisMenu.min.css);
-<<<<<<< HEAD
 
 
 .DZ-theme-btn {
@@ -87,13 +86,12 @@
 [dir=rtl] .DZ-theme-btn {
   right: 10px;
   left: auto; }
-/* 
+/*
 {
   color: #21a9dd;
   color: #1aa6dc;
 } */
-=======
->>>>>>> 694678def4a88777071b6a84dfc1fd364b3dadba
+
 :root {
   --primary: #21a9dd;
   --secondary: #21a9dd;
@@ -13624,29 +13622,29 @@ html[dir="rtl"] [direction="rtl"][data-sidebar-style="compact"]:not([data-layout
 
 [data-nav-headerbg="color_3"][data-theme-version="dark"],
 [data-nav-headerbg="color_3"] {
-<<<<<<< HEAD
+
   --nav-headbg: #21a9dd;
   /* &[data-nav-headerbg="color_8"]{
 				.nav-header{
 					.brand-logo{
 						.brand-title{
 							path{
-								fill:$black;		
+								fill:$black;
 							}
 							tspan{
-								fill:$black;	
+								fill:$black;
 							}
-						}	
+						}
 					}
 					.hamburger .line{
 						background:$black;
 					}
 				}
 			} */ }
-=======
+
   --nav-headbg: #5e72e4;
   }
->>>>>>> 694678def4a88777071b6a84dfc1fd364b3dadba
+
   [data-nav-headerbg="color_3"][data-theme-version="dark"] .nav-header .brand-logo .logo-abbr .line-1,
   [data-nav-headerbg="color_3"] .nav-header .brand-logo .logo-abbr .line-1 {
     fill: #fff; }
@@ -14022,7 +14020,7 @@ html[dir="rtl"] [direction="rtl"][data-sidebar-style="compact"]:not([data-layout
 
 [data-sibebarbg="color_3"][data-theme-version="dark"],
 [data-sibebarbg="color_3"] {
-<<<<<<< HEAD
+
   --sidebar-bg: #21a9dd;
   /* .hamburger .line{
 				background:$white;
@@ -14031,7 +14029,7 @@ html[dir="rtl"] [direction="rtl"][data-sidebar-style="compact"]:not([data-layout
 				.dlabnav .metismenu > li.mm-active > a,
 				.dlabnav .metismenu > li:hover > a{
 						background:transparent;
-				}	
+				}
 			} */
   /* &[data-sibebarbg="color_8"]{
 				.dlabnav .metismenu ul a:before {
@@ -14063,14 +14061,14 @@ html[dir="rtl"] [direction="rtl"][data-sidebar-style="compact"]:not([data-layout
 									&:before{
 										background:rgba($black,0.6)!important;
 									}
-									
-									
-								}	
+
+
+								}
 							}
 						}
 					}
 					.copyright p{
-						color:rgba($black,0.6);							
+						color:rgba($black,0.6);
 					}
 					.book-box{
 						background: rgba($black,0.4);
@@ -14079,21 +14077,21 @@ html[dir="rtl"] [direction="rtl"][data-sidebar-style="compact"]:not([data-layout
 					color: rgba($black,0.6)
 					}
 					.sidebar-info{
-						color: rgba($black,0.6); 
+						color: rgba($black,0.6);
 						i{
-							color: rgba($black,0.6) 		
+							color: rgba($black,0.6)
 						}
 					}
-				} 
-				
+				}
+
 				 .plus-box{
-					background-color:rgba($black,0.4);	
-				} 
+					background-color:rgba($black,0.4);
+				}
 			} */ }
-=======
+
   --sidebar-bg: #5e72e4;
   }
->>>>>>> 694678def4a88777071b6a84dfc1fd364b3dadba
+
   [data-sibebarbg="color_3"][data-theme-version="dark"] .menu-toggle .dlabnav .metismenu li > ul,
   [data-sibebarbg="color_3"] .menu-toggle .dlabnav .metismenu li > ul {
     background: #21a9dd !important; }
@@ -15494,10 +15492,10 @@ html[dir="rtl"] [direction="rtl"][data-sidebar-style="compact"]:not([data-layout
 
 [data-headerbg="color_3"][data-theme-version="dark"],
 [data-headerbg="color_3"] {
-<<<<<<< HEAD
+
   --headerbg: #21a9dd;
   /* &[data-headerbg="color_8"]{
-					
+
 				.search-area .input-group-text,
 				.search-area .form-control,.search-area .form-control::placeholder{
 					color:$black;
@@ -15511,28 +15509,28 @@ html[dir="rtl"] [direction="rtl"][data-sidebar-style="compact"]:not([data-layout
 						}
 					}
 					.dashboard_bar{
-						color:$black;	
+						color:$black;
 					}
 					.plus-icon a{
-						background-color:$black;	
+						background-color:$black;
 					}
-					
+
 				}
 				.hamburger .line{
 					background:$black;
 					}
-				
+
 				.header-right{
 				svg{
 					path{
-						fill:rgba($black,0.4);	
+						fill:rgba($black,0.4);
 					}
 				}
 			} */ }
 =======
   --headerbg: #5e72e4;
   }
->>>>>>> 694678def4a88777071b6a84dfc1fd364b3dadba
+
   [data-headerbg="color_3"][data-theme-version="dark"] .search-area .input-group-text,
   [data-headerbg="color_3"][data-theme-version="dark"] .search-area .form-control, [data-headerbg="color_3"][data-theme-version="dark"] .search-area .form-control::placeholder,
   [data-headerbg="color_3"] .search-area .input-group-text,
@@ -17663,7 +17661,7 @@ html[dir="rtl"] [direction="rtl"][data-sidebar-style="compact"]:not([data-layout
 @media only screen and (max-width: 90rem) {
   .email_left_pane {
     display: none; } }
-<<<<<<< HEAD
+
 
 #external-events .external-event:before {
   content: "";
@@ -17712,8 +17710,7 @@ html[dir="rtl"] [direction="rtl"][data-sidebar-style="compact"]:not([data-layout
   .fc .fc-row .fc-helper-skeleton td {
     border-color: #333754; }
 
-=======
->>>>>>> 694678def4a88777071b6a84dfc1fd364b3dadba
+
 [data-theme-version="dark"] .fc-unthemed .fc-content, [data-theme-version="dark"] .fc-unthemed .fc-divider, [data-theme-version="dark"] .fc-unthemed .fc-list-heading td, [data-theme-version="dark"] .fc-unthemed .fc-list-view, [data-theme-version="dark"] .fc-unthemed .fc-popover, [data-theme-version="dark"] .fc-unthemed .fc-row, [data-theme-version="dark"] .fc-unthemed tbody, [data-theme-version="dark"] .fc-unthemed td, [data-theme-version="dark"] .fc-unthemed th, [data-theme-version="dark"] .fc-unthemed thead {
   border-color: #333754; }
 
@@ -18068,7 +18065,7 @@ html[dir="rtl"] [direction="rtl"][data-sidebar-style="compact"]:not([data-layout
   color: #464a53; }
 .profile-page {
   height: 60px; }
-<<<<<<< HEAD
+
 
 .event-chat-ryt .chat-area .chat-reciver,
 .event-chat-ryt .chat-area .chat-sender {
@@ -18403,8 +18400,7 @@ html[dir="rtl"] [direction="rtl"][data-sidebar-style="compact"]:not([data-layout
         position: relative;
         top: -0.0625rem; }
 
-=======
->>>>>>> 694678def4a88777071b6a84dfc1fd364b3dadba
+
 .c3 {
   height: 15.625rem; }
 .legend > div {
@@ -24509,19 +24505,19 @@ table.dataTable.display tbody td {
   .custome-tooltip.style-1 .apexcharts-theme-light .apexcharts-tooltip.apexcharts-theme-light .apexcharts-tooltip-title {
     background: #21a9dd; }
   .custome-tooltip.style-1 .apexcharts-theme-light .apexcharts-tooltip.apexcharts-theme-light:after {
-<<<<<<< HEAD
+
     background: #21a9dd; }
 
 =======
     background: #5e72e4; }
->>>>>>> 694678def4a88777071b6a84dfc1fd364b3dadba
+
 .redial-content {
   text-align: center;
   margin-top: 15px; }
 .card-calendar {
   background: var(--primary);
   border-radius: inherit; }
-<<<<<<< HEAD
+
   .card-calendar .bootstrap-datetimepicker-widget {
     width: 100%; }
     .card-calendar .bootstrap-datetimepicker-widget table .picker-switch {
@@ -24658,8 +24654,7 @@ table.dataTable.display tbody td {
     width: 1.875rem;
     font-size: 1rem; }
 
-=======
->>>>>>> 694678def4a88777071b6a84dfc1fd364b3dadba
+
 #main-wrapper .ellipse .green-line {
   position: absolute;
   top: 0;
@@ -28911,7 +28906,7 @@ html[dir="rtl"] [direction="rtl"][data-sidebar-style="compact"]:not([data-layout
     --font-family-base: Roboto, sans-serif;
     --font-family-title: Roboto, sans-serif;
     --title: #374557; }
-  
+
 [data-theme-version="dark"] {
   background: #20203c;
   color: #828690;

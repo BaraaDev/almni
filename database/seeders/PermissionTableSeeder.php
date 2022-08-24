@@ -64,11 +64,11 @@ class PermissionTableSeeder extends Seeder
             'role-edit',
             'role-delete',
 
-            // permission student
-            'student-list',
-            'student-create',
-            'student-edit',
-            'student-delete',
+            // permission instructors
+            'instructors-list',
+            'instructors-create',
+            'instructors-edit',
+            'instructors-delete',
 
             // permission subject
             'subject-list',

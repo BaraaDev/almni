@@ -13,7 +13,7 @@ class HomeController extends Controller
     public function index()
     {
         $user = User::status('active')->type('admin')->count();
-        $students = User::status('active')->type('student')->count();
+        $students = User::status('active')->type('instructors')->count();
         $instructor = User::status('active')->type('instructor')->count();
 
 

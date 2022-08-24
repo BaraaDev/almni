@@ -28,6 +28,7 @@ class GroupRequest extends FormRequest
             'description'       => 'nullable|string|max:500',
             'level_id'          => 'nullable|exists:levels,id',
             'classroom_id'      => 'required|exists:classrooms,id',
+            'start_date'        => 'required',
             'months'            => 'required',
             'days'              => 'required',
             'status'            => 'required|string|in:active,stopped',

@@ -16,10 +16,11 @@ return new class extends Migration
         Schema::create('groups', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->integer('course_id')->nullable();
             $table->integer('level_id')->nullable();
             $table->integer('classroom_id')->nullable();
+            $table->timestamp('start_date')->nullable();
             $table->string('months')->nullable();
             $table->string('days')->nullable();
             $table->time('time_start')->nullable();

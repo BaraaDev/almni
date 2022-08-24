@@ -1,11 +1,10 @@
 @extends('layouts.admin.app')
 
 @section('title') {{__('city.all cities') . $title}} @endsection
-@section('content')
-    @section('search')
-        <div class="nav-item d-flex align-items-center">
-            <form action="" method="get">
-                <div class="input-group search-area">
+@section('search')
+    <div class="nav-item d-flex align-items-center">
+        <form action="" method="get">
+            <div class="input-group search-area">
                     <span class="input-group-text">
                         <a href="javascript:void(0)">
                             <svg width="24" height="24" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -13,12 +12,14 @@
                             </svg>
                         </a>
                     </span>
-                    <input name="keyword"  value="{{Request::old('keyword') ? Request::old('keyword') : $request->keyword}}" type="text" class="form-control" placeholder="Search here...">
-                </div>
-            </form>
-        </div>
+                <input name="keyword"  value="{{Request::old('keyword') ? Request::old('keyword') : $request->keyword}}" type="text" class="form-control" placeholder="Search here...">
+            </div>
+        </form>
+    </div>
 
-    @endsection
+@endsection
+@section('content')
+
     <!-- row -->
     <div class="container-fluid">
 

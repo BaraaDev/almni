@@ -19,43 +19,27 @@
                             <div class="menu js-navList">
                                 <ul class="menu__nav text-dark-1 -is-active">
                                     <li>
-                                        <a href="index.html">Home</a>
+                                        <a href="{{route('home')}}">Home</a>
                                     </li>
                                     <li class="menu-item-has-children">
-                                        <a href="#">Courses<div class="icon-chevron-right text-11"></div></a>
+                                        <a href="{{route('courses')}}">{{__('course.course')}}<div class="icon-chevron-right text-11"></div></a>
                                         <ul class="subnav">
-                                            <li class="menu__backButton js-nav-list-back">
-                                                <a href="#"><i class="icon-chevron-left text-13 mr-10"></i>Courses</a>
+                                            <li>
+                                                <a href="{{route('courses')}}">{{__('course.all courses')}}</a>
                                             </li>
                                             <li>
-                                                <a href="courses-list.html">Courses List</a>
+                                                <a href="javascript:void(0);">All Instructors</a>
                                             </li>
-                                            <li>
-                                                <a href="all-instructors.html">All Instructors</a>
-                                            </li>
-                                            <li>
-                                                <a href="courses-single.html">Single Course</a>
-                                            </li>
-                                            <li>
-                                                <a href="lesson-single.html">Single Lesson</a>
-                                            </li>
+
                                         </ul>
                                     </li>
                                     <li>
-                                        <a href="about.html">About</a>
+                                        <a href="{{route('about')}}">{{__('home.About')}}</a>
                                     </li>
                                     <li>
-                                        <a href="contact.html">Contact</a>
+                                        <a href="{{route('contact')}}">{{__('home.Contact')}}</a>
                                     </li>
-                                    <li>
-                                        <a href="pricing.html">Pricing</a>
-                                    </li>
-                                    <li>
-                                        <a href="terms.html">Terms</a>
-                                    </li>
-                                    <li>
-                                        <a href="help-center.html">Help Center</a>
-                                    </li>
+
                                     <li>
                                         <a href="become-instructor.html">Become Instructor</a>
                                     </li>

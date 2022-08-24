@@ -10,7 +10,10 @@ class Group extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable = ['name','description','level_id','course_id','months','days','time_start','time_end','classroom_id','status'];
+    protected $fillable = ['name','description','level_id',
+        'course_id','start_date','months','days','time_start',
+        'time_end','classroom_id','status'
+    ];
 
     /**
      * The attributes that should be cast.
@@ -20,6 +23,8 @@ class Group extends Model
     protected $casts = [
         'days' => 'array',
     ];
+
+
 
     public function level()
     {
@@ -36,12 +41,20 @@ class Group extends Model
         return $this->belongsTo(Classroom::class);
     }
 
-    public function users()
+    public function students()
     {
         return $this->belongsToMany(User::class,
             'group_student',
             'group_id',
             'student_id');
+    }
+
+    public function instructor()
+    {
+        return $this->belongsToMany(User::class,
+            'group_user',
+            'group_id',
+            'user_id');
     }
 
     public function scopeStatus($query,$arg)

@@ -7,6 +7,7 @@ use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
@@ -54,7 +55,8 @@ class CategoryController extends Controller
     public function store(CategoryRequest $request)
     {
         $category = Category::create($request->all());
-
+        $category->slug  = Str::slug($request->name);
+        $category->save();
         activity()
             ->performedOn($category)
             ->event(__('home.create'))
@@ -79,7 +81,8 @@ class CategoryController extends Controller
     {
         $category = Category::findOrFail($id);
         $category->update($request->all());
-
+        $category->slug  = Str::slug($request->name);
+        $category->save();
 
         activity()
             ->performedOn($category)

@@ -248,7 +248,7 @@
     <script src="{{asset('admin/vendor/datatables/js/jquery.dataTables.min.js')}}"></script>
     <script src="{{asset('admin/js/plugins-init/datatables.init.js')}}"></script>
     <script src="{{asset('admin/vendor/owl-carousel/owl.carousel.js')}}"></script>
-    <script src="{{asset('admin/js/dashboard/instructor-student.js')}}"></script>
+    <script src="{{asset('admin/js/dashboard/instructor-instructors.js')}}"></script>
 
     <script>
         $(document).ready(function() {

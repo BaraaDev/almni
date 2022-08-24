@@ -10,4 +10,9 @@ class Level extends Model
 {
     use HasFactory, SoftDeletes;
     protected $guarded = [];
+
+    public function courses()
+    {
+        return $this->hasMany(Course::class,'level_id');
+    }
 }

@@ -6,13 +6,13 @@
 @section('head')
     <link href="{{ asset('admin/vendor/datatables/css/jquery.dataTables.min.css') }}" rel="stylesheet">
 @endsection
-@section('content')
+
 @section('search')
     <div class="nav-item d-flex align-items-center">
         <form action="" method="get">
             <div class="input-group search-area">
                 <span class="input-group-text"><a href="javascript:void(0)"><svg width="24" height="24"
-                            viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                                 viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
                                 d="M27.414 24.586L22.337 19.509C23.386 17.928 24 16.035 24 14C24 8.486 19.514 4 14 4C8.486 4 4 8.486 4 14C4 19.514 8.486 24 14 24C16.035 24 17.928 23.386 19.509 22.337L24.586 27.414C25.366 28.195 26.634 28.195 27.414 27.414C28.195 26.633 28.195 25.367 27.414 24.586ZM7 14C7 10.14 10.14 7 14 7C17.86 7 21 10.14 21 14C21 17.86 17.86 21 14 21C10.14 21 7 17.86 7 14Z"
                                 fill="var(--secondary)" />
@@ -21,100 +21,25 @@
                 </span>
 
                 <input name="keyword" value="{{ Request::old('keyword') ? Request::old('keyword') : $request->keyword }}"
-                    type="text" class="form-control" placeholder="Search here...">
+                       type="text" class="form-control" placeholder="Search here...">
             </div>
         </form>
     </div>
 @endsection
+@section('content')
+
 <div class="container-fluid">
 
     <div class="widget-heading d-flex justify-content-between align-items-center">
         <h3 class="m-0">{{ __('group.all groups') }}</h3>
     </div>
     <div class="row">
-
-        {{--
-        @include('layouts.admin.alert.success')
-         @forelse($groups as $group)
-            <div class="col-xl-4 col-xxl-6">
-
-                <div class="card overflow-hidden">
-
-                    <div class="social-graph-wrapper @if ($loop->first) widget-facebook @elseif($loop->even)  widget-linkedin @elseif($loop->last) widget-twitter @else widget-googleplus @endif d-flex justify-content-center align-items-center"
-                        style="height: 120px;">
-                        <span class="s-icon">{{ $group->name }}</span>
-                    </div>
-                    <div class="d-flex justify-content-center gap-3">
-                        @can('group-edit')
-                            <a href="{{ route('groups.edit', $group->id) }}"
-                                class="btn btn-primary mt-3 mb-3">{{ __('home.edit') }}</a>
-                        @endcan
-                        @can('group-delete')
-                            {!! Form::open([
-                                'route' => ['groups.destroy', $group->id],
-                                'method' => 'delete',
-                            ]) !!}
-
-
-                            <button class="btn btn-danger mt-3 mb-3"
-                                onclick="return confirm('{{ __('home.Are you sure to delete') }}');"
-                                type="submit">{{ __('home.delete') }}</button>
-
-                            {!! Form::close() !!}
-                        @endcan
-                    </div>
-                    <div class="row">
-                        <div class="col-4 border-end">
-                            <div class="ps-0 pe-0 pt-3 pb-3 text-center">
-                                <a href="{{ route('group.student', $group->id) }}">
-                                    <h4 class="m-1"><span class="counter">{{ $group->users->count() }}</span></h4>
-                                    <p class="m-0">{{ __('student.students') }}</p>
-                                </a>
-
-                            </div>
-                        </div>
-                        <div class="col-4 border-end">
-                            <div class="ps-0 pe-0 pt-3 pb-3 text-center">
-                                <h4 class="m-1"><span
-                                        class="counter">{{ Str::limit($group->level->level ?? '', 10, '...') }}</span>
-                                </h4>
-                                <p class="m-0">{{ __('level.level') }}</p>
-                            </div>
-                        </div>
-                        <div class="col-4 border-end">
-                            <div class="ps-0 pe-0 pt-3 pb-3 text-center">
-                                <a href="{{ route('courses.show', $group->course->id ?? '', '') }}">
-                                    <h4 class="m-1"><span
-                                            class="counter">{{ Str::limit($group->course->title ?? '', 10, '...') }}
-                                        </span></h4>
-                                    <p class="m-0">{{ __('course.course') }}</p>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        @empty
-            <div class="alert alert-danger">
-                <span class="font-weight-semibold">{{ __('home.There is no data') }}</span>.
-            </div>
-        @endforelse --}}
-
-
-
         <div class="col-xl-12">
             @include('layouts.admin.alert.success')
             <div class="card students-list">
                 <div class="card-header flex-wrap border-0 pb-0">
                     <h4>{{ __('group.all groups') }}</h4>
                     <div class="input-group search-area w-auto">
-                        <!--<span class="input-group-text">-->
-                        <!--    <a href="javascript:void(0)">-->
-                        <!--        <svg width="24" height="24" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">-->
-                        <!--            <path d="M27.414 24.586L22.337 19.509C23.386 17.928 24 16.035 24 14C24 8.486 19.514 4 14 4C8.486 4 4 8.486 4 14C4 19.514 8.486 24 14 24C16.035 24 17.928 23.386 19.509 22.337L24.586 27.414C25.366 28.195 26.634 28.195 27.414 27.414C28.195 26.633 28.195 25.367 27.414 24.586ZM7 14C7 10.14 10.14 7 14 7C17.86 7 21 10.14 21 14C21 17.86 17.86 21 14 21C10.14 21 7 17.86 7 14Z" fill="var(--primary)"></path>-->
-                        <!--        </svg>-->
-                        <!--    </a>-->
-                        <!--</span>-->
                         <input type="text" class="form-control" placeholder="Search here...">
                     </div>
                 </div>
@@ -124,15 +49,17 @@
                             id="application-tbl1">
                             <thead>
                                 <tr>
+                                    <th></th>
                                     <th>{{ __('user.name') }}</th>
                                     <th>{{ __('student.students') }}</th>
+                                    <th>{{ __('instructor.instructors') }}</th>
                                     <th>{{ __('level.level') }}</th>
                                     <th>{{ __('course.course') }}</th>
                                     <th>{{ __('classrooms.classroom') }}</th>
                                     <th>{{ __('home.days') }}</th>
                                     <th>{{ __('home.months') }}</th>
                                     <th>{{ __('home.time start') }}</th>
-                                    <th>{{ __('home.time end') }}</th>
+                                    <th>{{ __('group.start date') }}</th>
                                     <th>{{ __('home.status') }}</th>
                                     <th>{{ __('home.action') }}</th>
                                 </tr>
@@ -140,32 +67,39 @@
                             <tbody>
                                 @forelse($groups as $group)
                                     <tr>
+                                        <td>{{$loop->iteration}}</td>
                                         <td>
                                             <div class="d-flex align-items-center">
                                                 <h4 class="fs-16 font-w500 mb-0">{{ $group->name }}</h4>
                                             </div>
                                         </td>
-                                        <td><a href="{{ route('group.student', $group->id) }}">
-                                                <h4 class="m-1"><span
-                                                        class="counter">{{ $group->users->count() }}</span></h4>
-                                                <!--<p class="m-0">{{ __('student.students') }}</p>-->
-                                            </a></td>
-                                        <td>{{ Str::limit($group->level->level ?? '', 10, '...') }}</td>
+                                        <td>
+                                            <a class="d-flex align-items-center" href="{{ route('group.instructors', $group->id) }}">
+                                                <span class="counter">{{ $group->students->count() . ' ' . __('student.students') }}</span>
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <span class="counter">({{ $group->instructor->count()}}) @foreach($group->instructor->slice(0,1) as $row) {{$row->name ?? __('instructor.no instructor')}} @endforeach</span>
+                                            </div>
+                                        </td>
+                                        <td>{{ Str::limit($group->level->level ?? __('level.no level'), 10, '...') }}</td>
                                         <td>
                                             <a href="{{ route('courses.show', $group->course->id ?? '', '') }}">
                                                 {{ Str::limit($group->course->title ?? '', 10, '...') }}
                                             </a>
                                         </td>
-
-                                        <td>{{ $group->classroom->name }}</td>
+                                        <td>{{ $group->classroom->name ?? '' }}</td>
                                         <td>
-                                            {{-- @foreach($group->days as $key)
-                                                {{ $key }}
-                                            @endforeach --}}
+                                             @foreach($group->days as $key)
+                                                {{ $key }} ,
+                                             @endforeach
                                         </td>
                                         <td>{{ $group->months }}</td>
+                                        @php $elapsed = Illuminate\Support\Carbon::parse($group->start_date);
+                                        @endphp
                                         <td>{{ $group->time_start }}</td>
-                                        <td>{{ $group->time_end }}</td>
+                                        <td title="{{$group->start_date}}">{{ $elapsed->diffForHumans()}}</td>
                                         <td>
                                             @if ($group->status == 'active')
                                                 <span class="badge light badge-success">{{ $group->status }}</span>
@@ -191,13 +125,7 @@
                                                             'route' => ['groups.destroy', $group->id],
                                                             'method' => 'delete',
                                                         ]) !!}
-
-                                                        {{-- <button class="dropdown-item"
-                                                            onclick="return confirm('{{ __('home.Are you sure to delete') }}');"
-                                                            type="submit">{{ __('home.delete') }}</button> --}}
-                                                            <button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#basicModal"> {{ __('home.delete') }}</button>
-
-
+                                                            <button type="submit" onclick="return confirm('{{ __('home.Are you sure to delete') }}');" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#basicModal"> {{ __('home.delete') }}</button>
                                                         {!! Form::close() !!}
                                                     @endcan
                                                     @can('group-edit')
@@ -205,12 +133,9 @@
                                                             href="{{ route('groups.edit', $group->id) }}">{{ __('home.edit') }}</a>
                                                     @endcan
                                                     {!! Form::close() !!}
-
-
                                                 </div>
                                             </div>
                                         </td>
-
                                     </tr>
                                 @empty
                                     <div class="alert alert-danger">
@@ -235,5 +160,5 @@
     <script src="{{ asset('admin/vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('admin/js/plugins-init/datatables.init.js') }}"></script>
     <script src="{{ asset('admin/vendor/owl-carousel/owl.carousel.js') }}"></script>
-    <script src="{{ asset('admin/js/dashboard/instructor-student.js') }}"></script>
+    <script src="{{ asset('admin/js/dashboard/instructor-instructors.js') }}"></script>
 @endsection

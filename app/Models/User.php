@@ -65,10 +65,23 @@ class User extends Authenticatable implements HasMedia
         return $this->belongsTo(Category::class);
     }
 
+
     public function groups()
     {
-        return $this->belongsToMany(Group::class,'group_student','student_id','group_id');
+        return $this->belongsToMany(Group::class,
+            'group_student',
+            'student_id',
+            'group_id');
     }
+
+    public function groupInstructor()
+    {
+        return $this->belongsToMany(Group::class,
+            'group_user',
+            'user_id',
+            'group_id');
+    }
+
 
     public function subjects()
     {
@@ -82,12 +95,18 @@ class User extends Authenticatable implements HasMedia
 
     public function courseInstructor()
     {
-        return $this->belongsToMany(Course::class,'course_instructor','course_id','instructor_id');
+        return $this->belongsToMany(Course::class,
+            'course_instructor',
+            'course_id',
+            'instructor_id');
     }
 
     public function courseStudent()
     {
-        return $this->belongsToMany(Course::class,'course_user','course_id','student_id');
+        return $this->belongsToMany(Course::class,
+            'course_user',
+            'course_id',
+            'student_id');
     }
 
     public function salaries()

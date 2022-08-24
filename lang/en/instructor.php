@@ -2,6 +2,7 @@
 
 return [
     'instructor'                           => 'Instructor',
+    'no instructor'                        => 'No Instructor',
     'instructors'                          => 'Instructors',
     'all instructors'                      => 'All Instructors',
     'create instructor'                    => 'Create Instructor',

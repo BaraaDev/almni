@@ -2,6 +2,8 @@
 
 return [
     'group'                            => 'Group',
+    'start date'                       => 'Start Date',
+    'Total Groups'                       => 'Total Groups',
     'groups'                           => 'Groups',
     'all groups'                       => 'All Groups',
     'create group'                     => 'Create Group',

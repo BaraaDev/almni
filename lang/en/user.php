@@ -6,7 +6,7 @@ return [
     'users waiting'                      => 'Users Waiting',
     'All users'                          => 'All Users',
     'Add users'                          => 'Add Users',
-    'edit profile'                       => 'Edit Profile',
+    'profile'                            => 'Profile',
     'edit users'                         => 'Edit Users',
     'edit user'                          => 'Edit User',
     'update user'                        => 'Update User',

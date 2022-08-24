@@ -16,7 +16,9 @@ return new class extends Migration
         Schema::create('courses', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('title');
-            $table->text('description');
+            $table->string('slug');
+            $table->longText('description');
+            $table->text('short_description');
             $table->date('course_date');
             $table->decimal('price');
             $table->decimal('discount')->nullable();

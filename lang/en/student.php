@@ -5,7 +5,7 @@ return [
     'students'                  => 'Students',
     'all students'              => 'All Students',
     'arrival'                   => 'Arrival',
-    'missed'                 => 'Missed',
+    'missed'                    => 'Missed',
     'Add students'              => 'Add Students',
     'waiting student'           => 'Waiting Students',
     'Student ID'                => 'Student ID',

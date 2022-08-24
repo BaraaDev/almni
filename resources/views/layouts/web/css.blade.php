@@ -12,3 +12,5 @@
         border-radius: 5px;
     }
 </style>
+@yield('style')
+@livewireStyles

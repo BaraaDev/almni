@@ -11,7 +11,7 @@
                             <a href="{{route('home')}}">{{__('home.home')}}</a>
                         </div>
 
-                        <div class="breadcrumbs__item active">
+                        <div class="breadcrumbs__item">
                             <a href="{{route('courses')}}">{{__('course.all courses')}}</a>
                         </div>
 
@@ -637,7 +637,7 @@
                 <div class="accordion__item">
                     <div class="row y-gap-20 pb-30 items-center justify-between">
                         <div class="col-auto">
-                            <div class="text-14 lh-12">{{__('home.Showing')}} <span class="text-dark-1 fw-500">{{$courses->count()}}</span>
+                            <div class="text-14 lh-12">{{__('home.Showing')}} <span class="text-dark-1 fw-500">{{\App\Models\Course::count()}}</span>
                             </div>
                         </div>
                     </div>
@@ -648,10 +648,10 @@
                 @forelse($courses as $course)
                 <div data-anim-child="slide-up delay-{{$loop->iteration}}" class="col-lg-4 col-md-6">
 
-                    <a href="javascript:void(0);" class="coursesCard -type-1 rounded-8 shadow-3 bg-white">
+                    <a href="{{route('course',$course->slug)}}" class="coursesCard -type-1 rounded-8 shadow-3 bg-white">
                         <div class="relative">
                             <div class="coursesCard__image rounded-top-8 overflow-hidden">
-                                <img class="w-1/1" src="{{$course->photo}}" alt="image">
+                                <img class="w-1/1" src="{{$course->photo}}" alt="{{$course->title ?? ''}}">
                                 <div class="coursesCard__image_overlay rounded-top-8"></div>
                             </div>
                             <div class="d-flex absolute-full-center z-3 justify-between py-10 px-10">
@@ -675,7 +675,7 @@
                                     <div class="mr-8">
                                         <img src="{{asset('web/img/coursesCards/icons/2.svg')}}" alt="icon">
                                     </div>
-                                    <div class="text-14 lh-1">3h 56m</div>
+                                    <div class="text-14 lh-1">{{$course->course_date}}</div>
                                 </div>
 
                                 <div class="d-flex items-center">
@@ -688,10 +688,12 @@
                             </div>
 
                             <div class="coursesCard-footer">
-                                <div class="coursesCard-footer__author">
-                                    <img src="{{asset('web/img/general/avatar-1.png')}}" alt="image">
-                                    <div>Ali Tufan</div>
-                                </div>
+                                @foreach($course->courseInstructor->slice(0,1) as $instructor)
+                                    <div class="coursesCard-footer__author">
+                                        <img src="{{$instructor->photo}}" alt="{{$instructor->name}}">
+                                        <div>{{$instructor->name}}</div>
+                                    </div>
+                                @endforeach
 
                                 <div class="coursesCard-footer__price">
                                     <div>{{$course->discount . ' ' . __('home.le')}}</div>

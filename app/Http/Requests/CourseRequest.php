@@ -16,6 +16,7 @@ class CourseRequest extends FormRequest
         return true;
     }
 
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -26,6 +27,7 @@ class CourseRequest extends FormRequest
         return [
             'title'              => 'required|string|min:3|max:199',
             'description'        => 'required|string|max:600',
+            'short_description'  => 'nullable|string|max:100',
             'course_date'        => 'required|date',
             'price'              => 'required|numeric',
             'discount'           => 'required|numeric',

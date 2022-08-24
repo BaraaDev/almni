@@ -45,6 +45,7 @@
                                     <th>#</th>
                                     <th>{{__('user.name')}}</th>
                                     <th>{{__('subject.subject')}}</th>
+                                    <th>{{__('home.icon')}}</th>
                                     <th>{{__('home.date')}}</th>
                                     <th class="text-center">{{__('home.action')}}</th>
                                 </tr>
@@ -60,6 +61,7 @@
                                         </td>
 
                                         <td>{{$category->subject->name ?? ''}}</td>
+                                        <td>{{$category->icon}}</td>
                                         <td>{{$category->created_at->translatedFormat('M d, Y')}}</td>
 
                                         <td class="text-center">

@@ -181,6 +181,7 @@ return [
         'short_description'     => 'Short Description',
         'course_id'             => 'Course',
         'user_id'               => 'User',
+        'classroom_id'          => 'Classroom',
     ],
 
 ];

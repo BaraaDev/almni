@@ -9,6 +9,7 @@ use App\Models\Subject;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Nette\Utils\Random;
+use Illuminate\Support\Str;
 
 class CourseController extends Controller
 {
@@ -83,7 +84,8 @@ class CourseController extends Controller
     public function store(CourseRequest $request)
     {
         $course = Course::create($request->all());
-        $course->courseInstructor()->sync($request->course_id);
+        $course->slug  = Str::slug($request->title);
+        $course->courseInstructor()->sync($request->instructor_id);
         if($request->hasFile('image')) {
             $course
                 ->addMediaFromRequest('image')
@@ -138,7 +140,8 @@ class CourseController extends Controller
     {
         $course = Course::findOrFail($id);
         $course->update($request->all());
-
+        $course->slug  = Str::slug($request->title);
+        $course->courseInstructor()->sync($request->instructor_id);
         if($request->file('image')) {
             $course
                 ->clearMediaCollection('course')

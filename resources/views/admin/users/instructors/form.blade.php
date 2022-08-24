@@ -46,6 +46,17 @@
         @error('subject_id') <div class="invalid-feedback">{{$message}}</div> @enderror
     </div>
 
+
+    <div class="mb-3 col-6">
+        <label class="form-label">{{__('group.groups')}}</label>
+        @inject('group','App\Models\Group')
+        {!! Form::select('group_id[]',$group->status('active')->pluck('name','id'),$model->groupInstructor->pluck('id')->all(),[
+            'class' => 'js-example-programmatic-multi default-select form-control',
+            'multiple'
+        ]) !!}
+        @error('group_id') <div class="invalid-feedback">{{$message}}</div> @enderror
+    </div>
+
     <div class="mb-3 col-4">
         <label class="form-label">{{__('home.phone')}} <span style="color: red">*</span></label>
         <input type="tel" name="phone" class="form-control  @error('phone') is-invalid @enderror" id="validationNumber" placeholder="{{__('user.Enter your phone number')}}" value="{{Request::old('phone') ? Request::old('phone') : $model->phone}}" required>
