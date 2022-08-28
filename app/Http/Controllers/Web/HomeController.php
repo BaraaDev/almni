@@ -21,7 +21,8 @@ class HomeController extends Controller
         SEOTools::jsonLd()->addImage(asset('web/img/general/logo-full.png'));
         $categories = Category::with('courses')->limit('4')->get();
         $levels = Level::limit('4')->get();
-        return view('web.home',compact('categories','levels'));
+        $instructors = User::status('active')->type('instructor')->limit(4)->get();
+        return view('web.home',compact('categories','levels','instructors'));
     }
 
     public function about()

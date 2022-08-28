@@ -67,7 +67,7 @@
 
                 @foreach($instructors as $instructor)
                 <div class="col-lg-3 col-md-6">
-                    <div data-anim-child="slide-left delay-2" class="teamCard -type-1">
+                    <div data-anim-child="slide-left delay-{{$loop->iteration}}" class="teamCard -type-1">
                         <div class="teamCard__image">
                             <img src="{{$instructor->photo}}" alt="{{$instructor->name}}">
                         </div>

@@ -26,5 +26,6 @@ return [
     'no courses'                             => 'No Courses',
     'Course Date'                            => 'Course Date',
     'details this course'                    => 'Details This Course',
+    'Watch our courses'                    => 'Watch our courses',
 
 ];
