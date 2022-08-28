@@ -36,6 +36,8 @@ class StudentRequest extends FormRequest
             'classroom_id'        => 'nullable|exists:classrooms,id',
             'photo'               => 'nullable|image:jpg, jpeg, png, bmp, gif, svg,webp',
             'gender'              => 'required|string|in:male,female',
+            'bio'                 => 'nullable|string|max:255',
+            'notes'               => 'nullable|string|max:255',
             'status'              => 'required|string|in:active,stopped,waiting',
         ];
     }
@@ -57,6 +59,8 @@ class StudentRequest extends FormRequest
             'group_id'            => 'nullable|exists:groups,id',
             'photo'               => 'nullable|image:jpg, jpeg, png, bmp, gif, svg,webp',
             'gender'              => 'required|string|in:male,female',
+            'bio'                 => 'nullable|string|max:255',
+            'notes'               => 'nullable|string|max:600',
             'status'              => 'required|string|in:active,stopped,waiting',
         ];
     }

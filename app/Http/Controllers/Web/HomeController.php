@@ -69,16 +69,14 @@ class HomeController extends Controller
         return view('web.category',compact('category'));
     }
 
-    public function profile(User $user)
+    public function instructors()
     {
-        if (auth()->user()->userType == 'instructors'){
-            return view('web.students.profile', compact('user'));
-        } elseif (auth()->user()->userType == 'instructor')
-        {
-            return view('web.instructors.dashboard',compact('user'));
-        } else {
-            abort('404');
-        }
+        $instructors = User::status('active')->type('instructor')->paginate(50);
+        SEOTools::setTitle('Instructors');
+        SEOTools::setDescription('faculty of school on the 3lmniAcademy website | أعضاء هيئة التدريس في موقع أكاديمية علمني');
+        SEOTools::opengraph()->setUrl(route('instructors'));
+        SEOTools::setCanonical(route('instructors'));
+        return view('web.instructors',compact('instructors'));
     }
 
 }

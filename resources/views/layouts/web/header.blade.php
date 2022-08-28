@@ -3,59 +3,41 @@
         <div class="row justify-between items-center">
             <div class="col-auto">
                 <div class="header-left d-flex items-center">
-
                     <div class="header__logo pr-30 xl:pr-20 md:pr-0">
-                        <a data-barba href="index.html">
-                            <img src="{{asset('web/img/general/logo-full.png')}}" alt="logo">
+                        <a data-barba href="{{route('home')}}">
+                            <img src="{{asset('web/img/general/logo-full.png')}}" alt="اكاديمية علمني | 3lmnia cademy">
                         </a>
                     </div>
                     <div class="header-menu js-mobile-menu-toggle pl-30 xl:pl-20">
                         <div class="header-menu__content">
                             <div class="mobile-bg js-mobile-bg"></div>
+                            @guest
                             <div class="d-none xl:d-flex items-center px-20 py-20 border-bottom-light">
-                                <a href="login.html" class="text-dark-1">Log in</a>
-                                <a href="signup.html" class="text-dark-1 ml-30">Sign Up</a>
+                                <a href="{{route('signin')}}" class="text-dark-1">{{__('home.signin')}}</a>
+                                <a href="{{route('signup')}}" class="text-dark-1 ml-30">{{__('home.signup')}}</a>
                             </div>
+                            @else
+                            <div class="d-none xl:d-flex items-center px-20 py-20 border-bottom-light">
+                                <a href="{{route('web.profile')}}" class="text-dark-1 ml-30">{{__('user.profile')}}</a>
+                            </div>
+                            @endguest
                             <div class="menu js-navList">
                                 <ul class="menu__nav text-dark-1 -is-active">
                                     <li>
-                                        <a href="{{route('home')}}">Home</a>
+                                        <a href="{{route('home')}}">{{__('home.home')}}</a>
                                     </li>
-                                    <li class="menu-item-has-children">
-                                        <a href="{{route('courses')}}">{{__('course.course')}}<div class="icon-chevron-right text-11"></div></a>
-                                        <ul class="subnav">
-                                            <li>
-                                                <a href="{{route('courses')}}">{{__('course.all courses')}}</a>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:void(0);">All Instructors</a>
-                                            </li>
+                                    <li>
+                                        <a href="{{route('courses')}}">{{__('course.courses')}}</a>
+                                    </li>
 
-                                        </ul>
+                                    <li>
+                                        <a href="{{route('instructors')}}">{{__('instructor.instructors')}}</a>
                                     </li>
                                     <li>
                                         <a href="{{route('about')}}">{{__('home.About')}}</a>
                                     </li>
                                     <li>
                                         <a href="{{route('contact')}}">{{__('home.Contact')}}</a>
-                                    </li>
-
-                                    <li>
-                                        <a href="become-instructor.html">Become Instructor</a>
-                                    </li>
-                                    <li class="menu-item-has-children">
-                                        <a href="#">Profile<i class="fas ms-2 fa-user"></i><div class="icon-chevron-right text-11"></div></a>
-                                        <ul class="subnav">
-                                            <li class="menu__backButton js-nav-list-back">
-                                                <a href="#"><i class="icon-chevron-left text-13 mr-10"></i> Profile </a>
-                                            </li>
-                                            <li>
-                                                <a href="student.html">Student</a>
-                                            </li>
-                                            <li>
-                                                <a href="instructor.html">Instructor</a>
-                                            </li>
-                                        </ul>
                                     </li>
                                 </ul>
                             </div>
@@ -88,7 +70,6 @@
                                     <a href="tel:+201016600567" class="d-flex items-center justify-center rounded-full size-40">
                                         <i class="fas fa-phone"></i>
                                     </a>
-
                                 </div>
                             </div>
                         </div>
@@ -98,10 +79,8 @@
                                 <div class="icon-close text-dark-1 text-16"></div>
                             </div>
                         </div>
-
                         <div class="header-menu-bg"></div>
                     </div>
-
                 </div>
             </div>
 
@@ -109,110 +88,33 @@
             <div class="col-auto">
                 <div class="header-right d-flex items-center">
                     <div class="header-right__icons text-white d-flex items-center">
-                        <div class="header-search-field">
-                            <form action="#">
-                                <div class="header-search-field__group">
-                                    <input type="text" placeholder="What do you want to learn?">
-                                    <button type="submit">
-                                        <i class="icon icon-search"></i>
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
-
-
-                        <div class="relative -after-border pl-20 sm:pl-15">
-                            <button class="d-flex items-center text-dark-1" data-el-toggle=".js-cart-toggle">
-                                <i class="text-20 icon icon-basket"></i>
-                            </button>
-
-                            <div class="toggle-element js-cart-toggle">
-                                <div class="header-cart bg-white -dark-bg-dark-1 rounded-8">
-                                    <div class="px-30 pt-30 pb-10">
-
-                                        <div class="row justify-between x-gap-40 pb-20">
-                                            <div class="col">
-                                                <div class="row x-gap-10 y-gap-10">
-                                                    <div class="col-auto">
-                                                        <img src="{{asset('web/img/menus/cart/1.png')}}" alt="image">
-                                                    </div>
-
-                                                    <div class="col">
-                                                        <div class="text-dark-1 lh-15">The Ultimate Drawing Course Beginner to Advanced...</div>
-
-                                                        <div class="d-flex items-center mt-10">
-                                                            <div class="lh-12 fw-500 line-through text-light-1 mr-10">$179</div>
-                                                            <div class="text-18 lh-12 fw-500 text-dark-1">$79</div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-auto">
-                                                <button><img src="{{asset('web/img/menus/close.svg')}}" alt="icon"></button>
-                                            </div>
-                                        </div>
-
-                                        <div class="row justify-between x-gap-40 pb-20">
-                                            <div class="col">
-                                                <div class="row x-gap-10 y-gap-10">
-                                                    <div class="col-auto">
-                                                        <img src="{{asset('web/img/menus/cart/2.png')}}" alt="image">
-                                                    </div>
-
-                                                    <div class="col">
-                                                        <div class="text-dark-1 lh-15">User Experience Design Essentials - Adobe XD UI UX...</div>
-
-                                                        <div class="d-flex items-center mt-10">
-                                                            <div class="lh-12 fw-500 line-through text-light-1 mr-10">$179</div>
-                                                            <div class="text-18 lh-12 fw-500 text-dark-1">$79</div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-auto">
-                                                <button><img src="{{asset('web/img/menus/close.svg')}}" alt="icon"></button>
-                                            </div>
-                                        </div>
-
-                                    </div>
-
-                                    <div class="px-30 pt-20 pb-30 border-top-light">
-                                        <div class="d-flex justify-between">
-                                            <div class="text-18 lh-12 text-dark-1 fw-500">Total:</div>
-                                            <div class="text-18 lh-12 text-dark-1 fw-500">$659</div>
-                                        </div>
-
-                                        <div class="row x-gap-20 y-gap-10 pt-30">
-                                            <div class="col-sm-6">
-                                                <button class="button py-20 -dark-1 text-white -dark-button-white col-12">View Cart</button>
-                                            </div>
-                                            <div class="col-sm-6">
-                                                <button class="button py-20 -purple-1 text-white col-12">Checkout</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-
                         <div class="d-none xl:d-block pl-20 sm:pl-15">
                             <button class="text-dark-1 items-center" data-el-toggle=".js-mobile-menu-toggle">
                                 <i class="text-11 icon icon-mobile-menu"></i>
                             </button>
                         </div>
-
                     </div>
-
+                    @guest
                     <div class="header-right__buttons d-flex items-center ml-30 xl:ml-20 lg:d-none">
-                        <a href="login.html" class="button -underline text-purple-1">Log in</a>
-                        <a href="signup.html" class="button h-50 px-30 -purple-1 -rounded text-white ml-20">Sign up</a>
+                        <a href="{{route('signin')}}" class="button -underline text-purple-1">{{__('home.signin')}}</a>
+                        <a href="{{route('signup')}}" class="button h-50 px-30 -purple-1 -rounded text-white ml-20">{{__('home.signup')}}</a>
                     </div>
+                    @else
+                    <div class="header-right__buttons d-flex items-center ml-30 xl:ml-20 lg:d-none">
+                        <a href="{{ route('logout') }}" class="button -underline text-purple-1"
+                           onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{__('home.logout')}}</a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
+                        @if(auth()->user()->userType == 'admin')
+                        <a href="{{route('dashboard')}}" class="button h-50 px-30 -purple-1 -rounded text-white ml-20">{{__('home.Dashboard')}}</a>
+                        @else
+                        <a href="{{route('web.profile')}}" class="button h-50 px-30 -purple-1 -rounded text-white ml-20">{{__('user.profile')}}</a>
+                        @endif
+                    </div>
+                    @endguest
                 </div>
             </div>
-
         </div>
     </div>
 </header>

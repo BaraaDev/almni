@@ -68,6 +68,12 @@
         @error('bio') <div class="invalid-feedback">{{$message}}</div> @enderror
     </div>
 
+    <div class="mb-3">
+        <label class="form-label">{{__('user.notes')}}</label>
+        <textarea name="notes" class="form-control @error('notes') is-invalid @enderror" rows="2" id="comment" placeholder="{{__('user.notes')}}">{{Request::old('notes') ? Request::old('notes') : $model->notes}}</textarea>
+        @error('notes') <div class="invalid-feedback">{{$message}}</div> @enderror
+    </div>
+
     <div class="mb-3 col-6">
         <label for="file">{{__('home.add image')}} <span style="color: red">*</span></label>
         <div class="form-file">

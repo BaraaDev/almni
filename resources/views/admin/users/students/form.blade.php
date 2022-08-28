@@ -51,6 +51,17 @@
         @error('whatsApp') <div class="invalid-feedback">{{$message}}</div> @enderror
     </div>
 
+    <div class="mb-3">
+        <label class="form-label">{{__('user.bio')}}</label>
+        <textarea name="bio" class="form-control @error('bio') is-invalid @enderror" rows="2" id="comment" placeholder="{{__('user.bio')}}">{{Request::old('bio') ? Request::old('bio') : $model->bio}}</textarea>
+        @error('bio') <div class="invalid-feedback">{{$message}}</div> @enderror
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">{{__('user.notes')}}</label>
+        <textarea name="notes" class="form-control @error('notes') is-invalid @enderror" rows="2" id="comment" placeholder="{{__('user.notes')}}">{{Request::old('notes') ? Request::old('notes') : $model->notes}}</textarea>
+        @error('notes') <div class="invalid-feedback">{{$message}}</div> @enderror
+    </div>
     <div class="mb-3 col-12">
         <label for="file">{{__('home.add image')}}</label>
         <div class="form-file">

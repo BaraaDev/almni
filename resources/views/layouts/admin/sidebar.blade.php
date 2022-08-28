@@ -44,7 +44,7 @@
                     <li><a href="{{route('students.index')}}">{{__('student.all students')}}</a></li>
                     @endcan
                     <li><a href="{{route('students.create')}}">{{__('student.Add students')}}</a></li>
-                    <li><a href="{{route('participants.waiting')}}">{{__('student.waiting instructors')}}</a></li>
+                    <li><a href="{{route('participants.waiting')}}">{{__('student.waiting student')}}</a></li>
                 </ul>
             </li>{{-- End students --}}
             @endcan

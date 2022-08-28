@@ -21,9 +21,9 @@ class User extends Authenticatable implements HasMedia
      *
      * @var array<int, string>
      */
-    protected $fillable = ['name','username', 'nickname', 'email', 'bio', 'age', 'job', 'phone', 'phone2', 'address', 'postal_code',
+    protected $fillable = ['name','username', 'nickname', 'email', 'bio','notes', 'age', 'job', 'phone', 'phone2', 'address', 'postal_code',
         'location', 'city_id', 'level_id','classroom_id','category_id','life_stage_id', 'test_date','userType','status','whatsApp',
-        'facebook','twitter','linkedin','AskFM','YouTube','website','instagram','salary','hourly_time','gender' ];
+        'facebook','twitter','linkedin','AskFM','YouTube','website','instagram','telegram','salary','hourly_time','gender'];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -97,8 +97,8 @@ class User extends Authenticatable implements HasMedia
     {
         return $this->belongsToMany(Course::class,
             'course_instructor',
-            'course_id',
-            'instructor_id');
+            'instructor_id',
+            'course_id');
     }
 
     public function courseStudent()

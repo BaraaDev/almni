@@ -28,17 +28,12 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 */
 Route::group([
     'prefix' => LaravelLocalization::setLocale(),
-    'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath','auth']], function () {
+    'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath','auth','admin']], function () {
     Route::group(['prefix' => 'dashboard'], function (){
         Route::get('/', [HomeController::class, 'index'])->name('dashboard');
-
-
         Route::get('/activities', [HomeController::class, 'activity_log'])->name('activity_log');
-
-
         Route::resource('/users', UserController::class);
         Route::resource('/students', StudentController::class);
-
         Route::get('/participants/waiting', [StudentController::class,'waiting'])->name('participants.waiting');
         Route::resource('/cities', CityController::class);
         Route::resource('/levels', LevelController::class);

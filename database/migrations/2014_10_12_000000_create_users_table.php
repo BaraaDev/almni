@@ -22,6 +22,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable();
             $table->text('bio')->nullable();
+            $table->text('notes')->nullable();
             $table->string('age')->nullable();
             $table->string('job')->nullable();
             $table->string('phone')->nullable();
@@ -43,13 +44,14 @@ return new class extends Migration
             $table->string('linkedin')->nullable();
             $table->string('AskFM')->nullable();
             $table->string('whatsApp')->nullable();
+            $table->string('telegram')->nullable();
             $table->string('YouTube')->nullable();
             $table->string('website')->nullable();
             $table->decimal('salary')->nullable();
             $table->decimal('salary_time')->nullable();
             $table->string('api_token','100')->nullable();
-            $table->enum('userType',['admin','instructors','instructor'])->nullable();
-            $table->enum('status',['active','stopped','waiting']);
+            $table->enum('userType',['admin','student','instructor'])->default('student');
+            $table->enum('status',['active','stopped','waiting'])->default('waiting');
             $table->enum('gender',['male','female'])->nullable();
             $table->rememberToken();
             $table->timestamps();

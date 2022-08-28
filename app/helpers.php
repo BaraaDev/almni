@@ -31,3 +31,26 @@ function numtoks($number)
     }
     return round($number, 1) . $units[$i];
 }
+
+
+    if(! function_exists('prefixActive')){
+        function prefixActive($prefixName)
+        {
+            return	request()->route()->getPrefix() == $prefixName ? '-is-active' : '';
+        }
+    }
+
+    if(! function_exists('prefixBlock')){
+        function prefixBlock($prefixName)
+        {
+            return	request()->route()->getPrefix() == $prefixName ? 'block' : 'none';
+        }
+    }
+
+    if(! function_exists('routeActive')){
+        function routeActive($routeName)
+        {
+            return	request()->routeIs($routeName) ? '-is-active' : '';
+        }
+    }
+

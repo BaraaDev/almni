@@ -7148,7 +7148,10 @@ width: 80px;
   padding-top: 90px;
   padding-bottom: 40px;
 }
-
+.page-header__img img{
+    width: 150px;
+    border-radius: 25px;
+}
 @media (max-width: 767px) {
   .page-header.-type-1 {
     padding-top: 60px;
