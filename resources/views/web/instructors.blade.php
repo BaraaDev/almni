@@ -65,7 +65,7 @@
 
             <div class="row y-gap-30">
 
-                @foreach($instructors as $instructor)
+                @forelse($instructors as $instructor)
                 <div class="col-lg-3 col-md-6">
                     <div data-anim-child="slide-left delay-{{$loop->iteration}}" class="teamCard -type-1">
                         <div class="teamCard__image">
@@ -88,7 +88,11 @@
                         </div>
                     </div>
                 </div>
-                @endforeach
+                @empty
+                    <div class="alert alert-danger">
+                        {{__('home.There is no data')}}.
+                    </div>
+                @endforelse
             </div>
 {{--            {{$instructors->links('pagination::simple-default')}}--}}
 

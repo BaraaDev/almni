@@ -5,7 +5,6 @@
         <div class="dashboard__sidebar scroll-bar-1">
             @include('layouts.web.instructors.sidebar')
         </div>
-
         <div class="dashboard__main">
             <div class="dashboard__content bg-light-4">
                 <div class="row pb-50 mb-10">
@@ -13,7 +12,6 @@
                         <h1 class="text-30 lh-12 fw-700">{{__('home.Settings')}}</h1>
                     </div>
                 </div>
-
                 <div class="row y-gap-30">
                     <div class="col-12">
                         <div class="rounded-16 bg-white -dark-bg-dark-1 shadow-4 h-100">
@@ -25,7 +23,6 @@
                                     <button class="tabs__button text-light-1 js-tabs-button" data-tab-target=".-tab-item-2" type="button">
                                         {{__('user.password')}}
                                     </button>
-
                                 </div>
 
                                 <div class="tabs__content py-30 px-30 js-tabs-content">
@@ -84,7 +81,6 @@
                                                     @enderror
                                                 </div>
 
-
                                                 <div class="col-md-6">
                                                     <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">{{__('home.Postal Code')}} <span style="color: red">*</span></label>
                                                     <input type="text" class="form-control @error('postal_code') is-invalid @enderror" name="postal_code" autocomplete="off" placeholder="{{__('home.Enter Postal Code')}}" value="{{Request::old('postal_code') ? Request::old('postal_code') : $user->postal_code}}">
@@ -95,9 +91,7 @@
                                                     @enderror
                                                 </div>
 
-
                                                 <div class="col-md-6">
-
                                                     <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">{{__('city.cities')}}<span style="color: red">*</span></label>
                                                     @inject('city','App\Models\City')
                                                     {!! Form::select('city_id',$city->pluck('city','id'),Request::old('city_id') ? Request::old('city_id') :  $user->city_id ,[
@@ -105,7 +99,6 @@
                                                         'placeholder' => __('home.please choose')
                                                     ]) !!}
                                                     @error('city_id') <div class="invalid-feedback">{{$message}}</div> @enderror
-
                                                 </div>
 
                                                 <div class="col-md-6">
@@ -118,7 +111,6 @@
                                                     @enderror
                                                 </div>
 
-
                                                 <div class="col-md-6">
                                                     <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">{{__('home.facebook')}}</label>
                                                     <input type="text" class="form-control @error('facebook') is-invalid @enderror" name="facebook" autocomplete="off" placeholder="{{__('home.username facebook')}}" value="{{Request::old('facebook') ? Request::old('facebook') : $user->facebook}}">
@@ -129,7 +121,6 @@
                                                     @enderror
                                                 </div>
 
-
                                                 <div class="col-md-6">
                                                     <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">{{__('home.instagram')}}</label>
                                                     <input type="text" class="form-control @error('instagram') is-invalid @enderror" name="instagram" autocomplete="off" placeholder="{{__('home.username instagram')}}" value="{{Request::old('instagram') ? Request::old('instagram') : $user->instagram}}">
@@ -139,7 +130,6 @@
                                                     </span>
                                                     @enderror
                                                 </div>
-
 
                                                 <div class="col-md-6">
                                                     <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">{{__('home.linkedin')}}</label>
@@ -163,13 +153,14 @@
 
                                                 <div class="col-md-6">
                                                     <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">{{__('home.telegram')}}</label>
-                                                    <input type="text" class="form-control @error('telegram') is-invalid @enderror" name="telegram" autocomplete="off" placeholder="{{__('home.username telegram')}}" value="{{Request::old('telegram') ? Request::old('telegram') : $user->telegram}}">\
+                                                    <input type="text" class="form-control @error('telegram') is-invalid @enderror" name="telegram" autocomplete="off" placeholder="{{__('home.username telegram')}}" value="{{Request::old('telegram') ? Request::old('telegram') : $user->telegram}}">
                                                     @error('telegram')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
                                                     </span>
                                                     @enderror
                                                 </div>
+
                                                 <div class="col-12">
                                                     <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Personal info</label>
                                                     <textarea name="bio" class="form-control @error('bio') is-invalid @enderror" placeholder="Text..." rows="7">{{Request::old('bio') ? Request::old('bio') : $user->bio}}</textarea>
@@ -179,7 +170,6 @@
                                                     </span>
                                                     @enderror
                                                 </div>
-
 
                                                 <div class="col-12">
                                                     <button type="submit" class="button -md -purple-1 text-white">Update Profile</button>
@@ -194,14 +184,12 @@
                                             <div class="col-md-7">
                                                 <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">{{__('user.current password')}}</label>
                                                 <input class="form-control @error('current_password') is-invalid @enderror" type="password" name="current_password" required placeholder="{{__('user.enter current password')}}">
-
                                                 @error('current_password')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
                                                 @enderror
                                             </div>
-
 
                                             <div class="col-md-7">
                                                 <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">{{__('user.New password')}}</label>
@@ -213,7 +201,6 @@
                                                 </span>
                                                 @enderror
                                             </div>
-
 
                                             <div class="col-md-7">
                                                 <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">{{__('user.Confirm New Password')}}</label>
@@ -230,9 +217,7 @@
                         </div>
                     </div>
                 </div>
-
             </div>
-
             @include('layouts.web.instructors.footer')
         </div>
     </div>

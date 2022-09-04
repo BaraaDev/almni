@@ -119,35 +119,35 @@
                             </span>
                             <input type="text" class="form-control" id="tableSearchBar" placeholder="Search here...">
                             <select class="form-select filter" aria-label="Default select example" id="filter-class">
-                                <option>{{__('classrooms.classrooms')}}</option>
+                                <option value="0">{{__('classrooms.classrooms')}}</option>
                                 <option value="No Class">{{__('classrooms.no classrooms')}}</option>
                                 @foreach($classes as $class)
                                     <option value="{{$class->name}}">{{$class->name}}</option>
                                 @endforeach
                             </select>
                             <select class="form-select filter" aria-label="Default select example" id="filter-level">
-                                <option>{{__('level.levels')}}</option>
+                                <option value="0">{{__('level.levels')}}</option>
                                 <option value="No Level">{{__('level.no level')}}</option>
                                 @foreach($levels as $level)
                                     <option value="{{$level->level}}">{{$level->level}}</option>
                                 @endforeach
                             </select>
                             <select class="form-select filter" aria-label="Default select example" id="filter-lifestage">
-                                <option>{{__('life_stage.life Stages')}}</option>
+                                <option value="0">{{__('life_stage.life Stages')}}</option>
                                 <option value="No lifestage">{{__('life_stage.no life stage')}}</option>
                                 @foreach($life_stages as $life_stage)
                                     <option value="{{$life_stage->stage}}">{{$life_stage->stage}}</option>
                                 @endforeach
                             </select>
                             <select class="form-select filter" aria-label="Default select example" id="filter-category">
-                                <option>{{__('category.categories')}}</option>
+                                <option value="0">{{__('category.categories')}}</option>
                                 <option value="no category">{{__('category.no category')}}</option>
                                 @foreach($categories as $category)
                                     <option value="{{$category->name}}">{{$category->name}}</option>
                                 @endforeach
                             </select>
                             <select class="form-select filter" aria-label="Default select example" id="filter-sort">
-                                <option>Status</option>
+                                <option value="0">Status</option>
                                 <option value="Active">Active</option>
                                 <option value="Waiting">Waiting</option>
                                 <option value="Stopped">Stopped</option>
@@ -176,7 +176,7 @@
                                 <tr>
                                     <td>
                                         <div class="d-flex align-items-center">
-                                            <img src="{{$student->photo}}" alt="">
+                                            <img data-src="{{$student->photo}}" class="lazyload" alt="">
                                             <h4 class="mb-0 fs-16 font-w500">{{$student->name}}</h4>
                                         </div>
                                     </td>
@@ -248,7 +248,7 @@
     <script src="{{asset('admin/vendor/datatables/js/jquery.dataTables.min.js')}}"></script>
     <script src="{{asset('admin/js/plugins-init/datatables.init.js')}}"></script>
     <script src="{{asset('admin/vendor/owl-carousel/owl.carousel.js')}}"></script>
-    <script src="{{asset('admin/js/dashboard/instructor-instructors.js')}}"></script>
+    <script src="{{asset('admin/js/dashboard/instructor-student.js')}}"></script>
 
     <script>
         $(document).ready(function() {

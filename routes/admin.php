@@ -34,6 +34,7 @@ Route::group([
         Route::get('/activities', [HomeController::class, 'activity_log'])->name('activity_log');
         Route::resource('/users', UserController::class);
         Route::resource('/students', StudentController::class);
+        Route::get('/participants/delete', [StudentController::class,'delete'])->name('participants.delete');
         Route::get('/participants/waiting', [StudentController::class,'waiting'])->name('participants.waiting');
         Route::resource('/cities', CityController::class);
         Route::resource('/levels', LevelController::class);

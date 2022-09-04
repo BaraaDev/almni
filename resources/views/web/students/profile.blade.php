@@ -76,6 +76,7 @@
         }
     </style>
 @endsection
+
 @section('content')
     <section data-anim="fade" class="breadcrumbs ">
         <div class="container">
@@ -95,7 +96,6 @@
             </div>
         </div>
     </section>
-
 
     <section class="page-header -type-3">
         <div class="page-header__bg bg-purple-1"></div>
@@ -133,7 +133,6 @@
                                 @if(!empty(auth()->user()->linkedin))  <a href="https://linkedin.com/{{auth()->user()->linkedin}}"><i class="fa fa-linkedin"></i></a> @endif
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -158,7 +157,6 @@
                                 <h4 class="text-20">{{__('user.bio')}}</h4>
                                 <p class="text-light-1 mt-30"> {{auth()->user()->bio}} </p>
                             </div>
-
                             <div class="tabs__pane -tab-item-2">
                                 <div class="row">
                                     @forelse($user->courseStudent as $course)
@@ -176,12 +174,8 @@
                                             </div>
 
                                             <div class="h-100 pt-20 pb-15 px-30">
-
-
                                                 <div class="text-17 lh-15 fw-500 text-dark-1 mt-10">{{$course->title}}</div>
-
                                                 <div class="d-flex x-gap-10 items-center pt-10">
-
                                                     <div class="d-flex items-center">
                                                         <div class="mr-8">
                                                             <img src="{{asset('web/img/coursesCards/icons/1.svg')}}" alt="icon">
@@ -202,17 +196,16 @@
                                                         </div>
                                                         <div class="text-14 lh-1">{{$course->level->level ?? ''}}</div>
                                                     </div>
-
                                                 </div>
 
                                                 <div class="coursesCard-footer">
-                                                    @foreach($course->courseInstructor->slice(0,1) as $instructor)
+                                                    @forelse($course->courseInstructor->slice(0,1) as $instructor)
                                                         <div class="coursesCard-footer__author">
                                                             <img src="{{$instructor->photo}}" alt="{{$instructor->name}}">
                                                             <div>{{$instructor->name}}</div>
                                                         </div>
-                                                    @endforeach
-
+                                                    @empty
+                                                    @endforelse
                                                     <div class="coursesCard-footer__price">
                                                         <div>{{$course->discount . ' ' . __('home.le')}}</div>
                                                         <div>{{$course->price . ' ' . __('home.le')}}</div>
@@ -220,22 +213,22 @@
                                                 </div>
                                             </div>
                                         </a>
-
                                     </div>
                                     @empty
+                                        <div class="alert alert-danger">
+                                            {{__('home.There is no data')}}.
+                                        </div>
                                     @endforelse
                                 </div>
                             </div>
                             <div class="tabs__pane -tab-item-3">
                                 <div class="row">
-
                                     @forelse($user->groups as $group)
                                     <div class="col-md-6">
                                         <div class="card group-card text-center">
                                             <div class="card-img-top">{{$group->name}}</div>
                                             <div class="card-body">
                                                 <div class="row">
-
                                                     <div class="col-6">
                                                         <div class="box">
                                                             <p class="value-box">{{$group->students->count()}}</p>
@@ -255,7 +248,7 @@
                                                     <div class="col-6">
                                                         <div class="box">
                                                             <p class="value-box">
-                                                                @foreach($group->instructor->slice(0,1) as $user) {{$user->name}} @endforeach
+                                                                @forelse($group->instructor->slice(0,1) as $user) {{$user->name}} @empty @endforelse
                                                             </p>
                                                             <i class="fas fa-user"></i>
                                                             <span class="box-title d-block">{{__('instructor.instructors')}}</span>
@@ -269,18 +262,21 @@
                                                             <span class="box-title d-block">{{__('course.course')}}</span>
                                                         </div>
                                                     </div>
-
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     @empty
+                                        <div class="alert alert-danger">
+                                            {{__('home.There is no data')}}.
+                                        </div>
                                     @endforelse
                                 </div>
                             </div>
                             <div class="tabs__pane -tab-item-4">
                                 <div class="accordion -block-2 text-left js-accordion mt-30">
 
+
                                     <div class="accordion__item">
                                         <div class="accordion__button py-20 px-30 bg-light-4">
                                             <div class="d-flex items-center">
@@ -288,7 +284,7 @@
                                                     <div class="icon" data-feather="chevron-down"></div>
                                                     <div class="icon" data-feather="chevron-up"></div>
                                                 </div>
-                                                <span class="text-17 fw-500 text-dark-1">Quiz</span>
+                                                <span class="text-17 fw-500 text-dark-1">{{__('question.exercises')}}</span>
                                             </div>
                                         </div>
 
@@ -296,6 +292,7 @@
                                             <div class="accordion__content__inner px-30 py-30">
                                                 <div class="y-gap-30">
 
+                                                    @forelse($exercises as $exercise)
                                                     <div class="">
                                                         <div class="d-flex">
                                                             <div class="d-flex justify-center items-center size-30 rounded-full bg-purple-3 mr-10">
@@ -303,50 +300,19 @@
                                                             </div>
 
                                                             <div class="">
-                                                                <div>Introduction to the User</div>
+                                                                <div>{{$exercise->title}}</div>
                                                                 <div class="d-flex x-gap-20 items-center pt-5">
-                                                                    <a href="#" class="text-14 lh-1 text-purple-1 underline">Preview</a>
+                                                                    <a href="{{route('exercises.show',$exercise->id)}}" class="text-14 lh-1 text-purple-1 underline">Preview</a>
                                                                     <a href="#" class="text-14 lh-1 text-purple-1 underline">03:56</a>
                                                                 </div>
                                                             </div>
                                                         </div>
-
                                                     </div>
-
-                                                    <div class="">
-                                                        <div class="d-flex">
-                                                            <div class="d-flex justify-center items-center size-30 rounded-full bg-purple-3 mr-10">
-                                                                <div class="icon-play text-9"></div>
-                                                            </div>
-
-                                                            <div class="">
-                                                                <div>Viewing your prototype on</div>
-                                                                <div class="d-flex x-gap-20 items-center pt-5">
-                                                                    <a href="#" class="text-14 lh-1 text-purple-1 underline">Preview</a>
-                                                                    <a href="#" class="text-14 lh-1 text-purple-1 underline">03:56</a>
-                                                                </div>
-                                                            </div>
+                                                    @empty
+                                                        <div class="alert alert-danger">
+                                                            {{__('home.There is no data')}}
                                                         </div>
-
-                                                    </div>
-
-                                                    <div class="">
-                                                        <div class="d-flex">
-                                                            <div class="d-flex justify-center items-center size-30 rounded-full bg-purple-3 mr-10">
-                                                                <div class="icon-play text-9"></div>
-                                                            </div>
-
-                                                            <div class="">
-                                                                <div>Sharing your design</div>
-                                                                <div class="d-flex x-gap-20 items-center pt-5">
-                                                                    <a href="#" class="text-14 lh-1 text-purple-1 underline">Preview</a>
-                                                                    <a href="#" class="text-14 lh-1 text-purple-1 underline">03:56</a>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                    </div>
-
+                                                    @endforelse
                                                 </div>
                                             </div>
                                         </div>
@@ -359,71 +325,75 @@
                                                     <div class="icon" data-feather="chevron-down"></div>
                                                     <div class="icon" data-feather="chevron-up"></div>
                                                 </div>
-                                                <span class="text-17 fw-500 text-dark-1">Exercises</span>
+                                                <span class="text-17 fw-500 text-dark-1">{{__('question.quizzes')}}</span>
                                             </div>
                                         </div>
-
                                         <div class="accordion__content">
                                             <div class="accordion__content__inner px-30 py-30">
                                                 <div class="y-gap-30">
 
-                                                    <div class="">
-                                                        <div class="d-flex">
-                                                            <div class="d-flex justify-center items-center size-30 rounded-full bg-purple-3 mr-10">
-                                                                <div class="icon-play text-9"></div>
-                                                            </div>
-
-                                                            <div class="">
-                                                                <div>Introduction to the User</div>
-                                                                <div class="d-flex x-gap-20 items-center pt-5">
-                                                                    <a href="#" class="text-14 lh-1 text-purple-1 underline">Preview</a>
-                                                                    <a href="#" class="text-14 lh-1 text-purple-1 underline">03:56</a>
+                                                    @forelse($quizzes as $quiz)
+                                                        <div class="">
+                                                            <div class="d-flex">
+                                                                <div class="d-flex justify-center items-center size-30 rounded-full bg-purple-3 mr-10">
+                                                                    <div class="icon-play text-9"></div>
+                                                                </div>
+                                                                <div class="">
+                                                                    <div>{{$quiz->title}}</div>
+                                                                    <div class="d-flex x-gap-20 items-center pt-5">
+                                                                        <a href="{{route('quizzes.show',$quiz->id)}}" class="text-14 lh-1 text-purple-1 underline">Preview</a>
+                                                                        <a href="javascript:void(0);" class="text-14 lh-1 text-purple-1 underline">03:56</a>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-
-                                                    </div>
-
-                                                    <div class="">
-                                                        <div class="d-flex">
-                                                            <div class="d-flex justify-center items-center size-30 rounded-full bg-purple-3 mr-10">
-                                                                <div class="icon-play text-9"></div>
-                                                            </div>
-
-                                                            <div class="">
-                                                                <div>Viewing your prototype on</div>
-                                                                <div class="d-flex x-gap-20 items-center pt-5">
-                                                                    <a href="#" class="text-14 lh-1 text-purple-1 underline">Preview</a>
-                                                                    <a href="#" class="text-14 lh-1 text-purple-1 underline">03:56</a>
-                                                                </div>
-                                                            </div>
+                                                    @empty
+                                                        <div class="alert alert-danger">
+                                                            {{__('home.There is no data')}}
                                                         </div>
-
-                                                    </div>
-
-                                                    <div class="">
-                                                        <div class="d-flex">
-                                                            <div class="d-flex justify-center items-center size-30 rounded-full bg-purple-3 mr-10">
-                                                                <div class="icon-play text-9"></div>
-                                                            </div>
-
-                                                            <div class="">
-                                                                <div>Sharing your design</div>
-                                                                <div class="d-flex x-gap-20 items-center pt-5">
-                                                                    <a href="#" class="text-14 lh-1 text-purple-1 underline">Preview</a>
-                                                                    <a href="#" class="text-14 lh-1 text-purple-1 underline">03:56</a>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                    </div>
-
+                                                    @endforelse
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
 
-
+                                    <div class="accordion__item">
+                                        <div class="accordion__button py-20 px-30 bg-light-4">
+                                            <div class="d-flex items-center">
+                                                <div class="accordion__icon">
+                                                    <div class="icon" data-feather="chevron-down"></div>
+                                                    <div class="icon" data-feather="chevron-up"></div>
+                                                </div>
+                                                <span class="text-17 fw-500 text-dark-1">{{__('question.final exam')}}</span>
+                                            </div>
+                                        </div>
+                                        <div class="accordion__content">
+                                            <div class="accordion__content__inner px-30 py-30">
+                                                <div class="y-gap-30">
+                                                    @forelse($finalExam as $final)
+                                                        <div class="">
+                                                            <div class="d-flex">
+                                                                <div class="d-flex justify-center items-center size-30 rounded-full bg-purple-3 mr-10">
+                                                                    <div class="fas fa-question text-9"></div>
+                                                                </div>
+                                                                <div class="">
+                                                                    <div>{{$final->title}}</div>
+                                                                    <div class="d-flex x-gap-20 items-center pt-5">
+                                                                        <a href="{{route('final-exam.show',$final->id)}}" target="_blank" class="text-14 lh-1 text-purple-1 underline">{{__('question.Start')}}</a>
+                                                                        <a href="javascript:void(0);" class="text-14 lh-1 text-purple-1 underline">03:56</a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    @empty
+                                                        <div class="alert alert-danger">
+                                                            {{__('home.There is no data')}}
+                                                        </div>
+                                                    @endforelse
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="tabs__pane -tab-item-5">
@@ -493,9 +463,7 @@
                                             @enderror
                                         </div>
 
-
                                         <div class="col-md-6">
-
                                             <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">{{__('city.cities')}}<span style="color: red">*</span></label>
                                             @inject('city','App\Models\City')
                                             {!! Form::select('city_id',$city->pluck('city','id'),Request::old('city_id') ? Request::old('city_id') :  $user->city_id ,[
@@ -503,7 +471,6 @@
                                                 'placeholder' => __('home.please choose')
                                             ]) !!}
                                             @error('city_id') <div class="invalid-feedback">{{$message}}</div> @enderror
-
                                         </div>
 
                                         <div class="col-md-6">
@@ -516,7 +483,6 @@
                                             @enderror
                                         </div>
 
-
                                         <div class="col-md-6">
                                             <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">{{__('home.facebook')}}</label>
                                             <input type="text" class="form-control @error('facebook') is-invalid @enderror" name="facebook" autocomplete="off" placeholder="{{__('home.username facebook')}}" value="{{Request::old('facebook') ? Request::old('facebook') : $user->facebook}}">
@@ -527,7 +493,6 @@
                                             @enderror
                                         </div>
 
-
                                         <div class="col-md-6">
                                             <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">{{__('home.instagram')}}</label>
                                             <input type="text" class="form-control @error('instagram') is-invalid @enderror" name="instagram" autocomplete="off" placeholder="{{__('home.username instagram')}}" value="{{Request::old('instagram') ? Request::old('instagram') : $user->instagram}}">
@@ -537,7 +502,6 @@
                                             </span>
                                             @enderror
                                         </div>
-
 
                                         <div class="col-md-6">
                                             <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">{{__('home.linkedin')}}</label>
@@ -568,6 +532,7 @@
                                             </span>
                                             @enderror
                                         </div>
+
                                         <div class="col-12">
                                             <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Personal info</label>
                                             <textarea name="bio" class="form-control @error('bio') is-invalid @enderror" placeholder="Text..." rows="7">{{Request::old('bio') ? Request::old('bio') : $user->bio}}</textarea>
@@ -591,7 +556,7 @@
                                         </div>
 
                                         <div class="col-12">
-                                            <button class="button -md -purple-1 text-white">Update Profile</button>
+                                            <button class="button -md -purple-1 text-white">{{__('user.update profile')}}</button>
                                         </div>
                                     </form>
                                 </div>
@@ -602,8 +567,7 @@
             </div>
         </div>
     </div>
-
-    @endsection
+@endsection
 @section('js')
     <script>
         function previewBeforeUpload(id){

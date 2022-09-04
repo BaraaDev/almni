@@ -10,7 +10,6 @@
             <div class="dashboard__content bg-light-4">
                 <div class="row pb-50 mb-10">
                     <div class="col-auto">
-
                         <h1 class="text-30 lh-12 fw-700">{{__('home.Dashboard')}}</h1>
                         <div class="breadcrumbs mt-10 pt-0 pb-0">
                             <div class="breadcrumbs__content">
@@ -22,15 +21,12 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
-
 
                 <div class="row y-gap-30">
                     <div class="col-xl-9 col-lg-12">
                         <div class="row y-gap-30">
-
                             <div class="col-xl-4 col-md-6">
                                 <div class="d-flex justify-between items-center py-35 px-30 rounded-16 bg-white -dark-bg-dark-1 shadow-4">
                                     <div>
@@ -63,18 +59,15 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="row y-gap-30 pt-30">
                             <div class="col-12">
                                 <div class="rounded-16 bg-white -dark-bg-dark-1 shadow-4 h-100">
                                     <div class="d-flex items-center py-20 px-30 border-bottom-light">
                                         <h2 class="text-17 lh-1 fw-500">{{__('course.courses')}}</h2>
                                     </div>
-
                                     <div class="py-30 px-30">
                                         <div class="row y-gap-30">
-
-                                            @foreach($user->courseInstructor as $course)
+                                            @forelse($user->courseInstructor as $course)
                                             <div class="col-xl-3 col-lg-6 col-md-4 col-sm-6">
                                                 <a href="#">
                                                     <div>
@@ -90,16 +83,19 @@
                                                     </div>
                                                 </a>
                                             </div>
-                                            @endforeach
+                                            @empty
+                                                <div class="alert alert-danger">
+                                                    {{__('home.There is no data')}}.
+                                                </div>
+                                            @endforelse
                                             <a href="{{route('web.profile.courses')}}" class="button mt-20 h-50 px-25 -dark-1 -dark-button-white text-white">{{__('home.See All')}}</a>
-
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
                     </div>
+
                     <div class="col-xl-3 col-lg-12">
                         <div class="row y-gap-30">
                             <div class="col-12">
@@ -113,10 +109,8 @@
                     </div>
                 </div>
             </div>
-
             @include('layouts.web.instructors.footer')
         </div>
     </div>
-
 @endsection
 

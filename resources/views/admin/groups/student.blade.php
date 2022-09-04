@@ -5,8 +5,6 @@
 @section('head')
     <link href="{{asset('admin/vendor/datatables/css/jquery.dataTables.min.css')}}" rel="stylesheet">
 @endsection
-@section('content')
-
 @section('search')
     <div class="nav-item d-flex align-items-center">
         <form action="" method="get">
@@ -23,6 +21,8 @@
     </div>
 
 @endsection
+@section('content')
+
 <!-- row -->
 <div class="container-fluid">
 

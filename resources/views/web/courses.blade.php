@@ -6,7 +6,6 @@
             <div class="row">
                 <div class="col-auto">
                     <div class="breadcrumbs__content">
-
                         <div class="breadcrumbs__item">
                             <a href="{{route('home')}}">{{__('home.home')}}</a>
                         </div>
@@ -14,7 +13,6 @@
                         <div class="breadcrumbs__item">
                             <a href="{{route('courses')}}">{{__('course.all courses')}}</a>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -647,23 +645,17 @@
 
                 @forelse($courses as $course)
                 <div data-anim-child="slide-up delay-{{$loop->iteration}}" class="col-lg-4 col-md-6">
-
                     <a href="{{route('course',$course->slug)}}" class="coursesCard -type-1 rounded-8 shadow-3 bg-white">
                         <div class="relative">
                             <div class="coursesCard__image rounded-top-8 overflow-hidden">
                                 <img class="w-1/1" src="{{$course->photo}}" alt="{{$course->title ?? ''}}">
                                 <div class="coursesCard__image_overlay rounded-top-8"></div>
                             </div>
-                            <div class="d-flex absolute-full-center z-3 justify-between py-10 px-10">
-
-                            </div>
                         </div>
 
                         <div class="h-100 pb-15 px-30 pt-20">
                             <div class="text-17 lh-15 fw-500 text-dark-1 mt-10">{{$course->title ?? ''}}</div>
-
                             <div class="d-flex x-gap-10 items-center pt-10">
-
                                 <div class="d-flex items-center">
                                     <div class="mr-8">
                                         <img src="{{asset('web/img/coursesCards/icons/1.svg')}}" alt="icon">
@@ -684,16 +676,16 @@
                                     </div>
                                     <div class="text-14 lh-1">{{$course->level->level ?? ''}}</div>
                                 </div>
-
                             </div>
 
                             <div class="coursesCard-footer">
-                                @foreach($course->courseInstructor->slice(0,1) as $instructor)
+                                @forelse($course->courseInstructor->slice(0,1) as $instructor)
                                     <div class="coursesCard-footer__author">
                                         <img src="{{$instructor->photo}}" alt="{{$instructor->name}}">
                                         <div>{{$instructor->name}}</div>
                                     </div>
-                                @endforeach
+                                @empty
+                                @endforelse
 
                                 <div class="coursesCard-footer__price">
                                     <div>{{$course->discount . ' ' . __('home.le')}}</div>
@@ -702,34 +694,36 @@
                             </div>
                         </div>
                     </a>
-
                 </div>
 
                 @empty
+                    <div class="alert alert-danger">
+                        {{__('home.There is no data')}}.
+                    </div>
                 @endforelse
             </div>
 
-            <div class="row pt-90 lg:pt-50 justify-center">
-                <div class="col-auto">
-                    <div class="pagination -buttons">
-                        <button class="pagination__button -prev">
-                            <i class="icon icon-chevron-left"></i>
-                        </button>
+{{--            <div class="row pt-90 lg:pt-50 justify-center">--}}
+{{--                <div class="col-auto">--}}
+{{--                    <div class="pagination -buttons">--}}
+{{--                        <button class="pagination__button -prev">--}}
+{{--                            <i class="icon icon-chevron-left"></i>--}}
+{{--                        </button>--}}
 
-                        <div class="pagination__count">
-                            <a href="#">1</a>
-                            <a class="-count-is-active" href="#">2</a>
-                            <a href="#">3</a>
-                            <span>...</span>
-                            <a href="#">67</a>
-                        </div>
+{{--                        <div class="pagination__count">--}}
+{{--                            <a href="#">1</a>--}}
+{{--                            <a class="-count-is-active" href="#">2</a>--}}
+{{--                            <a href="#">3</a>--}}
+{{--                            <span>...</span>--}}
+{{--                            <a href="#">67</a>--}}
+{{--                        </div>--}}
 
-                        <button class="pagination__button -next">
-                            <i class="icon icon-chevron-right"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
+{{--                        <button class="pagination__button -next">--}}
+{{--                            <i class="icon icon-chevron-right"></i>--}}
+{{--                        </button>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
         </div>
     </section>
 @endsection

@@ -54,6 +54,7 @@ return [
     'male'                                   => 'Male',
     'female'                                 => 'Female',
     'description'                            => 'Description',
+    'answer explanation'                     => 'Answer Explanation',
     'overview'                               => 'Overview',
     'Course Content'                         => 'Course Content',
     'short description'                      => 'Short Description',

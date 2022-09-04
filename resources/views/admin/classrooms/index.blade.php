@@ -34,7 +34,7 @@
                     <div class="card-body">
                         <div class="courses-bx">
                             <div class="dlab-media">
-                                <img src="{{$classroom->photo}}" alt="">
+                                <img data-src="{{$classroom->photo}}" class="lazyload" alt="">
                             </div>
                             <div class="dlab-info">
                                 <div class="dlab-title d-flex justify-content-between">

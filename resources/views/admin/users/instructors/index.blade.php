@@ -49,7 +49,7 @@
                     </div>
                     <div class="card-body text-center pb-3">
                         <div class="instructors-media">
-                            <img src="{{$instructor->photo}}" alt="">
+                            <img data-src="{{$instructor->photo}}" class="lazyload" alt="">
                             <div class="instructors-media-info">
                                 <h4>{{$instructor->name}}</h4>
                                 <ul class="d-flex align-items-center raiting my-0 justify-content-center">

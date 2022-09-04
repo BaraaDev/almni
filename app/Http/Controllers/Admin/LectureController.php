@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LectureRequest;
+use App\Models\Course;
+use App\Models\Group;
 use App\Models\Lecture;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -28,6 +30,8 @@ class LectureController extends Controller
 
     public function index(Request $request)
     {
+        $courses = Course::all();
+        $groups  = Group::all();
         $lectures = Lecture::orderBy('id','DESC')->where(function ($q) use($request){
             if($request->keyword){
                 $q->where('name' , 'LIKE' , '%'.$request->keyword.'%')
@@ -67,7 +71,7 @@ class LectureController extends Controller
         activity()
             ->causedBy(Auth::user()->id)
             ->log(__('log.See lectures'));
-        return view('admin.lectures.index',compact('lectures','request'));
+        return view('admin.lectures.index',compact('lectures','request','groups','courses'));
     }
 
 

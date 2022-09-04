@@ -65,6 +65,10 @@ class User extends Authenticatable implements HasMedia
         return $this->belongsTo(Category::class);
     }
 
+    public function format()
+    {
+        return $this->hasMany(Format::class,'instructor_id','id');
+    }
 
     public function groups()
     {

@@ -21,29 +21,23 @@
         </div>
     </section>
 
-
     <section class="page-header -type-1">
         <div class="container">
             <div class="page-header__content">
                 <div class="row justify-center text-center">
                     <div class="col-auto">
                         <div data-anim="slide-up delay-1">
-
                             <h1 class="page-header__title">About Us</h1>
-
                         </div>
 
                         <div data-anim="slide-up delay-2">
-
                             <p class="page-header__text">We’re on a mission to deliver engaging, curated courses at a reasonable price.</p>
-
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-
 
     <section class="layout-pt-md layout-pb-md">
         <div data-anim-wrap class="container">
@@ -61,7 +55,7 @@
                     <p class="text-dark-1 mt-30">You can start and finish one of these popular courses in under a day – for free! Check out the list below.. Take the course for free</p>
                     <p class="pr-50 lg:pr-0 mt-25">Neque convallis a cras semper auctor. Libero id faucibus nisl tincidunt egetnvallis a cras semper auctonvallis a cras semper aucto. Neque convallis a cras semper auctor. Liberoe convallis a cras semper atincidunt egetnval</p>
                     <div class="d-inline-block">
-                        <a href="courses-list-1.html" class="button -md -purple-1 text-white mt-30">Start Learning For Free </a>
+                        <a href="{{route('courses')}}" class="button -md -purple-1 text-white mt-30">Start Learning For Free </a>
                     </div>
                 </div>
             </div>
@@ -72,20 +66,14 @@
         <div class="container">
             <div class="row y-gap-20 justify-center text-center">
                 <div class="col-auto">
-
                     <div class="sectionTitle ">
-
                         <h2 class="sectionTitle__title ">How it works?</h2>
-
                         <p class="sectionTitle__text ">10,000+ unique online course list designs</p>
-
                     </div>
-
                 </div>
             </div>
 
             <div class="row y-gap-30 justify-between pt-60 lg:pt-40">
-
                 <div class="col-xl-2 col-lg-3 col-md-6">
                     <div class="d-flex flex-column items-center text-center">
                         <div class="relative size-120 d-flex justify-center items-center rounded-full bg-light-4">
@@ -99,14 +87,11 @@
                         <div class="text-17 fw-500 text-dark-1 mt-30">Browse courses from our expert contributors.</div>
                     </div>
                 </div>
-
-
                 <div class="col-auto xl:d-none">
                     <div class="pt-30">
                         <img src="{{asset('web/img/misc/lines/1.svg')}}" alt="icon">
                     </div>
                 </div>
-
 
                 <div class="col-xl-2 col-lg-3 col-md-6">
                     <div class="d-flex flex-column items-center text-center">
@@ -122,13 +107,11 @@
                     </div>
                 </div>
 
-
                 <div class="col-auto xl:d-none">
                     <div class="pt-30">
                         <img src="{{asset('web/img/misc/lines/2.svg')}}" alt="icon">
                     </div>
                 </div>
-
 
                 <div class="col-xl-2 col-lg-3 col-md-6">
                     <div class="d-flex flex-column items-center text-center">
@@ -143,8 +126,6 @@
                         <div class="text-17 fw-500 text-dark-1 mt-30">That’s it! Start learning right away.</div>
                     </div>
                 </div>
-
-
             </div>
         </div>
     </section>
@@ -155,20 +136,14 @@
         <div data-anim-wrap class="container">
             <div class="row justify-center text-center">
                 <div class="col-auto">
-
-                    <div class="sectionTitle ">
-
+                    <div class="sectionTitle">
                         <h2 class="sectionTitle__title text-white">Start your Learning Journey Today!</h2>
-
                         <p class="sectionTitle__text text-white">Lorem ipsum dolor sit amet, consectetur.</p>
-
                     </div>
-
                 </div>
             </div>
 
             <div data-anim-wrap class="row y-gap-30 justify-between pt-60 lg:pt-50">
-
                 <div data-anim-child="slide-up delay-1" class="col-lg-3 col-md-6">
                     <div class="coursesCard -type-2 text-center pt-50 pb-40 px-30 rounded-8 bg-white shadow-2">
                         <div class="coursesCard__image">
@@ -216,7 +191,6 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
@@ -225,15 +199,10 @@
         <div class="container">
             <div class="row y-gap-20 justify-center text-center">
                 <div class="col-auto">
-
-                    <div class="sectionTitle ">
-
+                    <div class="sectionTitle">
                         <h2 class="sectionTitle__title ">Testimonials</h2>
-
                         <p class="sectionTitle__text ">10,000+ unique online course list designs</p>
-
                     </div>
-
                 </div>
             </div>
 
@@ -357,7 +326,7 @@
                     <h3 class="text-45 md:text-30 lh-12"><span class="text-purple-1">Learn</span> new skills when<br class="lg:d-none"> and where you like.</h3>
                     <p class="mt-20">Use the list below to bring attention to your product’s key<br class="lg:d-none"> differentiator.</p>
                     <div class="d-inline-block mt-30">
-                        <a href="signup.html" class="button -md -dark-1 text-white">Join Free</a>
+                        <a href="{{route('signup')}}" class="button -md -dark-1 text-white">Join Free</a>
                     </div>
                 </div>
 
@@ -418,7 +387,7 @@
                     <h3 class="text-24 lh-1">Become an Instructor</h3>
                     <p class="mt-20">Join millions of people from around the world learning together. Online learning is as easy and natural as chatting.</p>
                     <div class="d-inline-block mt-20">
-                        <a href="instructors-become.html" class="button -md -outline-purple-1 text-purple-1">Apply Now</a>
+                        <a href="{{route('signup')}}" class="button -md -outline-purple-1 text-purple-1">Apply Now</a>
                     </div>
                 </div>
             </div>
@@ -432,7 +401,7 @@
                     <h3 class="text-24 lh-1">Become a Student</h3>
                     <p class="mt-20">Join millions of people from around the world learning together. Online learning is as easy and natural as chatting.</p>
                     <div class="d-inline-block mt-20">
-                        <a href="signup.html" class="button -md -outline-dark-2 text-dark-2">Apply Now</a>
+                        <a href="{{route('signup')}}" class="button -md -outline-dark-2 text-dark-2">Apply Now</a>
                     </div>
                 </div>
 

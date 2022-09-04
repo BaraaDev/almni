@@ -165,9 +165,9 @@ class UserController extends Controller
 
         activity()
             ->performedOn($user)
-            ->event(__('home.update'))
+            ->event(__('home.delete'))
             ->causedBy(Auth::user()->id)
-            ->log(__('log.update admin'));
+            ->log(__('log.delete admin'));
 
         return redirect()->route('users.index')
             ->with(['success' => __('home.User deleted successfully')]);

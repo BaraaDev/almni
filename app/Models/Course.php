@@ -53,6 +53,11 @@ class Course extends Model implements HasMedia
         return $this->belongsToMany(User::class,'course_user','student_id','course_id');
     }
 
+    public function format()
+    {
+        return $this->hasMany(Format::class,'course_id','id');
+    }
+
 
     public function getPhotoAttribute()
     {

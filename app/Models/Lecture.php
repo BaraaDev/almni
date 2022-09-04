@@ -28,6 +28,11 @@ class Lecture extends Model implements HasMedia
         return $this->belongsTo(User::class);
     }
 
+    public function format()
+    {
+        return $this->hasMany(Format::class,'lecture_id','id');
+    }
+
     public function getPhotoAttribute()
     {
         return $this->getFirstMediaUrl('lecturePC')

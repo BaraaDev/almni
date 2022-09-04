@@ -12,9 +12,9 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $user = User::status('active')->type('admin')->count();
-        $students = User::status('active')->type('instructors')->count();
-        $instructor = User::status('active')->type('instructor')->count();
+        $user = User::type('admin')->count();
+        $students = User::type('student')->count();
+        $instructor = User::type('instructor')->count();
 
 
         $users = User::status('active')->select(DB::raw("COUNT(*) as count"), DB::raw("MONTHNAME(created_at) as month_name"))
@@ -31,7 +31,7 @@ class HomeController extends Controller
 
     public function activity_log()
     {
-        $activities = Activity::paginate(25);
+        $activities = Activity::orderBy('created_at','DESC')->paginate(25);
 
         return view('admin.activity.index',compact('activities'));
     }

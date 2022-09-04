@@ -1,6 +1,9 @@
 @extends('layouts.admin.app')
 
 @section('title') {{__('level.all levels') . $title}} @endsection
+@section('head')
+    <link href="{{ asset('admin/vendor/datatables/css/jquery.dataTables.min.css') }}" rel="stylesheet">
+@endsection
 @section('search')
     <div class="nav-item d-flex align-items-center">
         <form action="" method="get">
@@ -36,16 +39,17 @@
                                     </svg>
                                 </a>
                             </span>
-                            <input type="text" class="form-control" placeholder="Search here...">
+                            <input type="text" class="form-control" id="tableSearchBar" placeholder="Search here...">
                         </div>
                     </div>
                     <div class="card-body py-0">
                         <div class="table-responsive">
-                            <table class="table display mb-4 dataTablesCard order-table card-table text-black application" id="application-tbl1">
+                            <table class="display dataTablesCard order-table card-table application mb-4 table text-black" id="application-tbl1">
                                 <thead>
                                 <tr>
                                     <th>#</th>
                                     <th>{{__('user.name')}}</th>
+                                    <th>{{__('course.courses')}}</th>
                                     <th>{{__('home.date')}}</th>
                                     <th class="text-center">{{__('home.action')}}</th>
                                 </tr>
@@ -60,7 +64,10 @@
                                             </div>
                                         </td>
 
+                                        <td>({{ $level->courses->count()}}) @foreach($level->courses->slice(0,2) as $course) - {{$course->title}} @endforeach</td>
+
                                         <td>{{$level->created_at->translatedFormat('M d, Y')}}</td>
+
 
                                         <td class="text-center">
                                             <div class="dropdown">
@@ -99,4 +106,25 @@
         </div>
         {{$levels->links('pagination::bootstrap-5')}}
     </div>
+@endsection
+
+@section('js')
+    <script src="{{ asset('admin/vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('admin/js/plugins-init/datatables.init.js') }}"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('#tableSearchBar').on("keyup", function() {
+                var value = $(this).val().toLocaleLowerCase();
+                $("#application-tbl1 tr").filter(function() {
+                    $(this).toggle($(this).text().toLocaleLowerCase().indexOf(value) > -1)
+                });
+            });
+            // Filter
+            $('.filter').change(function(){
+                filter_function();
+            });
+            $('#application-tbl1 tbody tr').show();
+        });
+    </script>
 @endsection

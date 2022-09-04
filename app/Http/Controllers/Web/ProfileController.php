@@ -1,21 +1,27 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Web;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Web\ProfileRequest;
 use App\Http\Requests\Web\UpdatePasswordRequest;
-use App\Models\Course;
+use App\Models\Format;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller
 {
     public function profile()
     {
-        $user = User::findOrFail(auth()->user()->id);
+        $user = User::status('active')->findOrFail(auth()->user()->id);
         if (auth()->user()->userType == 'student'){
-            return view('web.students.profile', compact('user'));
+            $groups = $user->groups->pluck('id');
+            $exercises = Format::whereIn('group_id',$groups)->where('type','exercise')->get();
+            $quizzes   = Format::whereIn('group_id',$groups)->where('type','test')->get();
+            $finalExam = Format::whereIn('group_id',$groups)->where('type','final_exam')->get();
+
+
+            return view('web.students.profile', compact('user','exercises','quizzes','finalExam'));
         } elseif (auth()->user()->userType == 'instructor')
         {
             return view('web.instructors.dashboard',compact('user'));
@@ -111,4 +117,5 @@ class ProfileController extends Controller
         return redirect()->route('web.profile')
             ->with(['message' => 'Password successfully changed']);
     }
+
 }

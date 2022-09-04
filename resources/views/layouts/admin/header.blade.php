@@ -174,7 +174,7 @@
                         <ul>
                             <li class="nav-item dropdown header-profile">
                                 <a class="nav-link" href="javascript:void(0);" role="button" data-bs-toggle="dropdown">
-                                    <img src="{{auth()->user()->photo}}" width="20" alt=""/>
+                                    <img data-src="{{auth()->user()->photo}}" class="lazyload" width="20" alt=""/>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-end">
                                     <a href="#" class="dropdown-item ai-icon">

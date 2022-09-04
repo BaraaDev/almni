@@ -19,5 +19,5 @@
     <link href="{{asset('admin/vendor/jquery-nice-select/css/nice-select.css')}}" rel="stylesheet">
 @yield('head')
 <!-- Style css -->
-    <link href="{{asset('admin/css/style.css')}}" rel="stylesheet">
+    <link href="{{asset('admin/css/style.css')}}"  rel="stylesheet">
 </head>

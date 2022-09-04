@@ -29,9 +29,11 @@
                                     <li>
                                         <a href="{{route('courses')}}">{{__('course.courses')}}</a>
                                     </li>
-
                                     <li>
                                         <a href="{{route('instructors')}}">{{__('instructor.instructors')}}</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{route('categories')}}">{{__('category.categories')}}</a>
                                     </li>
                                     <li>
                                         <a href="{{route('about')}}">{{__('home.About')}}</a>

@@ -4,8 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\GroupRequest;
+use App\Models\Classroom;
+use App\Models\Course;
 use App\Models\Group;
 use App\Models\GroupStudent;
+use App\Models\Level;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -31,6 +34,9 @@ class GroupController extends Controller
 
     public function index(Request $request)
     {
+        $levels = Level::all();
+        $classes = Classroom::all();
+        $courses = Course::all();
         $groups = Group::orderBy('id','DESC')->where(function ($q) use($request){
             if($request->keyword){
                 $q->where('name' , 'LIKE' , '%'.$request->keyword.'%')
@@ -54,14 +60,14 @@ class GroupController extends Controller
         activity()
             ->causedBy(Auth::user()->id)
             ->log(__('log.See groups'));
-        return view('admin.groups.index',compact('groups','request'));
+        return view('admin.groups.index',compact('groups','request','levels','classes','courses'));
     }
 
     public function create()
     {
 
         $instructors = User::status('active')->type('instructor')->pluck('name','id');
-        $students = User::status('waiting')->type('instructors')
+        $students = User::status('waiting')->type('student')
             ->whereNotIn('id',DB::table('group_student')
                 ->select('student_id')
                 ->pluck('student_id'))

@@ -37,16 +37,49 @@
         <div class="col-xl-12">
             @include('layouts.admin.alert.success')
             <div class="card students-list">
-                <div class="card-header flex-wrap border-0 pb-0">
-                    <h4>{{ __('group.all groups') }}</h4>
+
+                <div class="card-header border-0 flex-wrap pb-0">
+                    <h4>{{__('group.all groups')}}</h4>
                     <div class="input-group search-area w-auto">
-                        <input type="text" class="form-control" placeholder="Search here...">
+                            <span class="input-group-text">
+                                <a href="javascript:void(0)"><svg width="24" height="24" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M27.414 24.586L22.337 19.509C23.386 17.928 24 16.035 24 14C24 8.486 19.514 4 14 4C8.486 4 4 8.486 4 14C4 19.514 8.486 24 14 24C16.035 24 17.928 23.386 19.509 22.337L24.586 27.414C25.366 28.195 26.634 28.195 27.414 27.414C28.195 26.633 28.195 25.367 27.414 24.586ZM7 14C7 10.14 10.14 7 14 7C17.86 7 21 10.14 21 14C21 17.86 17.86 21 14 21C10.14 21 7 17.86 7 14Z" fill="var(--primary)"></path>
+                                </svg>
+                                </a>
+                            </span>
+                        <input type="text" class="form-control" id="tableSearchBar" placeholder="Search here...">
+                        <select class="form-select filter" aria-label="Default select example" id="filter-class">
+                            <option value="0">{{__('classrooms.classrooms')}}</option>
+                            <option value="No Class">{{__('classrooms.no classrooms')}}</option>
+                            @foreach($classes as $class)
+                                <option value="{{$class->name}}">{{$class->name}}</option>
+                            @endforeach
+                        </select>
+                        <select class="form-select filter" aria-label="Default select example" id="filter-level">
+                            <option value="0">{{__('level.levels')}}</option>
+                            <option value="No Level">{{__('level.no level')}}</option>
+                            @foreach($levels as $level)
+                                <option value="{{$level->level}}">{{$level->level}}</option>
+                            @endforeach
+                        </select>
+                        <select class="form-select filter" aria-label="Default select example" id="filter-courses">
+                            <option value="0">{{__('course.courses')}}</option>
+                            <option value="No Courses">{{__('course.no courses')}}</option>
+                            @foreach($courses as $course)
+                                <option value="{{$course->title}}">{{$course->title}}</option>
+                            @endforeach
+                        </select>
+
+                        <select class="form-select filter" aria-label="Default select example" id="filter-sort">
+                            <option value="0">Status</option>
+                            <option value="Active">Active</option>
+                            <option value="Stopped">Stopped</option>
+                        </select>
                     </div>
                 </div>
                 <div class="card-body py-0">
                     <div class="table-responsive">
-                        <table class="display dataTablesCard order-table card-table application mb-4 table text-black"
-                            id="application-tbl1">
+                        <table class="display dataTablesCard order-table card-table application mb-4 table text-black" id="application-tbl1">
                             <thead>
                                 <tr>
                                     <th></th>
@@ -56,6 +89,7 @@
                                     <th>{{ __('level.level') }}</th>
                                     <th>{{ __('course.course') }}</th>
                                     <th>{{ __('classrooms.classroom') }}</th>
+                                    <th>{{ __('course.courses') }}</th>
                                     <th>{{ __('home.days') }}</th>
                                     <th>{{ __('home.months') }}</th>
                                     <th>{{ __('home.time start') }}</th>
@@ -83,13 +117,14 @@
                                                 <span class="counter">({{ $group->instructor->count()}}) @foreach($group->instructor->slice(0,1) as $row) {{$row->name ?? __('instructor.no instructor')}} @endforeach</span>
                                             </div>
                                         </td>
-                                        <td>{{ Str::limit($group->level->level ?? __('level.no level'), 10, '...') }}</td>
+                                        <td class="level" data-level="{{$group->level->level ?? __('level.no level')}}">{{ Str::limit($group->level->level ?? __('level.no level'), 10, '...') }}</td>
                                         <td>
                                             <a href="{{ route('courses.show', $group->course->id ?? '', '') }}">
                                                 {{ Str::limit($group->course->title ?? '', 10, '...') }}
                                             </a>
                                         </td>
-                                        <td>{{ $group->classroom->name ?? '' }}</td>
+                                        <td class="class" data-class="{{$group->classroom->name ?? __('classrooms.no classrooms')}}">{{ $group->classroom->name ?? '' }}</td>
+                                        <td class="courses" data-courses="{{$group->course->title ?? __('course.no courses')}}">{{ $group->course->title ?? '' }}</td>
                                         <td>
                                              @foreach($group->days as $key)
                                                 {{ $key }} ,
@@ -100,11 +135,11 @@
                                         @endphp
                                         <td>{{ $group->time_start }}</td>
                                         <td title="{{$group->start_date}}">{{ $elapsed->diffForHumans()}}</td>
-                                        <td>
-                                            @if ($group->status == 'active')
-                                                <span class="badge light badge-success">{{ $group->status }}</span>
+                                        <td class="sort" @if($group->status == 'active') data-sort="Active" @elseif($student->status == 'waiting') data-sort="Waiting" @elseif($student->status == 'stopped') data-sort="Stopped" @endif >
+                                            @if($group->status == 'active')
+                                                <span class="badge  light badge-success">{{$group->status}}</span>
                                             @elseif($group->status == 'stopped')
-                                                <span class="badge light badge-danger">{{ $group->status }}</span>
+                                                <span class="badge light badge-danger">{{$group->status}}</span>
                                             @endif
                                         </td>
                                         <td class="text-center">
@@ -154,11 +189,89 @@
 
 @endsection
 @section('js')
-    <script src="{{ asset('admin/vendor/chart.js/Chart.bundle.min.js') }}"></script>
     <script src="{{ asset('admin/vendor/jquery-nice-select/js/jquery.nice-select.min.js') }}"></script>
-    <script src="{{ asset('admin/vendor/apexchart/apexchart.js') }}"></script>
     <script src="{{ asset('admin/vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('admin/js/plugins-init/datatables.init.js') }}"></script>
     <script src="{{ asset('admin/vendor/owl-carousel/owl.carousel.js') }}"></script>
-    <script src="{{ asset('admin/js/dashboard/instructor-instructors.js') }}"></script>
+    <script src="{{ asset('admin/js/dashboard/instructor-student.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            $('#tableSearchBar').on("keyup", function() {
+                var value = $(this).val().toLocaleLowerCase();
+                $("#application-tbl1 tr").filter(function() {
+                    $(this).toggle($(this).text().toLocaleLowerCase().indexOf(value) > -1)
+                });
+            });
+            // Filter
+            $('.filter').change(function(){
+                filter_function();
+            });
+
+            $('#application-tbl1 tbody tr').show();
+
+            function filter_function(){
+                $('#application-tbl1 tbody tr').hide();
+
+                var classFlag      = 0;
+                var classValue     = $('#filter-class').val();
+                var levelFlag      = 0;
+                var levelValue     = $('#filter-level').val();
+
+                var coursesFlag  = 0;
+                var coursesValue = $('#filter-courses').val();
+
+                var sortFlag       = 0;
+                var sortValue      = $('#filter-sort').val();
+
+                //traversing each row one by one
+                $('#application-tbl1 tr').each(function() {
+
+                    if(classValue == 0){
+                        classFlag = 1;
+                    }
+                    else if(classValue == $(this).find('td.class').data('class')){
+                        classFlag = 1;       //if value is same display row
+                    }
+                    else{
+                        classFlag = 0;
+                    }
+
+                    if(levelValue == 0){
+                        levelFlag = 1;
+                    }
+                    else if(levelValue == $(this).find('td.level').data('level')){
+                        levelFlag = 1;
+                    }
+                    else{
+                        levelFlag = 0;
+                    }
+
+                    if(coursesValue == 0){
+                        coursesFlag = 1;
+                    }
+                    else if(coursesValue == $(this).find('td.courses').data('courses')){
+                        coursesFlag = 1;
+                    }
+                    else{
+                        coursesFlag = 0;
+                    }
+
+                    if(sortValue == 0){
+                        sortFlag = 1;
+                    }
+                    else if(sortValue == $(this).find('td.sort').data('sort')){
+                        sortFlag = 1;
+                    }
+                    else{
+                        sortFlag = 0;
+                    }
+
+                    if(classFlag && levelFlag && sortFlag && coursesFlag){
+                        $(this).show();
+                    }
+                });
+            }
+        });
+
+    </script>
 @endsection

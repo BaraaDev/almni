@@ -12,7 +12,7 @@
                         </div>
 
                         <div class="breadcrumbs__item">
-                            <a href="{{route('courses')}}">{{__('course.all courses')}}</a>
+                            <a href="{{route('categories')}}">{{__('category.all categories')}}</a>
                         </div>
 
                         <div class="breadcrumbs__item">
@@ -689,12 +689,13 @@
                                 </div>
 
                                 <div class="coursesCard-footer">
-                                    @foreach($course->courseInstructor->slice(0,1) as $instructor)
+                                    @forelse($course->courseInstructor->slice(0,1) as $instructor)
                                         <div class="coursesCard-footer__author">
                                             <img src="{{$instructor->photo}}" alt="{{$instructor->name}}">
                                             <div>{{$instructor->name}}</div>
                                         </div>
-                                    @endforeach
+                                    @empty
+                                    @endforelse
 
                                     <div class="coursesCard-footer__price">
                                         <div>{{$course->discount . ' ' . __('home.le')}}</div>
@@ -707,29 +708,10 @@
                     </div>
 
                 @empty
-                @endforelse
-            </div>
-
-            <div class="row pt-90 lg:pt-50 justify-center">
-                <div class="col-auto">
-                    <div class="pagination -buttons">
-                        <button class="pagination__button -prev">
-                            <i class="icon icon-chevron-left"></i>
-                        </button>
-
-                        <div class="pagination__count">
-                            <a href="#">1</a>
-                            <a class="-count-is-active" href="#">2</a>
-                            <a href="#">3</a>
-                            <span>...</span>
-                            <a href="#">67</a>
-                        </div>
-
-                        <button class="pagination__button -next">
-                            <i class="icon icon-chevron-right"></i>
-                        </button>
+                    <div class="alert alert-danger">
+                        {{__('home.There is no data')}}.
                     </div>
-                </div>
+                @endforelse
             </div>
         </div>
     </section>

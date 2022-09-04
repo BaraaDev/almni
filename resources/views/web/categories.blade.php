@@ -40,7 +40,7 @@
     <section class="layout-pt-md layout-pb-lg">
         <div data-anim-wrap class="container">
             <div class="row y-gap-30">
-                @foreach($categories as $category)
+                @forelse($categories as $category)
                 <div data-anim-child="slide-up delay-{{$loop->iteration}}" class="col-lg-4 col-md-6">
                     <a href="{{route('category',$category->slug)}}" class="categoryCard -type-4">
                         <div class="categoryCard__icon bg-light-3">
@@ -52,30 +52,34 @@
                         </div>
                     </a>
                 </div>
-                @endforeach
-            </div>
-
-            <div class="row justify-center pt-90 lg:pt-50">
-                <div class="col-auto">
-                    <div class="pagination -buttons">
-                        <button class="pagination__button -prev">
-                            <i class="icon icon-chevron-left"></i>
-                        </button>
-
-                        <div class="pagination__count">
-                            <a href="#">1</a>
-                            <a class="-count-is-active" href="#">2</a>
-                            <a href="#">3</a>
-                            <span>...</span>
-                            <a href="#">67</a>
-                        </div>
-
-                        <button class="pagination__button -next">
-                            <i class="icon icon-chevron-right"></i>
-                        </button>
+                @empty
+                    <div class="alert alert-danger">
+                        {{__('home.There is no data')}}.
                     </div>
-                </div>
+                @endforelse
             </div>
+
+{{--            <div class="row justify-center pt-90 lg:pt-50">--}}
+{{--                <div class="col-auto">--}}
+{{--                    <div class="pagination -buttons">--}}
+{{--                        <button class="pagination__button -prev">--}}
+{{--                            <i class="icon icon-chevron-left"></i>--}}
+{{--                        </button>--}}
+
+{{--                        <div class="pagination__count">--}}
+{{--                            <a href="#">1</a>--}}
+{{--                            <a class="-count-is-active" href="#">2</a>--}}
+{{--                            <a href="#">3</a>--}}
+{{--                            <span>...</span>--}}
+{{--                            <a href="#">67</a>--}}
+{{--                        </div>--}}
+
+{{--                        <button class="pagination__button -next">--}}
+{{--                            <i class="icon icon-chevron-right"></i>--}}
+{{--                        </button>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
         </div>
     </section>
 @endsection

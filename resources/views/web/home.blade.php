@@ -33,7 +33,7 @@
                         </h1>
 
                         <p data-anim-child="slide-up delay-4" class="mainSlider__text text-white">
-                            More than 6.500 online courses
+                            More than {{\App\Models\Course::count()}} courses
                         </p>
 
                         <div data-anim-child="slide-up delay-5" class="mainSlider__form">
@@ -52,7 +52,7 @@
                 <div class="col-xl-3 col-md-4 col-sm-6">
                     <div class="mainSlider-item text-center">
                         <img src="{{ asset('web/img/home-2/mainSlider/icons/1.svg') }}" alt="icon">
-                        <h4 class="text-20 fw-500 lh-18 mt-8 text-white">100,000 online courses</h4>
+                        <h4 class="text-20 fw-500 lh-18 mt-8 text-white">{{\App\Models\Course::count()}} courses</h4>
                         <p class="text-15 text-white">Explore a variety of fresh topics</p>
                     </div>
                 </div>
@@ -60,7 +60,7 @@
                 <div class="col-xl-3 col-md-4 col-sm-6">
                     <div class="mainSlider-item text-center">
                         <img src="{{ asset('web/img/home-2/mainSlider/icons/2.svg') }}" alt="icon">
-                        <h4 class="text-20 fw-500 lh-18 mt-8 text-white">Expert instruction</h4>
+                        <h4 class="text-20 fw-500 lh-18 mt-8 text-white">{{\App\Models\User::type('instructor')->count()}} instructors</h4>
                         <p class="text-15 text-white">Find the right instructor for you</p>
                     </div>
                 </div>
@@ -87,49 +87,6 @@
         </button>
     </section>
 
-    <section class="layout-pt-sm layout-pb-sm bg-light-6">
-        <div class="container">
-            <div class="row y-gap-30 items-center justify-between sm:justify-start">
-
-                <div class="col-lg-auto col-md-2 col-sm-3 col-4">
-                    <div class="d-flex items-center justify-center px-4">
-                        <img class="w-1/1" src="{{ asset('web/img/clients/1.svg') }}" alt="clients image">
-                    </div>
-                </div>
-
-                <div class="col-lg-auto col-md-2 col-sm-3 col-4">
-                    <div class="d-flex items-center justify-center px-4">
-                        <img class="w-1/1" src="{{ asset('web/img/clients/2.svg') }}" alt="clients image">
-                    </div>
-                </div>
-
-                <div class="col-lg-auto col-md-2 col-sm-3 col-4">
-                    <div class="d-flex items-center justify-center px-4">
-                        <img class="w-1/1" src="{{ asset('web/img/clients/3.svg') }}" alt="clients image">
-                    </div>
-                </div>
-
-                <div class="col-lg-auto col-md-2 col-sm-3 col-4">
-                    <div class="d-flex items-center justify-center px-4">
-                        <img class="w-1/1" src="{{ asset('web/img/clients/4.svg') }}" alt="clients image">
-                    </div>
-                </div>
-
-                <div class="col-lg-auto col-md-2 col-sm-3 col-4">
-                    <div class="d-flex items-center justify-center px-4">
-                        <img class="w-1/1" src="{{ asset('web/img/clients/5.svg') }}" alt="clients image">
-                    </div>
-                </div>
-
-                <div class="col-lg-auto col-md-2 col-sm-3 col-4">
-                    <div class="d-flex items-center justify-center px-4">
-                        <img class="w-1/1" src="{{ asset('web/img/clients/6.svg') }}" alt="clients image">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <section class="page-header -type-1">
         <div class="container">
             <div class="page-header__content">
@@ -153,14 +110,14 @@
                 <div class="col-lg-6 pr-50 sm:pr-15">
                     <div class="composition -type-8">
                         <div class="-el-1"><img src="{{ asset('web/img/about-1/1.png') }}" alt="Welcome to Elmni Academy Enhance your skills with best Online courses"></div>
-                        <div class="-el-2"><img src="{{ asset('web/img/about-1/2.png') }}" alt="You can start and finish one of these popular courses in under a day - free! Check out the list below.. Take the course for free"></div>"></div>
+                        <div class="-el-2"><img src="{{ asset('web/img/about-1/2.png') }}" alt="You can start and finish one of these popular courses in under a day - free! Check out the list below.. Take the course for free"></div>
                         <div class="-el-3"><img src="{{ asset('web/img/about-1/3.png') }}" alt=">Neque convallis a cras semper auctor. Libero id faucibus nisl tincidunt egetnvallis a cras semper auctonvallis a cras semper aucto. Neque convallis a cras semper auctor. Liberoe convallis a cras semper atincidunt egetnval"></div>
                     </div>
                 </div>
 
                 <div class="col-lg-5">
                     <h2 class="text-30 lh-16">Welcome to Elmni Academy Enhance your skills with best Online courses</h2>
-                    <p class="text-dark-1 mt-30">You can start and finish one of these popular courses in under a day - for free! Check out the list below.. Take the course for free</p>
+                    <p class="text-dark-1 mt-30">You can start and finish one of these popular courses in under a day - for free! Check out the list below.. Take the course for free </p>
                     <p class="pr-50 mt-25 lg:pr-0">Neque convallis a cras semper auctor. Libero id faucibus nisl tincidunt egetnvallis a cras semper auctonvallis a cras semper aucto. Neque convallis a cras semper auctor. Liberoe convallis a cras semper atincidunt egetnval</p>
                     <div class="d-inline-block">
                         <a href="{{route('courses')}}" class="button -md -purple-1 mt-30 text-white">Start Learning For Free </a>
@@ -297,9 +254,9 @@
             </div>
 
             <div data-anim-wrap class="row y-gap-30 pt-50">
-                @foreach($categories as $category)
+                @forelse($categories as $category)
                 <div class="col-xl-3 col-md-6" data-anim-child="scale delay-{{$loop->iteration}}">
-                    <a href="#" class="categoryCard -type-4">
+                    <a href="{{route('category',$category->slug)}}" class="categoryCard -type-4">
                         <div class="categoryCard__icon bg-light-3">
                             <i class="icon {{$category->icon ?? 'icon-list'}}"></i>
                         </div>
@@ -311,7 +268,11 @@
                         </div>
                     </a>
                 </div>
-                @endforeach
+                @empty
+                    <div class="alert alert-danger">
+                        {{__('home.There is no data')}}.
+                    </div>
+                @endforelse
             </div>
         </div>
     </section>

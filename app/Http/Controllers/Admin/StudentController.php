@@ -32,7 +32,7 @@ class StudentController extends Controller
 
     public function index(Request $request)
     {
-        $allStudents = User::status('active')->type('student')->count();
+        $allStudents = User::type('student')->count();
         $levels = Level::all();
         $classes = Classroom::all();
         $life_stages = LifeStage::all();
@@ -58,6 +58,10 @@ class StudentController extends Controller
                         if($request->keyword){
                             $q->where('name' , 'LIKE' , '%'.$request->keyword.'%')
                                 ->orWhere('description' , 'LIKE' , '%'.$request->keyword.'%');
+                        }
+                    })->orWhereHas('classroom', function ($q) use ($request){
+                        if($request->keyword){
+                            $q->where('name' , 'LIKE' , '%'.$request->keyword.'%');
                         }
                     });
             }})->paginate(25);
@@ -189,6 +193,16 @@ class StudentController extends Controller
             ->causedBy(Auth::user()->id)
             ->log(__('log.See waiting students'));
         return view('admin.users.students.waiting',compact('users','request'));
+    }
+
+    public function delete(Request $request) {
+        $allStudents = User::status('active')->type('student')->count();
+        $levels = Level::all();
+        $classes = Classroom::all();
+        $life_stages = LifeStage::all();
+        $categories = Category::all();
+        $students = User::type('student')->onlyTrashed()->orderBy('id','DESC')->paginate(25);
+        return view('admin.users.students.delete', compact('students','request','allStudents','levels','categories','classes','life_stages'));
     }
 
 

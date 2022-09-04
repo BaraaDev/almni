@@ -31,7 +31,8 @@ class CategoryController extends Controller
                 $q->where('name' , 'LIKE' , '%'.$request->keyword.'%')
                     ->orWhereHas('subject', function ($q) use ($request){
                         if($request->keyword){
-                            $q->where('name' , 'LIKE' , '%'.$request->keyword.'%');
+                            $q->where('name' , 'LIKE' , '%'.$request->keyword.'%')
+                                ->orWhere('icon' , 'LIKE' , '%'.$request->keyword.'%');
                         }
                     });
             }})->paginate(25);

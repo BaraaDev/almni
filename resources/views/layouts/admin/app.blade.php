@@ -27,8 +27,8 @@
         Nav header start
     ***********************************-->
     <div class="nav-header">
-        <a href="#" class="brand-logo">
-            <img src="{{asset('admin/images/logo-full.png')}}" alt="">
+        <a href="{{route('dashboard')}}" class="brand-logo">
+            <img data-src="{{asset('admin/images/logo-full.png')}}" class="lazyload" alt="">
         </a>
         <div class="nav-control">
             <div class="hamburger">
@@ -85,7 +85,7 @@
     ***********************************-->
     <div class="footer">
         <div class="copyright">
-            <p>Copyright © Designed   by <a href="https://programmerscaffe.com" target="_blank">programmers Caffe</a> 2022</p>
+            <p>Copyright © Designed   by <a href="https://programmerscaffe.com" target="_blank" title="baraa samy">programmers Caffe</a> 2022</p>
         </div>
     </div>
     <!--**********************************
@@ -107,5 +107,5 @@ End scripts
 ***********************************-->
 </body>
 
-<!-- Mirrored from getskills.dexignzone.com/xhtml/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 10 Jul 2022 22:16:16 GMT -->
+<!--by Baraa samy and Abdulrahman haridy, 1/8/2022 -->
 </html>

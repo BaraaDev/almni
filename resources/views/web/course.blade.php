@@ -7,7 +7,6 @@
             <div class="row">
                 <div class="col-auto">
                     <div class="breadcrumbs__content">
-
                         <div class="breadcrumbs__item ">
                             <a href="{{route('home')}}">{{__('home.home')}}</a>
                         </div>
@@ -830,22 +829,17 @@
         <div data-anim-wrap class="container">
             <div class="row">
                 <div class="col-auto">
-
                     <div class="sectionTitle ">
-
                         <h2 class="sectionTitle__title ">Courses you may like</h2>
-
-                        <p class="sectionTitle__text ">{{numtoks(\App\Models\Course::count())}}+ courses in the academy almni</p>
-
+                        <p class="sectionTitle__text ">{{numtoks(\App\Models\Course::status('active')->count())}}+ courses in the academy almni</p>
                     </div>
-
                 </div>
             </div>
 
             <div class="relative pt-60 lg:pt-50">
                 <div class="overflow-hidden js-section-slider" data-gap="30" data-loop data-pagination data-nav-prev="js-courses-prev" data-nav-next="js-courses-next" data-slider-cols="xl-4 lg-3 md-2">
                     <div class="swiper-wrapper">
-                        @foreach($courses as $course)
+                        @forelse($courses as $course)
                         <div data-anim-child="slide-up delay-{{$loop->iteration}}" class="swiper-slide">
                             <a href="{{route('course',$course->slug)}}" class="coursesCard -type-1 ">
                                 <div class="relative">
@@ -896,12 +890,13 @@
                                     </div>
 
                                     <div class="coursesCard-footer">
-                                        @foreach($course->courseInstructor->slice(0,1) as $instructor)
+                                        @forelse($course->courseInstructor->slice(0,1) as $instructor)
                                         <div class="coursesCard-footer__author">
                                             <img src="{{$instructor->photo}}" alt="{{$instructor->name}}">
                                             <div>{{$instructor->name}}</div>
                                         </div>
-                                        @endforeach
+                                        @empty
+                                        @endforelse
 
                                         <div class="coursesCard-footer__price">
                                             <div>{{$course->discount}}</div>
@@ -911,7 +906,11 @@
                                 </div>
                             </a>
                         </div>
-                        @endforeach
+                        @empty
+                            <div class="alert alert-danger">
+                                {{__('home.There is no data')}}.
+                            </div>
+                        @endforelse
                     </div>
                 </div>
 

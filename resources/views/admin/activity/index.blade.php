@@ -61,7 +61,7 @@
                                             <h4 class="mb-0 fs-16 font-w500">{{$activity->causer->name ?? ''}}</h4>
                                         </div>
                                     </td>
-                                    <td>{{$activity->created_at->translatedFormat('M d, Y')}}</td>
+                                    <td title="{{$activity->created_at}}">{{$activity->created_at->translatedFormat('M d, Y')}}</td>
                                 </tr>
                             @empty
                                 <div class="alert alert-danger">

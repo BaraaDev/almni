@@ -27,6 +27,6 @@ class AppServiceProvider extends ServiceProvider
     {
         $Dashboard_title = ' - Dashboard';
         View::share('title', $Dashboard_title);
-        View::share('activities', Activity::orderBy('created_at','DESC')->limit(30)->get());
+        View::share('activities', Activity::orderBy('created_at','ASC')->limit(30)->get());
     }
 }

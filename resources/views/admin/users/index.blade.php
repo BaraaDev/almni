@@ -32,7 +32,7 @@
                     <div class="card-body">
                         <div class="text-center">
                             <div class="profile-photo">
-                                <img src="{{$user->photo}}" width="100" class="img-fluid rounded-circle" alt="">
+                                <img data-src="{{$user->photo}}" class="lazyload" width="100" class="img-fluid rounded-circle" alt="">
                             </div>
                             <h3 class="mt-4 mb-1">{{$user->name}}</h3>
                             <p class="text-muted">{{$user->job}}</p>

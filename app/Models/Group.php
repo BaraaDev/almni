@@ -57,6 +57,12 @@ class Group extends Model
             'user_id');
     }
 
+    public function format()
+    {
+        return $this->hasMany(Format::class,'group_id','id');
+    }
+
+
     public function scopeStatus($query,$arg)
     {
         return $query->where('status',$arg);
